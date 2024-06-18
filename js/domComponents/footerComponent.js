@@ -50,8 +50,8 @@ class Footer {
       </a>
     </li>
     <li>
-      <a href='#' id="footer-feedback" class="footer-decoration" onclick="sankeyToolsNameSpace.shareSocial(event);" onkeydown="sankeyToolsNameSpace.shareSocial(event);">
-        <span class='feedback'>${ languageNameSpace.labels["FOOTER_FEEDBACK"] }</span>
+ <a href="https://ec.europa.eu/eurostat/web/main/help/accessibility" target="_blank" rel="noreferrer noopener" id="footer-accessibility" class="footer-decoration">
+        <span>${languageNameSpace.labels["FOOTER_ACCESSIBILITY"]}</span>
         <svg viewBox="0 0 13 20">
           <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
         </svg>
