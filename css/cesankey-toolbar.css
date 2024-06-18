@@ -1,0 +1,78 @@
+.bg-light {
+    background-color: var(--sub-nav-color) !important;
+}
+#dimension-labels {
+  display: flex;
+  flex-direction: column;
+  color: var(--tool-1);
+}
+
+#dimension-labels>i>span {
+  color: black;
+  margin: 10px;
+}
+
+#dimension-labels>i:nth-child(1) {
+  margin-bottom: 0.2em;
+}
+
+.sankey-category{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+#sankeyToolbox > li a.btn{
+    background-color: var(--tool-1);
+    border-color: var(--tool-1);
+}
+
+
+[role="menuitemradio"]::before {
+  display: inline-block;
+  content: "";
+  width: 1.2em;
+  height: 1.2em;
+  padding: 0.1em;
+  border: 3px solid lightgray;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background-clip: content-box;
+  margin-inline-end: 2px;
+  color: #fff;
+}
+[role="menuitemradio"][aria-checked="true"]::before {
+  background-color: var(--tool-1);
+}
+
+.min-with--geo {
+  min-width: 5vw;
+  background-color: var(--tool-1);
+}
+#geo-sum-disclaimer {
+  background-color: var(--sub-nav-color) !important;
+  max-height: 86px;
+  min-width: 64px;
+  overflow: auto;
+}
+#sankeyToolbox > li:nth-child(1) > div > div.d-flex.justify-content-evenly {
+    background-color: var(--sub-nav-color) !important;
+}
+.min-with--nav {
+    min-width: 2.875rem;
+}
+
+i.fas.fa-dot-circle {
+    color: var(--tool-1);
+} 
+
+img.flag {
+  max-width: 25px;
+  height: auto;
+}
+#dropdown-geo-list {
+  min-width: 14.2rem;
+}

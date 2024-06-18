@@ -1,0 +1,37 @@
+﻿{
+	"TUTO_1":  "Einleitung",
+	"TUTO_2":  "Willkommen zum Tutorial des Sankey-Diagramm-Tools von Eurostat. Diese Führung zeigt Ihnen die wichtigsten Funktionen des Tools und wie man sie benutzt. Eine ausführlichere Dokumentation finden Sie <a href='https://ec.europa.eu/eurostat/statistics-explained/index.php/Sankey_diagrams_for_energy_balance' target='_blank'>hier</a> .",
+	"TUTO_3":  "Sankey-Diagramm",
+	"TUTO_4":  "Ein Sankey-Diagramm ist eine grafische Darstellung von Flüssen (zum Beispiel von Energie, Materialien oder Geld), die kombiniert, aufgeteilt, und durch verschiedene Ereignisse oder Prozesse verfolgt werden können.",
+	"TUTO_5": "Kraftstoffmenü",
+	"TUTO_6":  "Die Breite jedes Flusses entspricht der Menge Energie (kraftstoff) in diesem Fluss. Dieses Sankey-Tool ist interaktiv. Das Kraftstoffmenü kann durch Klicken auf die Kraftstoffe im Diagramm oder in der Legende aufgerufen werden. Versuchen Sie, auf einen fluss zu klicken, um das Menü mit anzuzeigen: <ul><li>Detaillierte Brennstoffe zeigen/ausblenden</li> <li>Diesen Brennstoffe hervoheben</li><li>Diagramm für diese Brennstofffamilie</li><li>Definitionen</li></ul>",
+	"TUTO_9": "Knoten",
+	"TUTO_10": "Eurostats Sankey-Diagramme basieren auf einer Reihe von Knoten, die durch Energiebilanzflüsse verbunden sind. Diese Knoten (im Diagramm in schwarz angezeigt) repräsentieren Ereignisse oder Prozesse, beispielsweise Einfuhren, Endenergieverbrauch usw. Klicken Sie auf einen Knoten, um das Menü mit anzuzeigen: <ul><li>Diesen Knoten einklappen/aufklappen</li><li>Zeitkurven</li><li>Tortendiagramme</li><li>Vergleichen Sie Länder</li><li>Definitionen</li></ul>",
+	"TUTO_11": "Menü",
+	"TUTO_12": "Zusätzlich zu den Knoten- und Flussmenüs enthält das Werkzeug ein Menü für weitere Funktionen. Bewegen Sie die Maus über das Menü, um es zu auszuklappen. Klicken Sie auf 'weiter', um mehr über die Menüfunktionen zu erfahren.",
+	"TUTO_13": "Länder",
+	"TUTO_14": "Hier können Sie das dargestellte Land (oder die dargestellte Länderkombination) ändern.",
+	"TUTO_15": "Energieeinheit auswählen",
+	"TUTO_16": "Verwenden Sie diese Option um zwischen verschiedenen Energieeinheiten zu wechseln.",
+	"TUTO_17": "Legende ausblenden",
+	"TUTO_18": "Verwenden Sie diese Option um die Legende aus- oder einzublenden",
+	
+	"TUTO_19": "Knotenbeschriftung auswählen",
+	"TUTO_20": "Verwenden Sie diese Option um Energiezahlen oder Knotennamen ein- oder auszublenden.",
+	"TUTO_21": "Knotendetails auswählen",
+	"TUTO_22": "Sie können hier schnell eine von drei vordefinierten Knotenzuständen wählen. Diese sind: <ul><li>Alle Knoten ausklappen</li> <li>Alle Knoten einklappen</li> <li>Standardansicht</li></ul>",
+	"TUTO_23": "Speicherfunktionen",
+	
+	"TUTO_24": "Immer wenn Sie dieses Symbol sehen, können Sie darauf klicken, um das jeweilige Objekt zu speichern und/oder zu drucken. Wenn Sie zum Beispiel auf dieses Element klicken, speichern Sie das aktuell angezeigte Sankey-Diagramm. Sie können auch Zeitkurven und Tortendiagramme speichern.",
+	"TUTO_25": "Definitionen",
+	"TUTO_26": "Immerwenn Sie dieses Symbol sehen, können Sie darauf klicken um mehr Informationen zu erhalten. Das Sankey-Tool von Eurostat ist verlinkt mit einem 'Statistik erklärt'-Artikel, Definitionen, Metadaten und Datensätzen. Und natürlich haben Sie hier auch diese Tour angefangen!",
+	"TUTO_27": "Zeitleiste",
+	"TUTO_28": "Klicken Sie auf ein Jahr in der interaktiven Zeitleiste, um dieses Jahr im Diagramm anzuzeigen.",
+	"TUTO_29": "Animation",
+	"TUTO_30": "Sie können die Veränderungen über die Jahre sichtbar machen, indem Sie die Play-Taste drücken.",
+	"TUTO_31": "Das ist das Ende unserer Tour.",
+	"TUTO_32": "Wenn Sie dieses Visualisierungstool nützlich finden, unterstützen Sie uns bitte indem Sie es mit anderen teilen - zum Beispiel über Twitter, Facebook oder LinkedIn. Danke!",
+	
+	"PROMO_TUTO_1": "Tutorial",
+	"PROMO_TUTO_2": "Willkommen zum Tutorial des Sankey-Diagramm-Tools von Eurostat. Für eine Führung durch alle Features <a href = '#' onclick='StartMainTour();'>bitte hier klicken um die Tour zu starten!</a>"
+}

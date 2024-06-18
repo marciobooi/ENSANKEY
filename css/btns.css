@@ -1,0 +1,63 @@
+/* zoom content*/
+
+.ui-widget-content {
+    border:0;
+}
+
+div.zoomControls {
+    position: absolute;
+    bottom: 1.3rem;
+    right: 0.2rem;
+}
+
+div.zoomControls button {
+    background-color: var(--tool-1);
+    border-color: var(--tool-1);
+    margin: 0.3rem;
+    min-width: 2.3rem;
+}
+
+#zoom-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#globan > div > div.globan-content > button {
+    height: 1em;
+
+}
+
+#autoplay-start, #autoplay-stop {
+    background-color: var(--tool-1);
+    border-color: var(--tool-1);
+}
+
+button.btn.btn-primary.min-with--nav {
+    background-color: var(--tool-1);
+    border-color: var(--tool-1);
+}
+
+
+.ecl-button.ecl-button--primary.active {
+    background-color: var(--c-s);
+    border: 2px solid var(--c-s);
+    color: var(--c-d);
+}
+
+
+.ecl-button--icon-only .ecl-button__container {
+    height: calc(var(--s-s)*1 + 1.5rem - 4px);
+    justify-content: center;
+    width: calc(var(--s-s)*1 + 1.5rem - 4px);
+}
+
+.navBtn {
+    background-color: initial;
+    border: initial;
+    color: #fff;
+}
+

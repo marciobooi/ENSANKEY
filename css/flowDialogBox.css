@@ -1,0 +1,111 @@
+
+
+#dialog-flow-content {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items :flex-start;
+}
+#dialog-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+img#infoImage {
+    width: 25rem;
+    height: 15rem;
+    object-fit: fill;
+}
+
+div#dialog-header {
+    display: flex;
+    flex-direction: column;
+}
+div#dialog-header {
+    width: 25rem;
+}
+
+
+.modalBtn {
+    border: 3px solid #0e47cb;
+}
+
+.modalBtn:hover {
+color:white !important;
+background-color:#0e47cb !important;
+border: 3px solid #0e47cb !important;
+
+}
+
+
+
+
+
+
+
+/* input#dataSet-icon,
+input#time-chart-flow-icon,
+input#pie-chart-flow-icon,
+input#bar-chart-flow-icon,
+input#meta-icon,
+#aggregate-flow-box > span > label,
+#aggregation-flow >  label,
+input#fuel-family-icon,
+input#flow-to-hide-icon,
+input#fuel-highlight {
+	filter: brightness(0.6) invert(.6);
+} */
+
+
+#aggregation-flow .switchFlow {
+    display: inline-block;
+    position: absolute;
+    right: 85px;
+}
+
+div#dialog-text {
+    padding: 10px;
+    max-width: fit-content;
+    max-width: -moz-fit-content;
+}
+h6#infotitle {
+    font-size: 2rem;
+}
+
+input#glossary-flow {
+    width: 40px;
+}
+
+#dialog-flow-content #aggregation-flow, #dialog-flow-content #aggregation-flow,
+#dialog-flow-content #time-chart, #dialog-flow-content #highlight,
+#dialog-flow-content #pie-chart, #dialog-flow-content #fuel-family,
+#dialog-flow-content #definition, #dialog-flow-content #definition {
+    background-color: white;
+}
+
+#dialog-node-content #aggregation-node #aggregate-node-title, #dialog-flow-content #aggregation-flow #aggregate-flow-title {
+    /* margin-top: 78px; */
+    /* margin-right: 1px; */
+}
+
+
+input[disabled] + p {
+	color: #dcdcdc ;
+}
+
+
+
+button#barChartOption, button#share, button.agregates, button.copy-button, button.percentages {
+    font-size: 1em;
+    color: grey;
+    border: none;
+    font-weight: 900;
+    border-radius: 0;
+    border: 1px solid grey;
+    margin: 2px;
+}
+
+button#barChartOption:hover, button#share:hover, button.agregates:hover, button.copy-button:hover, button.percentages:hover {
+    color: #fff;
+    background-color: grey;
+}

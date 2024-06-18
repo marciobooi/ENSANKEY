@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Energy flow diagrams</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="By using the Energy Sankey tool, created by Eurostat, you can easily visualise energy balances, see how much energy is imported or produced in the EU or in your country, find out where the energy is consumed and check out the principal renewable energy sources."/>
+  <meta name="keywords" content="Energy, sankey, energy balances, energy flows, energy flow chart, energy carrier, energy market, energy consumption, energy transformation, energy commodities, energy products, fuels, energy sector, energy data, data, statistics"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@EU_Eurostat">
+  <meta property="og:type" content="Chart"/>
+  <meta property="og:title" content="Energy flow diagrams" />
+  <meta property="og:description" content="By using the Energy Sankey tool, created by Eurostat, you can easily visualise energy balances, see how much energy is imported or produced in the EU or in your country, find out where the energy is consumed and check out the principal renewable energy sources."/>
+  <meta property="og:url" content="https://ec.europa.eu/eurostat/cache/sankey/energy/sankey.html"/>
+  <meta property="og:image" content="https://ec.europa.eu/eurostat/cache/sankey/energy/img/social-media/SankeyEnergy.png">
+  <meta property="og:image:secure_url" content="https://ec.europa.eu/eurostat/cache/sankey/energy/img/social-media/SankeyEnergy.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Sankey diagrams for Europe for the energy flows">
+  <meta property="og:image:width" content="200">
+  <meta property="og:image:height" content="200">
+  <meta property="og:site_name" content="Eurostat">
+  <meta property="fb:app_id" content="265318538122146">
+
+  <meta name="subject" content="Energy balances, energy flow diagrams, energy">
+  <meta name="copyright" content="European Union">
+  <meta name="author" content="Material flows account, Eurostat">
+  <meta name="owner" content="Eurostat">
+  <meta name="url" content="https://ec.europa.eu/eurostat/cache/sankey/circular_economy/sankey.html">
+  <meta name="identifier-URL" content="https://ec.europa.eu/eurostat/cache/sankey/circular_economy/sankey.html">
+  <!-- style -->
+  <link rel="stylesheet" href="./css/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="./css/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  
+  <link href="css/EC/ecl-reset.css" rel="stylesheet">  
+  <link href="css/EC/ecl-eu-default.css" rel="stylesheet">  
+  <link href="css/EC/ecl-eu.css" rel="stylesheet"> 
+ 
+  <link rel="stylesheet" href="css/jBox.css">
+  <link rel="stylesheet" href="css/sankey.css">
+  <link rel="stylesheet" href="css/time-line.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/fix.css">
+  <link rel="stylesheet" href="css/chartStyle.css">
+  <link rel="stylesheet" href="css/nodeDialogBox.css">
+  <link rel="stylesheet" href="css/flowDialogBox.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/appIntro.css">
+  <link rel="stylesheet" href="css/tutorial.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/btns.css">
+  <link rel="stylesheet" href="css/highchartsTable.css">
+  <link rel="stylesheet" href="css/rotateInfo.css">
+  <link rel="stylesheet" href="css/cesankey-toolbar.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/media-queries.css">
+
+
+
+
+
+  <!-- <link type="text/css" href="css/loader.css" rel="stylesheet"> -->
+  <!-- script -->
+  <script src="./js/jquery/jquery-3.6.1.js"></script>
+  <script type="text/javascript" src="./js/lib/xlsx/0.15.6/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="js/sankey/excelReader.js"></script>
+  <script type="text/javascript" src="js/jquery/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery/jquery-ui-1.11.4.js"></script>
+  <!-- pdf creating library -->
+  <script src="./js/lib/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="./js/lib/javascript-canvas-to-blob/3.29.0/js/canvas-to-blob.min.js" async></script>
+  <script src="./js/lib/FileSaver.js/2.0.0/FileSaver.min.js" async></script>
+  <script type="text/javascript" src="js/jBox/jBox.min.js"></script>
+  <script type="text/javascript" src="./js/lib/d3/3.2.2/d3.v3.min.js"></script>
+  <script type="text/javascript" src="js/d3/canvg.js"></script>
+  <script type="text/javascript" src="js/vector/Vec2.js"></script>
+  <script type="text/javascript" src="js/json/toolkit/iife.js"></script>
+  <script type="text/javascript" src="js/json/euro/iife.js"></script>
+  <script type="text/javascript" src="js/json/json-stat.js"></script>
+  <script type="text/javascript" src="js/canvas2image.js"></script>
+  <script type="text/javascript" src="js/xepOnline.jqPlugin.js"></script>
+  <script type="text/javascript" src="js/html2canvas-0.5.0.js"></script>
+  <script type="text/javascript" src="js/html2canvas-0.5.0.svg.js"></script>
+  <script type="text/javascript" src="js/sankey/language.js"></script>
+  <script type="text/javascript" src="js/sankey/basics.js"></script>
+  <script type="text/javascript" src="js/sankey/data.js"></script>
+  <script type="text/javascript" src="js/sankey/time-line.js"></script>
+		<script type="text/javascript" src="js/sankey/pie-chart-dialog-box.js"></script>
+		<script type="text/javascript" src="js/sankey/bar-chart-dialog-box.js"></script>
+		<script type="text/javascript" src="js/sankey/time-graph-dialog-box.js"></script>
+		<script type="text/javascript" src="js/sankey/message-dialog-box.js"></script>
+		<script type="text/javascript" src="js/sankey/legend-dialog-box.js"></script>
+		<script type="text/javascript" src="js/sankey/export-image.js"></script>
+  <script type="text/javascript" src="js/sankey/export-diagram-to-pdf.js"></script>
+  <script type="text/javascript" src="js/sankey/codes.js"></script>
+  <script type="text/javascript" src="js/sankey/database.js"></script>
+  <script type="text/javascript" src="js/sankey/sankey-tools.js"></script>
+  <script type="text/javascript" src="js/sankey/dialog-box.js"></script>
+  <script type="text/javascript" src="js/sankey/create-main-modal.js"></script>
+  <script type="text/javascript" src="js/sankey/node-dialog-box.js"></script>
+  <script type="text/javascript" src="js/sankey/flow.js"></script>
+  <script type="text/javascript" src="js/sankey/node.js"></script>
+  <script type="text/javascript" src="js/sankey/functions.js"></script>
+		<script type="text/javascript" src="js/sankey/sankey.js"></script>
+  <script type="text/javascript" src="js/sankey/create-toolbar.js"></script>
+  <!-- <script type="text/javascript" src="js/sankey/loader.js"></script> -->
+  <script type="text/javascript" src="js/sankey/chartsTable.js" async></script>
+  <script type="text/javascript" src="js/sankey/chartsControls.js" async></script>
+  <script defer type="text/javascript" src="https://europa.eu/webtools/load.js"></script>
+  	<script defer type="text/javascript" src="js/sankey/tabKeybordHandler.js"></script>
+  <script defer type="text/javascript" src="js/domComponents/navComponent.js"></script>
+	<script defer type="text/javascript" src="js/domComponents/subNavBarComponent.js"></script>
+	<script defer type="text/javascript" src="js/domComponents/zoomControlsComponent.js"></script>
+	<script defer type="text/javascript" src="js/domComponents/footerComponent.js"></script>
+	<script defer type="text/javascript" src="js/domComponents/timeLineComponent.js"></script>
+	<script defer type="text/javascript" src="js/domComponents/auxChartControls.js"></script>
+
+
+
+
+
+
+  <script type="application/json"> { "utility" : "analytics", "siteID" : "59", "instance" : "ec.europa.eu" } </script>
+</head>
+
+<body>
+  <div id="hiddenFormDiv"></div>
+  <noscript>
+    <p class="no-script"> Your browser does not support Javascript or Javascript is disabled. <br /> Please enable
+      Javascript to use the Sankey tool. </p>
+  </noscript>
+  <header>
+    <div id="navbar-container"></div>
+    <div id="euGlobanContainer"><div>
+  </header>
+  <main>
+
+    <dialog data-ecl-auto-init="Modal" id="sankey-primary-modal" aria-modal="true" class="ecl-modal ecl-modal--l" aria-labelledby="modal-example-header"></dialog>   
+
+
+
+
+
+
+    <div id="page">
+      <div id="allContainer">
+
+
+      <div id="subnavbar-container"></div>
+        <!-- navbar end -->
+
+
+        <!-- toolbar end -->
+        <div id="auxChartControls"></div>
+     
+        <!--chart controls end -->
+
+
+        <div id="loader">
+          <p id="progress" class="sankey-loader"></p>
+          <img id="loading-icon" alt="loading..." src="img/block-loader.gif">
+					</div>
+
+
+				<div id="diagramYearInfo"></div>
+        <div id="diagramContainer" class="svg-container-dynamic">
+          <header style="display: none;">
+            <h2 id="exportHeaderTitle">Material flow diagram.</h2>
+					</header>
+          <footer style="display: none;">
+            <p id="exportFooterTitle" class="foot" style="text-align: right;"></p>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+    <div id="timeLineComponent">
+      <div id="autoplay-timeline" class="autoplay" tabindex="0">
+        <button id="autoplay-start" aria-label="timeline animation start" class="btn btn-sm btn-primary" type="button">
+          <i class="fas fa-play"></i>
+        </button>
+      </div>
+      <div id="timeline-slider"></div>
+    </div>
+
+
+    <div id="zoomControls" class="zoomControls d-flex"></div>
+
+    <canvas id="sankey-canvas" style="display: none;"></canvas>
+    <img id="imgLogo" style="display: none;" alt="placeholder for the exported png file" src="img/eurostat-logo.png">
+    <div id="chartContainer" class="highcharts-figure">
+      <div id="chart"></div></div>
+    <span id="ruler"></span>
+  </main>
+
+  <div id="componentFooter"></div>
+
+  <script src="js/sankey/external/highcharts.js"></script>
+  <script src="js/sankey/external/exporting.js"></script>
+  <script src="js/sankey/external/export-data.js"></script>
+  <script src="js/sankey/external/accessibility.js"></script>
+  <!-- <script src="js/sankey/external/wordcloud.js"></script> -->
+  <script src="./js/lib/intro.js/minified/intro.min.js"></script>
+  <script src="js/tutorial/tutorial.js"></script>
+  <script src="js/sankey/panZoomKeyboard.js"></script>
+  
+
+  <script>
+    const lang = REF.language || "en",
+      langLowerCase = lang.toLowerCase();
+    $(document).ready(function () {
+      document.documentElement.lang = langLowerCase;
+
+      if (typeof sankeyNameSpace !== "undefined") sankeyNameSpace.buildSankey();
+      sankeyToolsNameSpace.initZoom();
+
+      if (!sessionStorage.getItem('isTourFinished'))
+        setTimeout(() => { tutorial() }, sessionStorage.isVisited ? 1500 : 3000);
+
+      sessionStorage.setItem('isTourFinished', true);
+      sessionStorage.setItem('isVisited', true);
+
+      function loader() {
+        var counter = 0;
+        setInterval(function () {
+          if (counter == 8) {
+            return
+		}
+          changeImage(counter);
+          counter++;
+        }, 400);
+        loading();
+			}
+
+  //     $(window).resize(function () {
+
+  //       $("#list-years").empty()
+
+  //       if (REF.year === "latest") REF.year = timeSeries[timeSeries.length - 1]
+
+  //       timelineNameSpace.totalWidth = $(window).width() - 55;
+  //       timelineNameSpace.nbYears = timeSeries.length;
+
+  //       timeSeries.forEach(function (time) {
+  //         const li = document.createElement("li"),
+  //           a = document.createElement("a");
+  //         a.setAttribute("href", "#0");
+  //         a.setAttribute("id", time);
+  //         if (time == REF.year) {
+  //           a.setAttribute("class", "selected");
+  //         }
+  //         a.innerHTML = time;
+  //         li.appendChild(a);
+  //         $("#list-years").append(li);
+	// });
+
+  //       timeline = $('.horizontal-timeline');
+  //       if (timeline.length > 0) {
+  //         timelineNameSpace.initTimeline(timeline);
+  //       };
+
+  //     });
+    });
+    window.addEventListener("wtReady", function () {
+      $wt.render("euGlobanContainer", {
+        utility: "globan",
+        lang: langLowerCase,
+        // theme: "dark",
+      });
+    });
+
+    // async function initialize() {
+    //   await getDataFromDb();
+    //   log(sankeyDBnew)
+    // }
+
+    // initialize();
+
+  </script>
+  <script src="./js/lib/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script type="text/javascript" src="js/sankey/external/ecl-eu.js"></script>
+  <script type="application/json">
+    {
+			"utility": "cck",
+			"url": "http://ec.europa.eu/cookies/index_en.htm",
+			"target": true
+    }
+  </script>
+</body>
+
+</html>
+

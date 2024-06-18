@@ -1,0 +1,136 @@
+@media screen and (max-width: 1280px) and (max-height: 720px) {
+  .horizontal-timeline.loaded {
+    bottom: 50px;
+  }
+
+  #lang-selection {
+    height: 1.5rem;
+    width: auto;
+    font-size: .8rem;
+  }
+
+  #legend-box-modal.position-legend-box-modal {
+    bottom: 13%;
+    margin-left: 0%;
+  }
+
+  .highcharts-data-table {
+    left: -16px;
+  }
+
+  .highcharts-data-table table tbody {
+    max-height: 13rem;
+  }
+
+}
+  
+/* 
+    ##Device = Desktops
+    ##Screen = B/w 1025px to ....
+  */
+@media (min-width: 1024px) {
+  .highcharts-data-table table tbody {
+    max-height: 32rem;
+  }
+
+}
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */  
+@media (min-height: 320px) and (max-height: 480px) {
+  #lang-selection {
+    height: 1.2rem;
+    width: auto;
+    font-size: .7rem;
+  }
+
+  ul#toolMenu li {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  img.nav-menu-icon {
+    width: 0.7rem;
+  }
+
+  .zoom-in-button,
+  .zoom-out-button {
+    height: 25px;
+    width: 25px;
+    margin: 3px;
+  }
+
+  button.resetZoomBtn.reset-button {
+    padding: 3px;
+    height: 25px;
+    width: 25px;
+  }
+
+  #legend-box-modal.position-legend-box-modal {
+    bottom: 19%;
+    margin-left: 0%;
+  }
+  .horizontal-timeline.loaded {
+    bottom: 48px;
+  }
+
+  div#zoom-content {
+    top: 20%;
+    position: fixed !important;
+    right: 2%;
+    bottom: -37%;
+  }
+}
+
+@media only screen and (max-width: 480px) { 
+  div#social-media {
+    visibility: hidden;
+  }
+  img.card-img-top {
+    height: 5rem;
+  }
+}
+@media only screen and (max-width: 680px) { 
+  #header-title-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    margin-left: -18px;
+  }
+  .me-4 {
+    margin-right: 0.25rem!important;
+  }
+  #social-media>span>i {
+    padding-right: 0.6em;
+  }
+  img#eurostatLogo {
+    height: 1rem;
+  }
+
+  span.sankey-category.geo.text-wrap {
+    font-size: .9rem !important;
+  }
+}
+
+
+/* toolbar  small screen */
+@media only screen and (max-width: 576px) {
+  .nav-item {
+    padding-bottom: .1rem;
+  }
+}
+
+
+@media print {
+  body{
+    -webkit-print-color-adjust: exact; /*chrome & webkit browsers*/
+    print-color-adjust:exact; /*safari*/
+  } 
+}
