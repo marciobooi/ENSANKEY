@@ -264,11 +264,11 @@ var nsMainModal = {
 
 const nsSankeyModal = {
 	closeModal: function () {
-		const modal = document.getElementById("modalBtn");
-		const myModal = bootstrap.Modal.getInstance(modal);
-		if (myModal) {
-			myModal.hide();
-		}
+		// marcio
+		const modal = document.getElementById("sankey-primary-modal");
+		if (modal.hasAttribute('open')) {
+			modal.close();
+		  }
 	},
 
 	modalEnvelopeHtml: function (params) {
@@ -376,16 +376,6 @@ const nsSankeyModal = {
 			.reduce((acc, cur) => {
 				acc += `<a href="${cur.URL}" target="_blank" rel="noreferrer noopener"
 				class="ecl-button ecl-button--secondary modalBtn">${cur.TITLE}</a>`;
-
-
-
-
-
-
-
-
-
-
 				return acc;
 			}, "");
 
@@ -393,9 +383,7 @@ const nsSankeyModal = {
 	},
 
 	modalToolbarHtml: function (modalType) {
-		return modalType === "node"
-			? this.nodeToolbarHtml()
-			: this.flowToolbarHtml();
+		return modalType === "node" ? this.nodeToolbarHtml() : this.flowToolbarHtml();
 	},
 
 	flowToolbarHtml: function () {
