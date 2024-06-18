@@ -10,19 +10,30 @@ const nsCharts = {
 	 * @param {string} action - the action to take.
 	 * @returns None
 	 */
-	initChartState: function (action, chart, node ) {
-		if (action === "open") {
-			const controls = new ChartControls(chart, node);
-			controls.addToDOM("#auxChartControls"); // Add controls to the DOM
-		} else {
-			const controls = new ChartControls(chart, node);
-			controls.removeFromDOM(); // Remove controls from the DOM
-		}
+  initChartState: function (action, chart, node) {
+    const controls = new ChartControls(chart, node);
+    const isOpen = action === "open";
 
-		$("#chartContainer").css("display", action === "open" ? "block" : "none");
-		$( "#diagramContainer, .horizontal-timeline, #legendContainer, #legend-box-modal, #reset-to-default").css("display", action === "open" ? "none" : "block");
-		$("#mainToolbar, #zoom-content").css( "display", action === "open" ? "none" : "flex");
-	},
+    if (isOpen) {
+        controls.addToDOM("#auxChartControls");
+    } else {
+        controls.removeFromDOM();
+    }
+    
+    showHideTimeline(action);
+
+    // Using a utility function to update display style for multiple elements
+    const updateDisplay = (selectors, display) => {
+        selectors.forEach(selector => {
+            $(selector).css("display", display);
+        });
+    };
+
+    updateDisplay(["#chartContainer"], isOpen ? "block" : "none");
+    updateDisplay(["#diagramContainer", ".horizontal-timeline", "#legendContainer", "#legend-box-modal", "#reset-to-default"], isOpen ? "none" : "block");
+    updateDisplay(["#mainToolbar", "#zoom-content"], isOpen ? "none" : "flex");
+}
+
 };
 
 

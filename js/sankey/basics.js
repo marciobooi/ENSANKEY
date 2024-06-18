@@ -694,5 +694,13 @@ function tooltipSetPosition(e) {
   // });
 
 
+  function showHideTimeline(action) {
+    const timelineElement = document.getElementById('timeLineComponent');
+    if (timelineElement) {
+        timelineElement.style.display = action === "open" ? 'none' : 'block';
+    } else {
+        console.error('Element with ID "timeLineComponent" not found.');
+    }
+}
 
-  
+
