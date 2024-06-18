@@ -390,39 +390,39 @@ const nsSankeyModal = {
 		return `
 		<ul class="nav flex-column">
 			<li class="nav-item">
-				<a class="nav-link" href="#" id="btn-flow-toggle">
+				<button class="ecl-button nav-link" id="btn-flow-toggle">
 					<i class="fas fa-stream"></i>
-				</a>
+				</button>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" id="btn-flow-highlight">
+				<button class="ecl-button nav-link" id="btn-flow-highlight">
 					<i class="fas fa-highlighter"></i>
-				</a>
+				</button>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" id="btn-fuel-family">
+				<button class="ecl-button nav-link" id="btn-fuel-family">
 					<i class="fas fa-expand-arrows-alt"></i>
-				</a>
+				</button>
 			</li>
 		</ul>`;
 	},
 
 	nodeToolbarHtml: function () {
 		return `
-      <a class="nav-link" href="#" id="btn-node-toggle">
+      <button class="ecl-button nav-link" id="btn-node-toggle">
         <i class="fas fa-project-diagram fa-1x"></i>
-			</a>
-      <a class="nav-link" href="#" id="time-chart">
+			</button>
+      <button class="ecl-button nav-link" id="time-chart">
         <i class="fas fa-chart-line fa-1x"></i>
         <span>${languageNameSpace.labels["TIME_GRAPHS"]}</span>
-      </a>
-      <a class="nav-link" href="#" id="pie-chart">
+      </button>
+      <button class="ecl-button nav-link" id="pie-chart">
         <i class="fas fa-chart-pie fa-1x"></i>
         <span>${languageNameSpace.labels["PIE_CHARTS"]}</span>
-      </a>
-      <a class="nav-link" href="#" id="bar-chart">
+      </button>
+      <button class="ecl-button nav-link" id="bar-chart">
         <i class="fas fa-chart-bar fa-1x"></i>
         <span>${languageNameSpace.labels["BAR_CHARTS"]}</span>
-      </a>`;
+      </button>`;
 	},
 };
