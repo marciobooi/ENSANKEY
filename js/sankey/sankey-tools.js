@@ -149,14 +149,14 @@ var sankeyToolsNameSpace = {
 		var currentUrl = window.location.href;
 		var encodedUrl = encodeURIComponent(currentUrl);
 		var targetUrl = targetClassName.includes("linkedin")
-			? "https://www.linkedin.com/sharing/share-offsite/?url="
+			? 'https://www.linkedin.com/shareArticle?mini=true&title=EnergyTrade&url=' + encodedUrl
 			: targetClassName.includes("twitter")
-			? "https://twitter.com/intent/tweet?text=Circular%20economy%20flow%20diagrams&url="
+			? 'https://twitter.com/share?text=EnergyTrade&url=' + encodedUrl
 			: targetClassName.includes("facebook")
-			? "https://www.facebook.com/sharer/sharer.php?u="
+			? 'https://www.facebook.com/sharer.php?t=EnergyTrade&u=' + encodedUrl
 			: targetClassName.includes("feedback")
-			? "mailto:ESTAT-CIRCULAR-ECONOMY@ec.europa.eu?subject=Circular%20economy%20flow%20diagrams&body="
-			: "mailto:?subject=Circular%20economy%20flow%20diagrams&body=";
+			? "mailto:ESTAT-ENERGY@ec.europa.eu?subject=Circular%20economy%20flow%20diagrams&body="
+			: "mailto:?subject=Circular%20economy%20flow%20diagrams&body=";			
 
 		if (type === "click" || (type === "keydown" && event.key === "Enter")) {
 			window.open(
@@ -164,6 +164,7 @@ var sankeyToolsNameSpace = {
 				targetClassName.includes("envelop") ? "_self" : "_blank",
 				"menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650"
 			);
+		
 			event.preventDefault();
 			event.stopPropagation();
 		}

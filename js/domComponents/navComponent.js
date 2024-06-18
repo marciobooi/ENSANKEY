@@ -82,7 +82,7 @@ class Navbar {
     this.navbar.className = 'navbar navbar-top';
     this.navbar.setAttribute('role', 'navigation');
 
-    this.navbar.innerHTML = /*html*/`
+    this.navbar.innerHTML = `
     <div class="col-6 col-lg-6">
       <div id="header-title">
         <h1 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h1>
@@ -140,25 +140,25 @@ class Navbar {
 
 
 
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
   <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
   <i class="fa-brands fa-x-twitter" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
   <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
   <i class="fa-brands fa-facebook" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial("linkedin");">
   <span class="ecl-button__container">
   <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
   <i class="fa-brands fa-linkedin" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
   <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
   <i class="fas fa-envelope" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
