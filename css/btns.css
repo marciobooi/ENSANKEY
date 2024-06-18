@@ -61,3 +61,6 @@ button.btn.btn-primary.min-with--nav {
     color: #fff;
 }
 
+#toggleLanguageBtn {
+    padding: 0.4rem 1rem;
+}

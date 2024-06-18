@@ -26,10 +26,10 @@
     background-repeat: no-repeat;
     background-size: var(--background-size, 100%) 1px;
     transition: background-size 0.2s linear var(--background-delay, 0.15s);
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 0;
     transform: translateZ(0);
-  }
+}
   .footer-decoration svg {
     vertical-align: top;
     display: inline;

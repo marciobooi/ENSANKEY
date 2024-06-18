@@ -135,6 +135,8 @@ var nsTimeChart = {
 function drawTimeChart(idNode, xAxisCategories, chartSeriesAligned) {
 	let labelCountries = [];
 
+	
+
 	$.each(countriesEB, function (idx, obj) {
 		if (jQuery.inArray(idx, REF.geos.split(",")) > -1) {
 			labelCountries.push(obj);
