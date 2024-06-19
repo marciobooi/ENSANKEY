@@ -10,36 +10,55 @@ class ChartControls {
 
 		this.flowState(node);
 
-		const select = document.createElement("select");
-		select.id = idChart;
-		select.classList.add("form-select", "mx-2");
-		select.setAttribute("aria-label", "Select flow");
-
-		let flagOptionSelected = false;
-
-		this.trendMap.forEach((value, option) => {
-			const optionElement = document.createElement("option");
-			optionElement.value = option;
-			optionElement.textContent = languageNameSpace.getFlowLabel(option);
-
-			if (!value.visible) {
-				optionElement.classList.add("d-none");
-			} else if (value.disabled) {
-				optionElement.setAttribute("disabled", true);
-			}
-
-			const optionSelected = value.visible && !value.disabled && !flagOptionSelected;
-			if (optionSelected) { optionElement.setAttribute("selected", true); }
-			if (optionSelected) { flagOptionSelected = true; }
-
-			select.appendChild(optionElement);
-		});
+		const selectTemplate = /*html*/ `
+			
+				<select class="ecl-select" id="${idChart}" name="country" aria-label="Select flow" required data-ecl-auto-init="Select">
+				</select>
+				`;
+	  
+	  const wrapper = document.createElement('div');
+	  wrapper.innerHTML = selectTemplate;
+	  const select = wrapper.querySelector('select');
+	  
+	  let flagOptionSelected = false;
+	  
+	  this.trendMap.forEach((value, option) => {
+		const optionElement = document.createElement("option");
+		optionElement.value = option;
+		optionElement.textContent = languageNameSpace.getFlowLabel(option);
+	  
+		if (!value.visible) {
+		  optionElement.classList.add("d-none");
+		} else if (value.disabled) {
+		  optionElement.setAttribute("disabled", true);
+		}
+	  
+		const optionSelected = value.visible && !value.disabled && !flagOptionSelected;
+		if (optionSelected) { 
+		  optionElement.setAttribute("selected", true);
+		  flagOptionSelected = true;
+		}
+	  
+		select.appendChild(optionElement);
+	  });
 
 		this.controls.innerHTML = `
       <div class="container-fluid">
         <nav aria-label="Chart controls" id="chartControls" class="navbar navbar-expand-sm navbar-light bg-light navChartControls">
           <div class="container-fluid">
-            ${select.outerHTML}
+			<div class="ecl-select__container">
+				${select.outerHTML}
+				<div class="ecl-select__icon">
+					<button class="ecl-button ecl-button--ghost ecl-button--icon-only" type="button" tabindex="-1">
+						<span class="ecl-button__container">
+							<span class="ecl-button__label" data-ecl-label="true">Toggle dropdown</span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="ecl-icon ecl-icon--s ecl-button__icon" focusable="false" aria-hidden="true">
+							<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
+							</svg>
+						</span>
+					</button>
+				</div>
+			</div>            
             <ul id="chartBtns" role="menubar" aria-label="pie graph toolbox" class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vw;">
               ${
 								idChart === "barChartCombo"
