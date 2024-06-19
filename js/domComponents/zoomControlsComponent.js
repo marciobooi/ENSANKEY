@@ -8,9 +8,9 @@ class ZoomControls {
       this.zoomContent.id = 'zoom-content';
       this.zoomContent.className = 'ui-widget-content';
   
-      this.zoomInButton = this.createZoomButton('btn-zoom btn btn-sm btn-primary', 'in', 'Zoom in', '<i class="fas fa-plus"></i>');
-      this.zoomResetButton = this.createZoomButton('btn-zoom btn btn-sm btn-primary px-1 my-0', 'reset', '100% - reset zoom', '<span id="zoom-reset" style="font-size: x-small;">100%</span>');
-      this.zoomOutButton = this.createZoomButton('btn-zoom btn btn-sm btn-primary', 'out', 'Zoom out', '<i class="fas fa-minus"></i>');
+      this.zoomInButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'in', 'Zoom in', '<i class="fas fa-plus"></i>');
+      this.zoomResetButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary px-1 my-0', 'reset', '100% - reset zoom', '<span id="zoom-reset" style="font-size: x-small;">100%</span>');
+      this.zoomOutButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'out', 'Zoom out', '<i class="fas fa-minus"></i>');
   
       this.zoomContent.appendChild(this.zoomInButton);
       this.zoomContent.appendChild(this.zoomResetButton);

@@ -64,3 +64,7 @@ button.btn.btn-primary.min-with--nav {
 #toggleLanguageBtn {
     padding: 0.4rem 1rem;
 }
+
+.btn-zoom {
+    padding: 3px;
+}

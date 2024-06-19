@@ -108,20 +108,20 @@ chartInitOptions = {
   customCredits: {
     load: function () {
       // if (1 == 1) return;
-      const customCredits = this.credits.getBBox();
-      this.renderer.image("img/eurostat-logo.png")
-        .addClass("chartLogo")
-        .attr({
-          zIndex: 9999,
-          preserveAspectRatio: "xMidYMid meet",
-          cursor: "pointer",
-          x: "88%",
-          y: "95.5%",
-          width: 100,
-          height: 40
-        }).add();
-      $(".chartLogo").click(function () {window.open("https://ec.europa.eu/eurostat","_self");
-      });
+      // const customCredits = this.credits.getBBox();
+      // this.renderer.image("img/eurostat-logo.png")
+      //   .addClass("chartLogo")
+      //   .attr({
+      //     zIndex: 9999,
+      //     preserveAspectRatio: "xMidYMid meet",
+      //     cursor: "pointer",
+      //     x: "88%",
+      //     y: "95.5%",
+      //     width: 100,
+      //     height: 40
+      //   }).add();
+      // $(".chartLogo").click(function () {window.open("https://ec.europa.eu/eurostat","_self");
+      // });
     },
   },
   events: {
