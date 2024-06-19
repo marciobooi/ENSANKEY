@@ -32,6 +32,6 @@ function closeDialogBox(box) {
 	// if (timeGraphs[nodeboxNameSpace.idClickedNode] !== undefined) {
 	// 	delete timeGraphs[nodeboxNameSpace.idClickedNode];
 	// }
-	box.close();
-	box.destroy();
+	// box.close();
+	// box.destroy();
 }

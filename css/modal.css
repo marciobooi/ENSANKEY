@@ -41,7 +41,7 @@
 }
 
 .ecl-modal__body {
-  padding: 0;
+  padding: 5px;
 }
 
 .ecl-modal__header {
@@ -80,4 +80,44 @@ fill:var(--c-p)
 
 .modalCloseBtn {
   margin-bottom: 1rem;
+}
+
+
+
+
+/* code related to legend modal */
+
+#legend-box-modal {
+  all: initial;
+  position: absolute;
+  bottom: 14%;
+  left: 1%;
+  max-width: 24rem;
+  
+}
+
+.ecl-modal__body:is(:last-child) {
+  padding-bottom: 0;
+}
+
+#graph-legend-box-content {
+  margin-bottom: 0;
+}
+
+.draggable-handle {
+  padding: 5px 10px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+#legend-box-modal .button-legend .title {
+  font-size: .75rem !important;
+}
+
+.draggable-handle {
+  cursor: move; /* Change cursor to move when hovering over the draggable handle */
+}
+
+.legend-text {
+  cursor: pointer; /* Change cursor to pointer when hovering over the legend text */
 }

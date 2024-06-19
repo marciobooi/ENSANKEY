@@ -127,17 +127,7 @@ g .flow :hover {
   font-weight: bold;
 }
 
-#legend-box-modal.position-legend-box-modal {
-  /* z-index: 10 !important; */
-  bottom: 11%;
-  margin-left: 4%;
-}
 
-#legend-box-modal .button-legend {
-  margin: 2px;
-  /* text-align: left; */
-  /* height: 30px; */
-}
 
 #legend-box-modal .button-legend .icon-legend-color {
   border-radius: 50%;
@@ -222,9 +212,7 @@ g .flow :hover {
   font-size: .875rem
 }
 
-#legend-box-modal .button-legend {
-  height: 20px
-}
+
 
 #browser-warning-modal .jBox-content {
   padding: 20px;
