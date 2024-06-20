@@ -351,5 +351,14 @@
 	"OFFICIAL": "Langue officielle de l'UE:",  
     "FOOTER_ACCESSIBILITY": "Accessibilité",
 
+	"VAL": "valeur",
+
+	"SELITEN": "Choisir des options",
+    "KEYWORD": "Entrez un mot-clé de filtre",
+    "NORESULTS": "Aucun résultat trouvé",
+    "SELALL": "Tout sélectionner",
+    "CLEAR": "Tout effacer",
+    "CLOSE": "Soumettre",
+
 	"": ""
 }

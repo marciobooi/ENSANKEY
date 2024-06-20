@@ -351,6 +351,15 @@
 	"SELECTLANGUAGE": "Wählen Sie Ihre Sprache",
   	"OFFICIAL": "Amtssprache der EU:",
 	"FOOTER_ACCESSIBILITY": "Barrierefreiheit",
+
+	"VAL": "Wert",
+
+	"SELITEN": "Optionen auswählen",
+    "KEYWORD": "Filter-Schlüsselwort eingeben",
+    "NORESULTS": "Keine Ergebnisse gefunden",
+    "SELALL": "Alle auswählen",
+    "CLEAR": "Alles löschen",
+    "CLOSE": "Einreichen",
 	
 	"": ""
 }
