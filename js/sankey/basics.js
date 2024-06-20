@@ -589,8 +589,8 @@ function tooltipSetPosition(e) {
 	tooltip.style.top = tooltipY + "px";
   }
   function tooltipContent(title, values, materials, colors) {
-	var tblWidth = 310;
-	var html = `<table style="white-space:nowrap;width:${tblWidth}px">
+	var tblWidth = 400;
+	var html = `<table style="white-space:nowrap;box-sizing: border-box;width:${tblWidth}px">
 	  <tr> <td> <span style="font-size: 12px; font-weight: bolder;"> ${title}</span>
 	</table>
 	<hr style="height: 1px; box-shadow: none; margin: 3px 0 0 0;width:${tblWidth}px">`;
@@ -618,6 +618,7 @@ function tooltipSetPosition(e) {
 	tooltip.innerHTML = innerHTML;
 	tooltip.style.display = "block";
 	tooltip.style.border = "1px solid " + color;
+	tooltip.style.width = "auto";
   
 	// Check the type of event
 	if (e.type === "focus") {
