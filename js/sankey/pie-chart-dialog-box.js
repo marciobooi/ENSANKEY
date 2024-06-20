@@ -163,7 +163,7 @@ function drawPieChart(node, trend, chartSeriesAligned) {
 		navigation: chartInitOptions.navigation,
 		tooltip: {
 			useHTML: true,
-			pointFormat: "{point.percentage:.1f}%</b>: {point.y:,.2f}",
+			pointFormat: "{point.percentage:.1f}%</b><br> "+ languageNameSpace.labels['VAL'] +" {point.y:,.2f}",			
 			backgroundColor: "#FFFFFF",
 		},
 		// accessibility: {
@@ -174,7 +174,6 @@ function drawPieChart(node, trend, chartSeriesAligned) {
 		credits: chartInitOptions.credits,
 		plotOptions: {
 			pie: {
-
 				allowPointSelect: true,
 				// size: "75%",
 				innerSize: "75%",
@@ -237,7 +236,7 @@ function drawPieChart(node, trend, chartSeriesAligned) {
 					enabled: true,
 					connectorColor: "silver",
 					style: {
-						font: "11pt Arial, sans-serif",
+						font: "12pt Arial, sans-serif",
 					},
 				},
 			},			

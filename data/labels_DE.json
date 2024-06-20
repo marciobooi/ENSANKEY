@@ -348,8 +348,9 @@
 	"SHOW": "Anzeigen",
 	"VIEW_CHART_MENU": "Diagramm-Menü anzeigen",
 	"TSV": "Sichtbarkeit der Reihen umschalten",
-	  "SELECTLANGUAGE": "Wählen Sie Ihre Sprache",
-  "OFFICIAL": "Amtssprache der EU:",
+	"SELECTLANGUAGE": "Wählen Sie Ihre Sprache",
+  	"OFFICIAL": "Amtssprache der EU:",
+	"FOOTER_ACCESSIBILITY": "Barrierefreiheit",
 	
 	"": ""
 }

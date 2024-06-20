@@ -1,48 +1,49 @@
 var filteredAgregates = false;
 
 class ChartControls {
-	constructor(idChart, node) {
-		if (typeof node === "undefined") {
-			return;
-		}
+  constructor(idChart, node) {
+    if (typeof node === "undefined") {
+      return;
+    }
 
-		this.controls = document.createElement("div");
+    this.controls = document.createElement("div");
 
-		this.flowState(node);
+    this.flowState(node);
 
-		const selectTemplate = /*html*/ `
+    const selectTemplate = /*html*/ `
 			
 				<select class="ecl-select" id="${idChart}" name="country" aria-label="Select flow" required data-ecl-auto-init="Select">
 				</select>
 				`;
-	  
-	  const wrapper = document.createElement('div');
-	  wrapper.innerHTML = selectTemplate;
-	  const select = wrapper.querySelector('select');
-	  
-	  let flagOptionSelected = false;
-	  
-	  this.trendMap.forEach((value, option) => {
-		const optionElement = document.createElement("option");
-		optionElement.value = option;
-		optionElement.textContent = languageNameSpace.getFlowLabel(option);
-	  
-		if (!value.visible) {
-		  optionElement.classList.add("d-none");
-		} else if (value.disabled) {
-		  optionElement.setAttribute("disabled", true);
-		}
-	  
-		const optionSelected = value.visible && !value.disabled && !flagOptionSelected;
-		if (optionSelected) { 
-		  optionElement.setAttribute("selected", true);
-		  flagOptionSelected = true;
-		}
-	  
-		select.appendChild(optionElement);
-	  });
 
-		this.controls.innerHTML = `
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = selectTemplate;
+    const select = wrapper.querySelector("select");
+
+    let flagOptionSelected = false;
+
+    this.trendMap.forEach((value, option) => {
+      const optionElement = document.createElement("option");
+      optionElement.value = option;
+      optionElement.textContent = languageNameSpace.getFlowLabel(option);
+
+      if (!value.visible) {
+        optionElement.classList.add("d-none");
+      } else if (value.disabled) {
+        optionElement.setAttribute("disabled", true);
+      }
+
+      const optionSelected =
+        value.visible && !value.disabled && !flagOptionSelected;
+      if (optionSelected) {
+        optionElement.setAttribute("selected", true);
+        flagOptionSelected = true;
+      }
+
+      select.appendChild(optionElement);
+    });
+
+    this.controls.innerHTML = `
       <div class="container-fluid">
         <nav aria-label="Chart controls" id="chartControls" class="navbar navbar-expand-sm navbar-light bg-light navChartControls">
           <div class="container-fluid">
@@ -61,8 +62,8 @@ class ChartControls {
 			</div>            
             <ul id="chartBtns" role="menubar" aria-label="pie graph toolbox" class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vw;">
               ${
-								idChart === "barChartCombo"
-									? `
+                idChart === "barChartCombo"
+                  ? `
               <li class="nav-item dropdown px-1" id="ChartTogle" role="none">
                 <a href="#" class="ecl-button ecl-button--primary" data-bs-toggle="dropdown" role="menuitem" title="Toggle percentage" aria-haspopup="true" aria-expanded="true" id="tb-togle-percentage">
                   <i class="fas fa-percentage"></i>
@@ -70,25 +71,25 @@ class ChartControls {
                 <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="stackingToggleDropdown">
                   <li>
                     <a class="dropdown-item stacking-option ${
-											this.stackingOption === "normal" ? "active" : ""
-										}" role="menuitem" href="#" data-option="normal">${
-											languageNameSpace.labels["NUMBER"]
-									  }</a>
+                      this.stackingOption === "normal" ? "active" : ""
+                    }" role="menuitem" href="#" data-option="normal">${
+                      languageNameSpace.labels["NUMBER"]
+                    }</a>
                   </li>
                   <li>
                     <a class="dropdown-item stacking-option ${
-											this.stackingOption === "percentage" ? "active" : ""
-										}" role="menuitem" href="#" data-option="percentage">${
-											languageNameSpace.labels["PERCENTAGE"]
-									  }</a>
+                      this.stackingOption === "percentage" ? "active" : ""
+                    }" role="menuitem" href="#" data-option="percentage">${
+                      languageNameSpace.labels["PERCENTAGE"]
+                    }</a>
                   </li>
                 </ul>
               </li>
               <li><button id="toggleAgregates" class="ecl-button ecl-button--primary" title="${
-								languageNameSpace.labels["TOGGLEAGREGATES"]
-							}">${languageNameSpace.labels["TOGGLEAGREGATES"]}</button></li>`
-									: ""
-							}
+                languageNameSpace.labels["TOGGLEAGREGATES"]
+              }">${languageNameSpace.labels["TOGGLEAGREGATES"]}</button></li>`
+                  : ""
+              }
               <li class="nav-item button px-1" id="printChart" role="none">
                 <button id="printBtn" title="Print chart" class="ecl-button ecl-button--primary" type="button" class="me-2" aria-label="print chart" onclick="chartObject.print()">
                   <i class="fas fa-print"></i>
@@ -114,117 +115,119 @@ class ChartControls {
         </nav>
       </div>`;
 
-		if (chart === "barChartCombo") {
-			this.controls.querySelector(".stacking-option").classList.add("active");
-		}
+    if (chart === "barChartCombo") {
+	log('here')
+      this.controls.querySelector(".stacking-option").classList.add("active");
+    }
 
-		const toggleStacking = () => {
-			const targetChart = chartObject;
-			console.log(targetChart);
-			if (targetChart) {
-				const currentStacking = targetChart.options.plotOptions.series.stacking;
-				const newStacking = currentStacking === "normal" ? "percent" : "normal";
-				targetChart.update({
-					plotOptions: {
-						series: {
-							stacking: newStacking,
-						},
-					},
-				});
-			}
-		};
+    const toggleStacking = () => {
+      const targetChart = chartObject;
+      console.log(targetChart);
+      if (targetChart) {
+        const currentStacking = targetChart.options.plotOptions.series.stacking;
+        const newStacking = currentStacking === "normal" ? "percent" : "normal";
+        targetChart.update({
+          plotOptions: {
+            series: {
+              stacking: newStacking,
+            },
+          },
+        });
+      }
+    };
 
-		const handleDropdownOptionClick = (event) => {
-			const dropdownOption = event.target;
-			const selectedOption = dropdownOption.getAttribute("data-option");
-			if (selectedOption === "normal" || selectedOption === "percentage") {
-				toggleStacking();
+    const handleDropdownOptionClick = (event) => {
+	log('here')
+      const dropdownOption = event.target;
+      const selectedOption = dropdownOption.getAttribute("data-option");
+      if (selectedOption === "normal" || selectedOption === "percentage") {
+        toggleStacking();
 
-				const dropdownOptions = this.controls.querySelectorAll(
-					".dropdown-item.stacking-option"
-				);
-				dropdownOptions.forEach((option) => {
-					option.classList.remove("active");
-				});
+        const dropdownOptions = this.controls.querySelectorAll(
+          ".dropdown-item.stacking-option"
+        );
+        dropdownOptions.forEach((option) => {
+          option.classList.remove("active");
+        });
 
-				dropdownOption.classList.add("active");
-			}
-		};
+        dropdownOption.classList.add("active");
+      }
+    };
 
-		const dropdownOptions = this.controls.querySelectorAll(".stacking-option");
-		dropdownOptions.forEach((option) => {
-			option.addEventListener("click", handleDropdownOptionClick);
-		});
+    const dropdownOptions = this.controls.querySelectorAll(".stacking-option");
+    dropdownOptions.forEach((option) => {
+      option.addEventListener("click", handleDropdownOptionClick);
+    });
 
-		// Add an event listener to the EU toggle button if the chart is barchart
-		if (idChart === "barChartCombo") {
-			const toggleAgregates = this.controls.querySelector("#toggleAgregates");
+    // Add an event listener to the EU toggle button if the chart is barchart
+    if (idChart === "barChartCombo") {
+      const toggleAgregates = this.controls.querySelector("#toggleAgregates");
 
-			toggleAgregates.addEventListener("click", function () {
-				filteredAgregates = !filteredAgregates;
+      toggleAgregates.addEventListener("click", function () {
+        filteredAgregates = !filteredAgregates;
 
-				nsBarChart.renderChart(node);
-			});
-		}
-	}
+        nsBarChart.renderChart(node);
+      });
+    }
+  }
 
-	addToDOM(targetElement) {
-		const container = document.querySelector(targetElement);
-		container.insertBefore(this.controls, container.firstChild);
-	}
+  addToDOM(targetElement) {
+    const container = document.querySelector(targetElement);
+    container.insertBefore(this.controls, container.firstChild);
+  }
 
-	removeFromDOM() {
-		const navElement = document.querySelector("div > nav.navChartControls");
-		if (navElement) {
-			const parentContainer = navElement.closest(".container-fluid");
-			if (parentContainer) {
-				parentContainer.parentNode.removeChild(parentContainer);
-			}
-		}
-	}
+  removeFromDOM() {
+    const navElement = document.querySelector("div > nav.navChartControls");
+    if (navElement) {
+      const parentContainer = navElement.closest(".container-fluid");
+      if (parentContainer) {
+        parentContainer.parentNode.removeChild(parentContainer);
+      }
+    }
+  }
 
-	flowState(node) {
-		const transformations = node.code.substring(0, 2) === "T2";
-		const disaggregated = fuelMap(REF.fuels, REF.flowDisagg).length > 1;
-		const inFlowsCount = node.nodeIn.filter((el) => el[1] > 0).length;
-		const outFlowsCount = node.nodeOut.filter((el) => el[1] > 0).length;
+  flowState(node) {
+    const transformations = node.code.substring(0, 2) === "T2";
+    const disaggregated = fuelMap(REF.fuels, REF.flowDisagg).length > 1;
+    const inFlowsCount = node.nodeIn.filter((el) => el[1] > 0).length;
+    const outFlowsCount = node.nodeOut.filter((el) => el[1] > 0).length;
 
-		this.trendMap = new Map([
-			[
-				"inFuel",
-				{
-					visible: transformations,
-					disabled: disaggregated ? inFlowsCount <= 1 : true,
-				},
-			],
-			[
-				"outFuel",
-				{
-					visible: transformations,
-					disabled: disaggregated ? outFlowsCount <= 1 : true,
-				},
-			],
-			[
-				"throughFuel",
-				{
-					visible: !transformations,
-					disabled: !disaggregated,
-				},
-			],
-			[
-				"inFlow",
-				{
-					visible: true,
-					disabled: inFlowsCount <= 1,
-				},
-			],
-			[
-				"outFlow",
-				{
-					visible: true,
-					disabled: outFlowsCount <= 1,
-				},
-			],
-		]);
-	}
+    this.trendMap = new Map([
+      [
+        "inFuel",
+        {
+          visible: transformations,
+          disabled: disaggregated ? inFlowsCount <= 1 : true,
+        },
+      ],
+      [
+        "outFuel",
+        {
+          visible: transformations,
+          disabled: disaggregated ? outFlowsCount <= 1 : true,
+        },
+      ],
+      [
+        "throughFuel",
+        {
+          visible: !transformations,
+          disabled: !disaggregated,
+        },
+      ],
+      [
+        "inFlow",
+        {
+          visible: true,
+          disabled: inFlowsCount <= 1,
+        },
+      ],
+      [
+        "outFlow",
+        {
+          visible: true,
+          disabled: outFlowsCount <= 1,
+        },
+      ],
+    ]);
+  }
 }

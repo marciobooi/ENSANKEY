@@ -84,138 +84,138 @@ const nsToolbarCountry = {
 	 * @returns {object} The menuitem object.
 	 */
 	createCountryMenuitem: function (args) {
-		const button = nsToolbar.navItem(args);
-		const anchor = nsToolbar.navItemLink(args);
-		const divAllContainer = document.createElement("div");
-		const divGeoList = getGeoListContainer();
-		const items = getGeoListItems();
+		// const button = nsToolbar.navItem(args);
+		// const anchor = nsToolbar.navItemLink(args);
+		// const divAllContainer = document.createElement("div");
+		// const divGeoList = getGeoListContainer();
+		// const items = getGeoListItems();
 
-		items.forEach(([geoCode, geoLabel]) => {
-			const ddAnchor = anchor();
-			// const img = flag();
-			const col1Box = document.createElement("span");
-			col1Box.innerText = geoLabel;
-			// col1Box.prepend(img);
-			ddAnchor.appendChild(col1Box);
-			const ddIcon = document.createElement("i");
-			ddIcon.classList.add("fas", "fa-check", "invisible", "ms-2");
-			ddAnchor.appendChild(ddIcon);
+		// items.forEach(([geoCode, geoLabel]) => {
+		// 	const ddAnchor = anchor();
+		// 	// const img = flag();
+		// 	const col1Box = document.createElement("span");
+		// 	col1Box.innerText = geoLabel;
+		// 	// col1Box.prepend(img);
+		// 	ddAnchor.appendChild(col1Box);
+		// 	const ddIcon = document.createElement("i");
+		// 	ddIcon.classList.add("fas", "fa-check", "invisible", "ms-2");
+		// 	ddAnchor.appendChild(ddIcon);
 
-			divGeoList.appendChild(ddAnchor);
+		// 	divGeoList.appendChild(ddAnchor);
 
-			// function flag() {
-			// 	const img = document.createElement("img");
-			// 	const altGeoCode = { EU27_2020: "eu", EL: "gr" };
-			// 	const flagCode = altGeoCode[geoCode] || geoCode;
-			// 	img.classList.add("flag", "me-2");
-			// 	img.setAttribute(
-			// 		"src",
-			// 		"img/country_flags/" + flagCode.toLowerCase() + ".webp"
-			// 	);
-			// 	img.setAttribute("alt", "");
-			// 	return img;
-			// }
+		// 	// function flag() {
+		// 	// 	const img = document.createElement("img");
+		// 	// 	const altGeoCode = { EU27_2020: "eu", EL: "gr" };
+		// 	// 	const flagCode = altGeoCode[geoCode] || geoCode;
+		// 	// 	img.classList.add("flag", "me-2");
+		// 	// 	img.setAttribute(
+		// 	// 		"src",
+		// 	// 		"img/country_flags/" + flagCode.toLowerCase() + ".webp"
+		// 	// 	);
+		// 	// 	img.setAttribute("alt", "");
+		// 	// 	return img;
+		// 	// }
 
-			function anchor() {
-				const ddAnchor = document.createElement("a");
-				ddAnchor.setAttribute("role", "menuitem");
-				ddAnchor.classList.add(
-					"dropdown-item",
-					"d-flex",
-					"justify-content-between",
-					"align-items-center"
-				);
+		// 	function anchor() {
+		// 		const ddAnchor = document.createElement("a");
+		// 		ddAnchor.setAttribute("role", "menuitem");
+		// 		ddAnchor.classList.add(
+		// 			"dropdown-item",
+		// 			"d-flex",
+		// 			"justify-content-between",
+		// 			"align-items-center"
+		// 		);
 
-				// disable the option if the country is not available for the selected year
-				// disableOptionIfCountryNotAvailable(ddAnchor, geoCode);
+		// 		// disable the option if the country is not available for the selected year
+		// 		// disableOptionIfCountryNotAvailable(ddAnchor, geoCode);
 
-				ddAnchor.setAttribute("href", "#");
-				ddAnchor.setAttribute(
-					"onclick",
-					`nsToolbarHandler.eCountryChange(event,'${geoCode}');`
-				);
-				ddAnchor.setAttribute("data-geo", geoCode);
-				ddAnchor.setAttribute("data-bs-toggle", "button");
-				return ddAnchor;
-			}
-		});
+		// 		ddAnchor.setAttribute("href", "#");
+		// 		ddAnchor.setAttribute(
+		// 			"onclick",
+		// 			`nsToolbarHandler.eCountryChange(event,'${geoCode}');`
+		// 		);
+		// 		ddAnchor.setAttribute("data-geo", geoCode);
+		// 		ddAnchor.setAttribute("data-bs-toggle", "button");
+		// 		return ddAnchor;
+		// 	}
+		// });
 
-		if ($("#dropdown-geo-list").length) {
-			return;
-		}
+		// if ($("#dropdown-geo-list").length) {
+		// 	return;
+		// }
 
-		const divControl = addControl();
+		// const divControl = addControl();
 
-		divAllContainer.classList.add("dropdown-menu");
-		divAllContainer.setAttribute("role", "none");
-		divAllContainer.appendChild(divGeoList);
-		divAllContainer.appendChild(divControl);
+		// divAllContainer.classList.add("dropdown-menu");
+		// divAllContainer.setAttribute("role", "none");
+		// divAllContainer.appendChild(divGeoList);
+		// divAllContainer.appendChild(divControl);
 
-		anchor.setAttribute("data-bs-auto-close", "outside");
+		// anchor.setAttribute("data-bs-auto-close", "outside");
 
-		button.appendChild(anchor);
-		button.appendChild(divAllContainer);
+		// button.appendChild(anchor);
+		// button.appendChild(divAllContainer);
 
-		document.getElementById("sankeyToolbox").appendChild(button);
+		// document.getElementById("sankeyToolbox").appendChild(button);
 
-		return button;
+		// return button;
 
-		function getGeoListItems() {
-			const euAggrCodes = Object.keys(countriesEB)
-				.filter((key) => key.indexOf("EU") !== -1)
-				.map((key) => [key, countriesEB[key]]);
-			const countryCodesSorted = Object.keys(countriesEB)
-				.filter((key) => key.indexOf("EU") === -1)
-				.map((key) => [key, countriesEB[key]])
-				.sort((a, b) => a[1].localeCompare(b[1]));
-			return [...euAggrCodes, ...countryCodesSorted];
-		}
+		// function getGeoListItems() {
+		// 	const euAggrCodes = Object.keys(countriesEB)
+		// 		.filter((key) => key.indexOf("EU") !== -1)
+		// 		.map((key) => [key, countriesEB[key]]);
+		// 	const countryCodesSorted = Object.keys(countriesEB)
+		// 		.filter((key) => key.indexOf("EU") === -1)
+		// 		.map((key) => [key, countriesEB[key]])
+		// 		.sort((a, b) => a[1].localeCompare(b[1]));
+		// 	return [...euAggrCodes, ...countryCodesSorted];
+		// }
 
-		function getGeoListContainer() {
-			if ($("#dropdown-geo-list").length) {
-				$("#dropdown-geo-list").empty();
-				return document.getElementById("dropdown-geo-list");
-			}
-			const divGeoList = document.createElement("div");
-			divGeoList.style.cssText =
-				"height: auto;max-height: 48vh; overflow-x: hidden;";
-			divGeoList.setAttribute("id", "dropdown-geo-list");
-			divGeoList.setAttribute("role", "menu");
-			return divGeoList;
-		}
+		// function getGeoListContainer() {
+		// 	if ($("#dropdown-geo-list").length) {
+		// 		$("#dropdown-geo-list").empty();
+		// 		return document.getElementById("dropdown-geo-list");
+		// 	}
+		// 	const divGeoList = document.createElement("div");
+		// 	divGeoList.style.cssText =
+		// 		"height: auto;max-height: 48vh; overflow-x: hidden;";
+		// 	divGeoList.setAttribute("id", "dropdown-geo-list");
+		// 	divGeoList.setAttribute("role", "menu");
+		// 	return divGeoList;
+		// }
 
-		function addControl() {
-			const div = document.createElement("div");
-			div.classList.add("d-flex", "justify-content-evenly", "py-2");
-			["ok", "cancel", "reset"].forEach((id) => {
-				const btn = document.createElement("button");
-				btn.classList.add(				
-					"ecl-button",
-					id ==="ok"? "ecl-button--primary" : "ecl-button--secondary",
-				);
-				btn.setAttribute("type", "button");
-				btn.setAttribute("id", `btn-country-${id}`);
-				btn.innerText = languageNameSpace.labels[`BTN_${id.toUpperCase()}`];
-				div.appendChild(btn);
-			});
-			return div;
-		}
+		// function addControl() {
+		// 	const div = document.createElement("div");
+		// 	div.classList.add("d-flex", "justify-content-evenly", "py-2");
+		// 	["ok", "cancel", "reset"].forEach((id) => {
+		// 		const btn = document.createElement("button");
+		// 		btn.classList.add(				
+		// 			"ecl-button",
+		// 			id ==="ok"? "ecl-button--primary" : "ecl-button--secondary",
+		// 		);
+		// 		btn.setAttribute("type", "button");
+		// 		btn.setAttribute("id", `btn-country-${id}`);
+		// 		btn.innerText = languageNameSpace.labels[`BTN_${id.toUpperCase()}`];
+		// 		div.appendChild(btn);
+		// 	});
+		// 	return div;
+		// }
 
-		function disableOptionIfCountryNotAvailable(ddAnchor, geoCode) {
-			const queryString = window.location.search;
-			const urlParams = new URLSearchParams(queryString);
-			const year = urlParams.get("year");
-			const notAvailableCountries = countriesNotAvailable(
-				year,
-				geoCode,
-				REF.flowDisagg
-			);
-			if (notAvailableCountries.length !== 0) {
-				ddAnchor.classList.add("disabled");
-				ddAnchor.setAttribute("tabindex", "-1");
-				ddAnchor.setAttribute("aria-disabled", "true");
-			}
-		}
+		// function disableOptionIfCountryNotAvailable(ddAnchor, geoCode) {
+		// 	const queryString = window.location.search;
+		// 	const urlParams = new URLSearchParams(queryString);
+		// 	const year = urlParams.get("year");
+		// 	const notAvailableCountries = countriesNotAvailable(
+		// 		year,
+		// 		geoCode,
+		// 		REF.flowDisagg
+		// 	);
+		// 	if (notAvailableCountries.length !== 0) {
+		// 		ddAnchor.classList.add("disabled");
+		// 		ddAnchor.setAttribute("tabindex", "-1");
+		// 		ddAnchor.setAttribute("aria-disabled", "true");
+		// 	}
+		// }
 	},
 };
 
@@ -487,22 +487,22 @@ const nsToolbarHandler = {
 	 * Updates the country dimension to the current selected country.
 	 * @returns None
 	 */
-	countryDimensionUpdate: () => {
-		sankeyNameSpace.adaptCountryTitle();
-		sankeyNameSpace.setCountryLabels();
-	},
+	// countryDimensionUpdate: () => {
+	// 	sankeyNameSpace.adaptCountryTitle();
+	// 	sankeyNameSpace.setCountryLabels();
+	// },
 
-	setCountryLabels: function () {
-		var labelCountries = [];
-		$.each(countriesEB, function (idx, obj) {
-			if (jQuery.inArray(idx, REF.geos.split(",")) > -1) {
-				labelCountries.push(obj);
-			}
-		});
-		let label = labelCountries.toString().replace(/,/g, " + ");
-		label += " - " + languageNameSpace.labels["TITLE_YEAR"];
-		$("span.sankey-category.geo").text(label);
-	},
+	// setCountryLabels: function () {
+	// 	var labelCountries = [];
+	// 	$.each(countriesEB, function (idx, obj) {
+	// 		if (jQuery.inArray(idx, REF.geos.split(",")) > -1) {
+	// 			labelCountries.push(obj);
+	// 		}
+	// 	});
+	// 	let label = labelCountries.toString().replace(/,/g, " + ");
+	// 	label += " - " + languageNameSpace.labels["TITLE_YEAR"];
+	// 	$("span.sankey-category.geo").text(label);
+	// },
 
 
 	/**
@@ -570,143 +570,143 @@ const nsToolbarHandler = {
 	 * Updates the country dimension to the new country selected.
 	 * @returns None
 	 */
-	eCountryChange: function (e, geoCode) {
-		const geoAggr = document.querySelector(
-			`#dropdown-geo-list a[data-geo="EU27_2020"]`
-		);
+	// eCountryChange: function (e, geoCode) {
+	// 	const geoAggr = document.querySelector(
+	// 		`#dropdown-geo-list a[data-geo="EU27_2020"]`
+	// 	);
 
-		// if selected country is not EU27_2020, then remove EU27_2020 from active countries
-		if (geoCode !== "EU27_2020") {
-			geoAggr.classList.remove("active");
-			geoAggr.querySelector("i").classList.add("invisible");
-		}
+	// 	// if selected country is not EU27_2020, then remove EU27_2020 from active countries
+	// 	if (geoCode !== "EU27_2020") {
+	// 		geoAggr.classList.remove("active");
+	// 		geoAggr.querySelector("i").classList.add("invisible");
+	// 	}
 
-		// if selected country is EU27_2020, then remove all other countries from active countries
-		if (geoCode === "EU27_2020") {
-			const activeButtons = document.querySelectorAll(
-				"#dropdown-geo-list a.active"
-			);
-			activeButtons.forEach((button) => {
-				button.classList.remove("active");
-				button.querySelector("i").classList.add("invisible");
-			});
-		}
+	// 	// if selected country is EU27_2020, then remove all other countries from active countries
+	// 	if (geoCode === "EU27_2020") {
+	// 		const activeButtons = document.querySelectorAll(
+	// 			"#dropdown-geo-list a.active"
+	// 		);
+	// 		activeButtons.forEach((button) => {
+	// 			button.classList.remove("active");
+	// 			button.querySelector("i").classList.add("invisible");
+	// 		});
+	// 	}
 
-		// toggle selected country
-		const countryListItem = document.querySelector(
-			`#dropdown-geo-list a[data-geo="${geoCode}"]`
-		);
-		countryListItem.querySelector("i").classList.toggle("invisible");
+	// 	// toggle selected country
+	// 	const countryListItem = document.querySelector(
+	// 		`#dropdown-geo-list a[data-geo="${geoCode}"]`
+	// 	);
+	// 	countryListItem.querySelector("i").classList.toggle("invisible");
 
-		// collect all active countries
-		const activeButtons = document.querySelectorAll(
-			"#dropdown-geo-list a.active"
-		);
+	// 	// collect all active countries
+	// 	const activeButtons = document.querySelectorAll(
+	// 		"#dropdown-geo-list a.active"
+	// 	);
 
-		// restore EU27_2020 if no other country is selected
-		if (activeButtons.length === 0) {
-			geoAggr.classList.add("active");
-			geoAggr.querySelector("i").classList.remove("invisible");
-		}
+	// 	// restore EU27_2020 if no other country is selected
+	// 	if (activeButtons.length === 0) {
+	// 		geoAggr.classList.add("active");
+	// 		geoAggr.querySelector("i").classList.remove("invisible");
+	// 	}
 
-		// list all active countrie codes
-		const activeButtonsGeo = [...activeButtons].map((a) =>
-			a.getAttribute("data-geo")
-		);
-		REF.geos = activeButtons.length ? activeButtonsGeo.join(",") : "EU27_2020";
+	// 	// list all active countrie codes
+	// 	const activeButtonsGeo = [...activeButtons].map((a) =>
+	// 		a.getAttribute("data-geo")
+	// 	);
+	// 	REF.geos = activeButtons.length ? activeButtonsGeo.join(",") : "EU27_2020";
 
-		this.countryDimensionUpdate();
-		// this.countryChangeUpdateUnits();
-		e.preventDefault();
-	},
+	// 	this.countryDimensionUpdate();
+	// 	// this.countryChangeUpdateUnits();
+	// 	e.preventDefault();
+	// },
 
-	countryDropdownClose: () => {
-		const countryDropdownToggle = document.getElementById(
-			nsToolbarConf.args[0].ddItemId
-		);
-		let dropdown = new bootstrap.Dropdown(countryDropdownToggle);
-		dropdown.hide();
-	},
+	// countryDropdownClose: () => {
+	// 	const countryDropdownToggle = document.getElementById(
+	// 		nsToolbarConf.args[0].ddItemId
+	// 	);
+	// 	let dropdown = new bootstrap.Dropdown(countryDropdownToggle);
+	// 	dropdown.hide();
+	// },
 
 	/**
 	 * This function is called when the user clicks the "OK" button in the country dropdown.
 	 * It closes the dropdown and resets the timeline if the timeline is loaded.
 	 * Otherwise it is drawing the diagram.
 	 */
-	btnCountryOK: function () {
-		const notAvailableCountries = countriesNotAvailable(
-			REF.year,
-			dataNameSpace.ref.geos,
-			REF.flowDisagg
-		);
+	// btnCountryOK: function () {
+	// 	const notAvailableCountries = countriesNotAvailable(
+	// 		REF.year,
+	// 		dataNameSpace.ref.geos,
+	// 		REF.flowDisagg
+	// 	);
 
-		if (notAvailableCountries.length == 0) infobox();
+	// 	if (notAvailableCountries.length == 0) infobox();
 
-		this.countryDropdownClose();
-		//reset animation when changing country
-		if (timelineNameSpace.isAutoplayLoaded) {
-			timelineNameSpace.resetAutoplayTimeline();
-		}
+	// 	this.countryDropdownClose();
+	// 	//reset animation when changing country
+	// 	if (timelineNameSpace.isAutoplayLoaded) {
+	// 		timelineNameSpace.resetAutoplayTimeline();
+	// 	}
 
-			composeAndCacheYearsOfGeo(flagRedrawDiagram = true,[performance.now()]);
-			composeAndCacheGeosOfYear();
+	// 		composeAndCacheYearsOfGeo(flagRedrawDiagram = true,[performance.now()]);
+	// 		composeAndCacheGeosOfYear();
 		
 
-		function infobox() {
-			const geos = REF.geos.split(",");
-			const countries = geos.map((geo) => countriesEB[geo]).join(", ");
+	// 	function infobox() {
+	// 		const geos = REF.geos.split(",");
+	// 		const countries = geos.map((geo) => countriesEB[geo]).join(", ");
 
-			if (geos && geos.length > 1) {
-				const msg = languageNameSpace.labels.INFO_COUNTRY_SELECTOR.replace(
-					/\+/g,
-					countries
-				);
-				p = {
-					body: `<p>${msg}</p>`,
-					checkbox: false,
-					ssKey: "countrySelectorInfoAccepted",
-					title: "Information",
-					closeX: true,
-					footer: false,
-				};
-				messageboxNameSpace.messageModalBs(p);
-			}
-		}
-	},
+	// 		if (geos && geos.length > 1) {
+	// 			const msg = languageNameSpace.labels.INFO_COUNTRY_SELECTOR.replace(
+	// 				/\+/g,
+	// 				countries
+	// 			);
+	// 			p = {
+	// 				body: `<p>${msg}</p>`,
+	// 				checkbox: false,
+	// 				ssKey: "countrySelectorInfoAccepted",
+	// 				title: "Information",
+	// 				closeX: true,
+	// 				footer: false,
+	// 			};
+	// 			messageboxNameSpace.messageModalBs(p);
+	// 		}
+	// 	}
+	// },
 	/**
 	 * Remove the active class on the dropdown
 	 * Update the REF.geos variable.
 	 * Update the category title
 	 */
-	btnCountryReset: function () {
-		document.querySelectorAll("#dropdown-geo-list a").forEach(function (a) {
-			a.classList.remove("active");
-			a.setAttribute("aria-pressed", false);
-			a.querySelector("i").classList.add("invisible");
-		});
+	// btnCountryReset: function () {
+	// 	document.querySelectorAll("#dropdown-geo-list a").forEach(function (a) {
+	// 		a.classList.remove("active");
+	// 		a.setAttribute("aria-pressed", false);
+	// 		a.querySelector("i").classList.add("invisible");
+	// 	});
 
-		// set EU27_2020 as active
-		const geoAggr = document.querySelector(
-			`#dropdown-geo-list a[data-geo="EU27_2020"]`
-		);
-		geoAggr.classList.add("active");
-		geoAggr.querySelector("i").classList.remove("invisible");
+	// 	// set EU27_2020 as active
+	// 	const geoAggr = document.querySelector(
+	// 		`#dropdown-geo-list a[data-geo="EU27_2020"]`
+	// 	);
+	// 	geoAggr.classList.add("active");
+	// 	geoAggr.querySelector("i").classList.remove("invisible");
 
-		REF.geos = "EU27_2020";
-		this.countryDimensionUpdate();
-	},
+	// 	REF.geos = "EU27_2020";
+	// 	this.countryDimensionUpdate();
+	// },
 	/**
 	 * Restore the previous state of the dropdown
 	 * Restore the previous state of the REF variable
 	 */
-	btnCountryCancel: function () {
-		this.countryDropdownClose();
-		REF.geos = REF.before.geos;
-		if (REF.unit !== REF.before.unit) {
-			this.eUnitsChange(REF.before.unit);
-		}
-		this.countryDimensionUpdate();
-	},
+	// btnCountryCancel: function () {
+	// 	this.countryDropdownClose();
+	// 	REF.geos = REF.before.geos;
+	// 	if (REF.unit !== REF.before.unit) {
+	// 		this.eUnitsChange(REF.before.unit);
+	// 	}
+	// 	this.countryDimensionUpdate();
+	// },
 
 	/**
 	 * Adds an event listener to the given element for each of the given events.
@@ -733,85 +733,85 @@ const nsToolbarHandler = {
 		 * More listeners are added in the createCountryMenuitem function.
 		 * @param {Event} e - The event object.
 		 */
-		if (args.fn === "createCountryMenuitem") {
-			this.setEventListener(element, ["keyup"], function (e) {
-				/**
-				 * Keyboard navigation: if escape key is pressed
-				 * restore the previous state : Click the cancel button
-				 * close the dropdown : Click the menuitem button
-				 * set focus on the menitem button
-				 */
-				if (e.key === "Escape") {
-					nsToolbarHandler.btnCountryCancel();
-					nsToolbarHandler.countryDropdownClose();
-				}
-				if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
-					trapFocus();
-				}
-			});
+		// if (args.fn === "createCountryMenuitem") {
+		// 	this.setEventListener(element, ["keyup"], function (e) {
+		// 		/**
+		// 		 * Keyboard navigation: if escape key is pressed
+		// 		 * restore the previous state : Click the cancel button
+		// 		 * close the dropdown : Click the menuitem button
+		// 		 * set focus on the menitem button
+		// 		 */
+		// 		if (e.key === "Escape") {
+		// 			nsToolbarHandler.btnCountryCancel();
+		// 			nsToolbarHandler.countryDropdownClose();
+		// 		}
+		// 		if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+		// 			trapFocus();
+		// 		}
+		// 	});
 
-			document.getElementById(args.ddItemId).addEventListener("click", () => {
-				// Global variable to restore the previous state
-				REF.before = {
-					geos: REF.geos,
-					year: REF.year,
-					unit: REF.unit,
-					flowDisagg: REF.flowDisagg,
-				};
+		// 	document.getElementById(args.ddItemId).addEventListener("click", () => {
+		// 		// Global variable to restore the previous state
+		// 		REF.before = {
+		// 			geos: REF.geos,
+		// 			year: REF.year,
+		// 			unit: REF.unit,
+		// 			flowDisagg: REF.flowDisagg,
+		// 		};
 
-				const active = document.querySelectorAll("#dropdown-geo-list .active");
-				removeAllActivOptions(active);
+		// 		const active = document.querySelectorAll("#dropdown-geo-list .active");
+		// 		removeAllActivOptions(active);
 
-				// Adds the active options for the given geo to the dropdown menu.
+		// 		// Adds the active options for the given geo to the dropdown menu.
 
-				const activeGeos = REF.geos.split(",").filter((geo) => geo !== "");
-				for (let i = 0; i < activeGeos.length; i++) {
-					addGeoActiveOptions(activeGeos[i]);
-				}
+		// 		const activeGeos = REF.geos.split(",").filter((geo) => geo !== "");
+		// 		for (let i = 0; i < activeGeos.length; i++) {
+		// 			addGeoActiveOptions(activeGeos[i]);
+		// 		}
 
-				function removeAllActivOptions(activeOptions) {
-					if (activeOptions) {
-						activeOptions.forEach((a) => {
-							a.classList.remove("active");
-							a.setAttribute("aria-pressed", false);
-							if (a.querySelector("i")) {
-								a.querySelector("i").classList.add("invisible");
-							}
-						});
-					}
-				}
-				function addGeoActiveOptions(geo) {
-					const geoElement = document.querySelector(
-						`#dropdown-geo-list a[data-geo="${geo}"]`
-					);
-					if (geoElement) {
-						geoElement.classList.add("active");
-						geoElement.setAttribute("aria-pressed", true);
-						geoElement.querySelector("i").classList.remove("invisible");
-					}
-				}
-			});
+		// 		function removeAllActivOptions(activeOptions) {
+		// 			if (activeOptions) {
+		// 				activeOptions.forEach((a) => {
+		// 					a.classList.remove("active");
+		// 					a.setAttribute("aria-pressed", false);
+		// 					if (a.querySelector("i")) {
+		// 						a.querySelector("i").classList.add("invisible");
+		// 					}
+		// 				});
+		// 			}
+		// 		}
+		// 		function addGeoActiveOptions(geo) {
+		// 			const geoElement = document.querySelector(
+		// 				`#dropdown-geo-list a[data-geo="${geo}"]`
+		// 			);
+		// 			if (geoElement) {
+		// 				geoElement.classList.add("active");
+		// 				geoElement.setAttribute("aria-pressed", true);
+		// 				geoElement.querySelector("i").classList.remove("invisible");
+		// 			}
+		// 		}
+		// 	});
 
-			document
-				.getElementById("btn-country-ok")
-				.addEventListener("click", () => {
-					this.btnCountryOK();
-				});
+		// 	document
+		// 		.getElementById("btn-country-ok")
+		// 		.addEventListener("click", () => {
+		// 			this.btnCountryOK();
+		// 		});
 
-			document
-				.getElementById("btn-country-cancel")
-				.addEventListener("click", (e) => {
-					REF.geos = REF.before.geos;
-					REF.unit = REF.before.unit;
-					this.btnCountryCancel();
-				});
+		// 	document
+		// 		.getElementById("btn-country-cancel")
+		// 		.addEventListener("click", (e) => {
+		// 			REF.geos = REF.before.geos;
+		// 			REF.unit = REF.before.unit;
+		// 			this.btnCountryCancel();
+		// 		});
 
-			document
-				.getElementById("btn-country-reset")
-				.addEventListener("click", () => {
-					this.btnCountryReset();
-				});
-		}
+		// 	document
+		// 		.getElementById("btn-country-reset")
+		// 		.addEventListener("click", () => {
+		// 			this.btnCountryReset();
+		// 		});
+		// }
 		/**
 		 * end of createCountryMenuitem function
 		 *
@@ -901,6 +901,8 @@ const nsToolbarHandler = {
 };
 
 $(document).ready(function () {
+
+	
 	const components = [
 		{ instance: new ZoomControls(), target: "#zoomControls" },
 		{ instance: new SubNavbar(), target: "#subnavbar-container" },
@@ -912,6 +914,8 @@ $(document).ready(function () {
 	components.forEach(({ instance, target }) => {
 		instance.addToDOM(target);
 	});
+
+	populateCountries()
 
 	/**
 	 *  create toolbar items
@@ -930,20 +934,20 @@ $(document).ready(function () {
 	 * Adds an event listener to the toolbar button that will
 	 * cancel the country selection if the user clicks outside te dropdown .
 	 */
-	document
-		.getElementById(nsToolbarConf.args[0].ddItemId)
-		.addEventListener("hidden.bs.dropdown", function (e) {
-			if (e.clickEvent) {
-				nsToolbarHandler.btnCountryCancel();
-				nsToolbarHandler.countryDropdownClose();
-			}
-		});
+	// document
+	// 	.getElementById(nsToolbarConf.args[0].ddItemId)
+	// 	.addEventListener("hidden.bs.dropdown", function (e) {
+	// 		if (e.clickEvent) {
+	// 			nsToolbarHandler.btnCountryCancel();
+	// 			nsToolbarHandler.countryDropdownClose();
+	// 		}
+	// 	});
 
-	document
-		.getElementById(nsToolbarConf.args[0].ddItemId)
-		.addEventListener("show.bs.dropdown", function (e) {
-			nsToolbarCountry.createCountryMenuitem(nsToolbarConf.args[0]);
-		});
+	// document
+	// 	.getElementById(nsToolbarConf.args[0].ddItemId)
+	// 	.addEventListener("show.bs.dropdown", function (e) {
+	// 		nsToolbarCountry.createCountryMenuitem(nsToolbarConf.args[0]);
+	// 	});
 
 		ECL.autoInit();
 });

@@ -389,6 +389,18 @@
 	"SELECTLANGUAGE": "Select language",
  	"OFFICIAL": "Official EU languages:",
  	"FOOTER_ACCESSIBILITY": "Accessibility",
+
+	"VAL": "value",
+
+
+
+	"SELITEN": "Choose options",
+	"KEYWORD": "Enter filter keyword",
+	"NORESULTS": "No results found",
+	"SELALL": "Select all",
+	"CLEAR": "Clear all",
+	"CLOSE": "Submit",
+
 	
 
 	"": ""
