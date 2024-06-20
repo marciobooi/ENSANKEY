@@ -1,113 +1,69 @@
-/*
- *   This content is licensed according to the W3C Software License at
- *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
- *
- *   File:   tabs-automatic.js
- *
- *   Desc:   Tablist widget that implements ARIA Authoring Practices
- */
-
-'use strict';
-
 class TabsAutomatic {
   constructor(groupNode) {
     this.tablistNode = groupNode;
-
-    this.tabs = [];
-
-    this.firstTab = null;
-    this.lastTab = null;
-
     this.tabs = Array.from(this.tablistNode.querySelectorAll('[role=tab]'));
-    this.tabpanels = [];
+    this.tabpanels = this.tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
 
-    for (var i = 0; i < this.tabs.length; i += 1) {
-      var tab = this.tabs[i];
-      var tabpanel = document.getElementById(tab.getAttribute('aria-controls'));
+    this.firstTab = this.tabs[0];
+    this.lastTab = this.tabs[this.tabs.length - 1];
 
+    this.tabs.forEach((tab, index) => {
       tab.tabIndex = -1;
       tab.setAttribute('aria-selected', 'false');
-      this.tabpanels.push(tabpanel);
+      this.tabpanels[index].classList.add('is-hidden');
 
-      tab.addEventListener('keydown', this.onKeydown.bind(this));
-      tab.addEventListener('click', this.onClick.bind(this));
-
-      if (!this.firstTab) {
-        this.firstTab = tab;
-      }
-      this.lastTab = tab;
-    }
+      tab.addEventListener('keydown', this.onKeydown);
+      tab.addEventListener('click', this.onClick);
+    });
 
     this.setSelectedTab(this.firstTab, false);
   }
 
-  setSelectedTab(currentTab, setFocus) {
-    if (typeof setFocus !== 'boolean') {
-      setFocus = true;
-    }
-    for (var i = 0; i < this.tabs.length; i += 1) {
-      var tab = this.tabs[i];
+  setSelectedTab = (currentTab, setFocus = true) => {
+    this.tabs.forEach((tab, index) => {
       if (currentTab === tab) {
         tab.setAttribute('aria-selected', 'true');
         tab.removeAttribute('tabindex');
-        this.tabpanels[i].classList.remove('is-hidden');
+        this.tabpanels[index].classList.remove('is-hidden');
         if (setFocus) {
           tab.focus();
         }
       } else {
         tab.setAttribute('aria-selected', 'false');
         tab.tabIndex = -1;
-        this.tabpanels[i].classList.add('is-hidden');
+        this.tabpanels[index].classList.add('is-hidden');
       }
-    }
+    });
   }
 
-  setSelectedToPreviousTab(currentTab) {
-    var index;
-
-    if (currentTab === this.firstTab) {
-      this.setSelectedTab(this.lastTab);
-    } else {
-      index = this.tabs.indexOf(currentTab);
-      this.setSelectedTab(this.tabs[index - 1]);
-    }
+  setSelectedToPreviousTab = (currentTab) => {
+    const currentIndex = this.tabs.indexOf(currentTab);
+    const previousTab = currentTab === this.firstTab ? this.lastTab : this.tabs[currentIndex - 1];
+    this.setSelectedTab(previousTab);
   }
 
-  setSelectedToNextTab(currentTab) {
-    var index;
-
-    if (currentTab === this.lastTab) {
-      this.setSelectedTab(this.firstTab);
-    } else {
-      index = this.tabs.indexOf(currentTab);
-      this.setSelectedTab(this.tabs[index + 1]);
-    }
+  setSelectedToNextTab = (currentTab) => {
+    const currentIndex = this.tabs.indexOf(currentTab);
+    const nextTab = currentTab === this.lastTab ? this.firstTab : this.tabs[currentIndex + 1];
+    this.setSelectedTab(nextTab);
   }
 
   /* EVENT HANDLERS */
 
-  onKeydown(event) {
-    var tgt = event.currentTarget,
-      flag = false;
+  onKeydown = (event) => {
+    const currentTab = event.currentTarget;
+    let flag = false;
 
     switch (event.key) {
       case 'ArrowLeft':
-        this.setSelectedToPreviousTab(tgt);
+      case 'ArrowUp':
+        this.setSelectedToPreviousTab(currentTab);
         flag = true;
         break;
 
       case 'ArrowRight':
-        this.setSelectedToNextTab(tgt);
-        flag = true;
-        break;
-
-      case 'ArrowUP':
-        this.setSelectedToPreviousTab(tgt);
-        flag = true;
-        break;
-
       case 'ArrowDown':
-        this.setSelectedToNextTab(tgt);
+        this.setSelectedToNextTab(currentTab);
         flag = true;
         break;
 
@@ -131,11 +87,7 @@ class TabsAutomatic {
     }
   }
 
-  onClick(event) {
+  onClick = (event) => {
     this.setSelectedTab(event.currentTarget);
   }
 }
-
-// Initialize tablist
-
-
