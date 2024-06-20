@@ -121,3 +121,27 @@ fill:var(--c-p)
 .legend-text {
   cursor: pointer; /* Change cursor to pointer when hovering over the legend text */
 }
+
+#containerCountry > div > div.ecl-select__multiple > div:nth-child(1) > div.ecl-select__icon > svg > path{
+  fill: white;
+}
+
+
+
+.iconContainerSvg {
+  background-color: rgb(14, 71, 203);
+  height: 2rem;
+  width: 2rem;
+  color: white;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin-right: .5rem;
+  border-radius: 4px;
+}
+
+#browser-message-modal-info > div > div > .ecl-modal__body {
+  padding: 15px;
+}
