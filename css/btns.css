@@ -84,10 +84,15 @@ button.btn.btn-primary.min-with--nav {
 }
 
 
+
 button.ecl-button.ecl-button--ghost {
     background-color: #fff;
     border-color: var(--c-p);
     color: var(--c-p);
+}
+
+#chartControls > div > div > div > button {
+    all:initial
 }
 
 
