@@ -156,7 +156,7 @@ const nsToolbarCountry = {
 		// button.appendChild(anchor);
 		// button.appendChild(divAllContainer);
 
-		// document.getElementById("sankeyToolbox").appendChild(button);
+		// document.getElementById(container).appendChild(button);
 
 		// return button;
 
@@ -219,10 +219,16 @@ const nsToolbarCountry = {
 	},
 };
 
+var isMobilePortrait = window.matchMedia("(max-width: 768px) and (orientation: portrait)").matches;
+var container = isMobilePortrait ? "btnGroup" : "sankeyToolbox";
+
 const nsToolbar = {
+	
 	createUnitMenuitem: function (args) {
 		const navitemList = this.navItemList(args);
 		const items = energyUnits;
+
+		
 
 		Object.entries(items).forEach(([key, value]) => {
 			const ddAnchor = createAnchor();
@@ -267,7 +273,7 @@ const nsToolbar = {
 		const button = this.navItem(args, "dropdown");
 		button.appendChild(anchor);
 		button.appendChild(navitemList);
-		document.getElementById("sankeyToolbox").appendChild(button);
+		document.getElementById(container).appendChild(button);
 		return navitemList;
 	},
 
@@ -326,7 +332,7 @@ const nsToolbar = {
 		const button = this.navItem(args);
 		button.appendChild(anchor);
 		button.appendChild(navitemList);
-		document.getElementById("sankeyToolbox").appendChild(button);
+		document.getElementById(container).appendChild(button);
 		return navitemList;
 	},
 
@@ -335,7 +341,7 @@ const nsToolbar = {
 		navitemLink.setAttribute("data-bs-toggle", "button");
 		const navitem = this.navItem(args, "button");
 		navitem.appendChild(navitemLink);
-		document.getElementById("sankeyToolbox").appendChild(navitem);
+		document.getElementById(container).appendChild(navitem);
 
 		if (REF.flowDisagg) {
 			const button = document.getElementById(args.ddItemId);
@@ -375,7 +381,7 @@ const nsToolbar = {
 		const navItem = this.navItem(args);
 		navItem.appendChild(navItemLink);
 		navItem.appendChild(navitemList);
-		document.getElementById("sankeyToolbox").appendChild(navItem);
+		document.getElementById(container).appendChild(navItem);
 		return navitemList;
 	},
 
@@ -412,7 +418,7 @@ const nsToolbar = {
 		const navItem = this.navItem(args);
 		navItem.appendChild(navItemLink);
 		navItem.appendChild(navitemList);
-		document.getElementById("sankeyToolbox").appendChild(navItem);
+		document.getElementById(container).appendChild(navItem);
 		return navitemList;
 	},
 
@@ -420,7 +426,7 @@ const nsToolbar = {
 		const navItemLink = this.navItemLink(args, "button");
 		const navItem = this.navItem(args, "button");
 		navItem.appendChild(navItemLink);
-		document.getElementById("sankeyToolbox").appendChild(navItem);
+		document.getElementById(container).appendChild(navItem);
 		return navItemLink;
 	},
 
@@ -428,7 +434,7 @@ const nsToolbar = {
 		const navItemLink = this.navItemLink(args, "button");
 		const navItem = this.navItem(args, "button");
 		navItem.appendChild(navItemLink);
-		document.getElementById("sankeyToolbox").appendChild(navItem);
+		document.getElementById(container).appendChild(navItem);
 		return navItemLink;
 	},
 

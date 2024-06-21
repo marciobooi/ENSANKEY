@@ -250,7 +250,7 @@ function scaleHandler(cliWidth, cliHeight, svgWidth, svgHeight) {
 
 function screenHandler(cliWidth, cliHeight) {
   // left and top margins for the diagram
-  let xy = [120, 10];
+  let xy = isMobile ? [10, 60] : [120, 10];
   return xy;
 }
 

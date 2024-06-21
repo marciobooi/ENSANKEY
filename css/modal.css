@@ -145,3 +145,7 @@ fill:var(--c-p)
 #browser-message-modal-info > div > div > .ecl-modal__body {
   padding: 15px;
 }
+
+#language-list-overlay {
+  padding-top: 0.7rem;
+}

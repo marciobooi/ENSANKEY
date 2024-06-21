@@ -48,6 +48,7 @@ var sankeyNameSpace = {
 		.scaleExtent([0.2, 5])
 		.on("zoom", sankeyToolsNameSpace.zoomed),
 
+
 	//zoom parameters
 	translateX: REF.translateX,
 	translateY: REF.translateY,
@@ -63,7 +64,7 @@ var sankeyNameSpace = {
 			sankeyNameSpace.adaptCountryTitle();
 
 		} else {
-			sankeyNameSpace.svgMarginsDevice = dataNameSpace.marginSmall;
+			sankeyNameSpace.svgMarginsDevice = dataNameSpace.marginSmall;		
 		};
 	},
 
@@ -179,8 +180,8 @@ var sankeyNameSpace = {
 
 	setDiagramTranslate: function (id, svgSize) {
 		const svgContainer = document.querySelector(`#svg-container${id}`);
-		sankeyTransform(svgSize.width, svgSize.height);
-		sankeyNameSpace.zoom.scale(dataNameSpace.reset.scale);
+			sankeyTransform(svgSize.width, svgSize.height);		
+			sankeyNameSpace.zoom.scale(dataNameSpace.reset.scale);
 
 		// TODO : device scale
 		// scale = imgHeight / sankeyNameSpace.svgSize.height;

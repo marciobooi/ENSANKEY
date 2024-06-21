@@ -91,7 +91,8 @@ class Navbar {
 
     <div class="col-3 col-lg-2" id="lang-section">
       <button id="toggleLanguageBtn" type="button" class="ecl-button ecl-button--secondary" aria-expanded="false" aria-label="Change language, current language is English">
-        <i class="fas fa-globe" focusable="false" aria-hidden="true"></i><span id="lang-selection-text">English</span>
+        <i class="fas fa-globe" focusable="false" aria-hidden="true"></i>
+        <span id="lang-selection-text">English</span>
       </button>
       <div class="ecl-site-header__language-container" id="language-list-overlay" data-ecl-language-list-overlay="" aria-labelledby="ecl-site-header__language-title" role="dialog" aria-modal="true">
       <div class="ecl-site-header__language-header">

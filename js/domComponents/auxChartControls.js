@@ -87,7 +87,7 @@ class ChartControls {
               </li>
               <li><button id="toggleAgregates" class="ecl-button ecl-button--primary" title="${
                 languageNameSpace.labels["TOGGLEAGREGATES"]
-              }">${languageNameSpace.labels["TOGGLEAGREGATES"]}</button></li>`
+              }"><i class="fa-solid fa-layer-group"></i></button></li>`
                   : ""
               }
               <li class="nav-item button px-1" id="printChart" role="none">
