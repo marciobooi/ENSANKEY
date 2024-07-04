@@ -149,13 +149,13 @@ var sankeyToolsNameSpace = {
 		var currentUrl = window.location.href;
 		var encodedUrl = encodeURIComponent(currentUrl);
 		var targetUrl = targetClassName.includes("linkedin")
-			? 'https://www.linkedin.com/shareArticle?mini=true&title=EnergyTrade&url=' + encodedUrl
+			? 'https://www.linkedin.com/shareArticle?mini=true&title=Energy%20flow%20diagram&url=' + encodedUrl
 			: targetClassName.includes("twitter")
-			? 'https://twitter.com/share?text=EnergyTrade&url=' + encodedUrl
+			? 'https://twitter.com/share?text=Energy%20flow%20diagram&url=' + encodedUrl
 			: targetClassName.includes("facebook")
-			? 'https://www.facebook.com/sharer.php?t=EnergyTrade&u=' + encodedUrl
+			? 'https://www.facebook.com/sharer.php?t=Energy%20flow%20diagram&u=' + encodedUrl
 			: targetClassName.includes("feedback")
-			? "mailto:ESTAT-ENERGY@ec.europa.eu?subject=Circular%20economy%20flow%20diagrams&body="
+			? "mailto:ESTAT-ENERGY@ec.europa.eu?subject=Energy%20flow%20diagram&body="
 			: "mailto:?subject=Circular%20economy%20flow%20diagrams&body=";			
 
 		if (type === "click" || (type === "keydown" && event.key === "Enter")) {
