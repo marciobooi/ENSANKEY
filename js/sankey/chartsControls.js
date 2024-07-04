@@ -44,7 +44,7 @@ const nsCharts = {
  */
 const creditsHTML = `<span style="font-size: .875rem;">${languageNameSpace.labels["EXPORT_FOOTER_TITLE"]} - </span>
   <a style="color:blue; text-decoration: underline; font-size: .875rem;"
-  href="https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table?lang=${REF.language}">${languageNameSpace.labels["accData"]}</a>,
+  href="https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table?lang=${REF.language}">${languageNameSpace.labels["accData"]}</a>
   <span style="font-size: .875rem;"> </span>`;
 
 
