@@ -369,10 +369,7 @@ const nsSankeyModal = {
 	},
 
 	externalLinksBtn: function (subject) {
-		const sheetId = 3,
-			dictionary = excelInfoData[sheetId];
-
-			log(subject)
+		const sheetId = 3, dictionary = excelInfoData[sheetId];			
 
 		const btnHtml = dictionary
 			.filter((o) => o.LANGUAGE === REF.language && o.SUBJECT === subject)
@@ -381,6 +378,8 @@ const nsSankeyModal = {
 				class="ecl-button ecl-button--secondary modalBtn">${cur.TITLE}</a>`;
 				return acc;
 			}, "");
+
+			log(btnHtml)
 
 		return btnHtml;
 	},
