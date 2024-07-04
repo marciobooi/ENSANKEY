@@ -82,7 +82,7 @@ class Navbar {
     this.navbar.className = 'navbar navbar-top';
     this.navbar.setAttribute('role', 'navigation');
 
-    this.navbar.innerHTML = `
+    this.navbar.innerHTML = /*html*/`
     <div class="col-6 col-lg-6">
       <div id="header-title">
         <h1 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h1>
@@ -227,10 +227,10 @@ class Navbar {
 selectLanguage(langItem) {
   // Remove "active" class from all language items
   const languageItems = this.navbar.querySelectorAll(".ecl-site-header__language-item");
-  languageItems.forEach(item => item.classList.remove("active"));
+  languageItems.forEach(item => item.classList.remove("ecl-site-header__language-link--active"));
 
   // Add "active" class to the selected language item
-  langItem.classList.add("active");
+  langItem.classList.add("ecl-site-header__language-link--active");
 
   // Update button text with the selected language
   const langLabel = langItem.querySelector(".ecl-site-header__language-link-label").textContent;
