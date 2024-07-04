@@ -360,6 +360,12 @@
     "SELALL": "Alle auswählen",
     "CLEAR": "Alles löschen",
     "CLOSE": "Einreichen",
+
+	"AGGREGATE": "Aggregat",
+	"EUCTR": "EU-Länder",
+	"EFTA": "EFTA-Länder",
+	"ENLARGEMENT": "Erweiterungsländer",
+	"OTHERCTR": "Andere Drittstaaten",
 	
 	"": ""
 }

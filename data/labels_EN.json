@@ -401,6 +401,12 @@
 	"CLEAR": "Clear all",
 	"CLOSE": "Submit",
 
+	"AGGREGATE": "Aggregate",
+	"EUCTR": "EU countries",
+	"EFTA": "EFTA countries",
+	"ENLARGEMENT": "Enlargement countries",
+	"OTHERCTR": "Other third countries",
+
 	
 
 	"": ""

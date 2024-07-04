@@ -1,9 +1,9 @@
-const allCountries = Object.keys(countriesEB).map((key) => [key, countriesEB[key]]).sort((a, b) => a[1].localeCompare(b[1]));
-const countriesAgregates = ["EU27_2020"];
+// const allCountries = Object.keys(countriesEB).map((key) => [key, countriesEB[key]]).sort((a, b) => a[1].localeCompare(b[1]));
+// const countriesAgregates = ["EU27_2020"];
 
- EU_MEMBER_COUNTRY_CODES = Object.keys(countriesEB).filter((key) => key.indexOf("EU") === -1).sort((a, b) => countriesEB[a].localeCompare(countriesEB[b]));
+//  EU_MEMBER_COUNTRY_CODES = Object.keys(countriesEB).filter((key) => key.indexOf("EU") === -1).sort((a, b) => countriesEB[a].localeCompare(countriesEB[b]));
 
- NON_MEMBER_COUNTRY_CODES = allCountries.filter(country => !EU_MEMBER_COUNTRY_CODES.includes(country) && !countriesAgregates.includes(country));
+//  NON_MEMBER_COUNTRY_CODES = allCountries.filter(country => !EU_MEMBER_COUNTRY_CODES.includes(country) && !countriesAgregates.includes(country));
 
 
 function populateCountries() {
@@ -19,11 +19,16 @@ function populateCountries() {
     existingSingleSelect.parentElement.parentElement.remove();
   }
 
-  const allCountries = Object.keys(countriesEB).map((key) => [key, countriesEB[key]]).sort((a, b) => a[1].localeCompare(b[1]));
-  const countriesAgregates = ["EU27_2020"];
+  const countriesAggregates = ["EU27_2020"];
+  const EU_COUNTRY_CODES = ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE"];
+  const EFTA_COUNTRY_CODES = ["IS", "NO"];
+  const ENLARGEMENT_COUNTRY_CODES = ["AL", "BA", "ME", "MK", "RS", "TR", "XK"];
+  const OTHER_THIRD_COUNTRY_CODES = ["UA", "MD", "GE"];
 
-  EU_MEMBER_COUNTRY_CODES = Object.keys(countriesEB).filter((key) => key.indexOf("EU") === -1).sort((a, b) => countriesEB[a].localeCompare(countriesEB[b]));
-  NON_MEMBER_COUNTRY_CODES = allCountries.filter(country => !EU_MEMBER_COUNTRY_CODES.includes(country[0]) && !countriesAgregates.includes(country[0]));
+  const sortedEU_COUNTRY_CODES = EU_COUNTRY_CODES.sort();
+  const sortedEFTA_COUNTRY_CODES = EFTA_COUNTRY_CODES.sort();
+  const sortedENLARGEMENT_COUNTRY_CODES = ENLARGEMENT_COUNTRY_CODES.sort();
+  const sortedOTHER_THIRD_COUNTRY_CODES = OTHER_THIRD_COUNTRY_CODES.sort();
 
   const html = /*html*/`      
     <div class="ecl-form-group" role="application">
@@ -37,14 +42,20 @@ function populateCountries() {
           data-ecl-select-all="${languageNameSpace.labels["SELALL"]}"
           data-ecl-select-clear-all="${languageNameSpace.labels["CLEAR"]}" 
           data-ecl-select-close="${languageNameSpace.labels["CLOSE"]}">
-          <optgroup label="Aggregates">
-            ${countriesAgregates.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+          <optgroup label="${languageNameSpace.labels["AGGREGATE"]}">
+            ${countriesAggregates.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
-          <optgroup label="European members">
-            ${EU_MEMBER_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+          <optgroup label="${languageNameSpace.labels["EUCTR"]}">
+            ${sortedEU_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
-          <optgroup label="Non European members">
-            ${NON_MEMBER_COUNTRY_CODES.map(([key, value]) => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+          <optgroup label="${languageNameSpace.labels["EFTA"]}">
+            ${sortedEFTA_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+          </optgroup>
+          <optgroup label="${languageNameSpace.labels["ENLARGEMENT"]}">
+            ${sortedENLARGEMENT_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+          </optgroup>
+          <optgroup label="${languageNameSpace.labels["OTHERCTR"]}">
+            ${sortedOTHER_THIRD_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
         </select>
         <div class="ecl-select__icon">
@@ -120,8 +131,6 @@ function populateCountries() {
 				messageboxNameSpace.messageModalBs(p);
 			}
 		}
-
-
   });
 
   function setCountryLabels () {
@@ -173,6 +182,7 @@ function populateCountries() {
     }
   }, 1000);
 }
+
 
 // setTimeout(() => {
 //   console.log('works');

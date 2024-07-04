@@ -360,5 +360,11 @@
     "CLEAR": "Tout effacer",
     "CLOSE": "Soumettre",
 
+	"AGGREGATE": "Agrégat",
+	"EUCTR": "Pays de l'UE",
+	"EFTA": "Pays de l'AELE",
+	"ENLARGEMENT": "Pays en élargissement",
+	"OTHERCTR": "Autres pays tiers",
+
 	"": ""
 }

@@ -385,7 +385,7 @@ ALL ABOUT COUNTRY CODES
 */
 // List of all countries in Eurobase !!! LOOKUP TABLE !!!
 // 2017-05-22: Labels are now set in the language JSON files in the data folder
-countriesEB = { "EU27_2020": "", "EA19": "", "BE": "", "BG": "", "CZ": "", "DK": "", "DE": "", "EE": "", "IE": "", "EL": "", "ES": "", "FR": "", "HR": "", "IT": "", "CY": "", "LV": "", "LT": "", "LU": "", "HU": "", "MT": "", "NL": "", "AT": "", "PL": "", "PT": "", "RO": "", "SI": "", "SK": "", "FI": "", "SE": "", "IS": "", "NO": "", "ME": "", "MK": "", "AL": "", "RS": "", "TR": "", "XK": "", "UA": "", "MD": "", "BA": "", "GE": "" }; //prettier-ignore
+countriesEB = { "EU27_2020": "", "BE": "", "BG": "", "CZ": "", "DK": "", "DE": "", "EE": "", "IE": "", "EL": "", "ES": "", "FR": "", "HR": "", "IT": "", "CY": "", "LV": "", "LT": "", "LU": "", "HU": "", "MT": "", "NL": "", "AT": "", "PL": "", "PT": "", "RO": "", "SI": "", "SK": "", "FI": "", "SE": "", "IS": "", "NO": "", "ME": "", "MK": "", "AL": "", "RS": "", "TR": "", "XK": "", "UA": "", "MD": "", "BA": "", "GE": "" }; //prettier-ignore
 
 
 
