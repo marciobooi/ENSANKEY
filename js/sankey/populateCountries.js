@@ -25,11 +25,6 @@ function populateCountries() {
   const ENLARGEMENT_COUNTRY_CODES = ["AL", "BA", "ME", "MK", "RS", "TR", "XK"];
   const OTHER_THIRD_COUNTRY_CODES = ["UA", "MD", "GE"];
 
-  const sortedEU_COUNTRY_CODES = EU_COUNTRY_CODES.sort();
-  const sortedEFTA_COUNTRY_CODES = EFTA_COUNTRY_CODES.sort();
-  const sortedENLARGEMENT_COUNTRY_CODES = ENLARGEMENT_COUNTRY_CODES.sort();
-  const sortedOTHER_THIRD_COUNTRY_CODES = OTHER_THIRD_COUNTRY_CODES.sort();
-
   const html = /*html*/`      
     <div class="ecl-form-group" role="application">
       <div class="ecl-select__container">
@@ -46,16 +41,16 @@ function populateCountries() {
             ${countriesAggregates.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
           <optgroup label="${languageNameSpace.labels["EUCTR"]}">
-            ${sortedEU_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+            ${EU_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
           <optgroup label="${languageNameSpace.labels["EFTA"]}">
-            ${sortedEFTA_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+            ${EFTA_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
           <optgroup label="${languageNameSpace.labels["ENLARGEMENT"]}">
-            ${sortedENLARGEMENT_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+            ${ENLARGEMENT_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
           <optgroup label="${languageNameSpace.labels["OTHERCTR"]}">
-            ${sortedOTHER_THIRD_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
+            ${OTHER_THIRD_COUNTRY_CODES.map(ctr => `<option data-geo="${ctr}" value="${ctr}" ${REF.geos.includes(ctr) ? 'selected' : ''}>${languageNameSpace.labels[ctr]}</option>`).join('')}
           </optgroup>
         </select>
         <div class="ecl-select__icon">

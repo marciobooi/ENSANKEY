@@ -372,6 +372,8 @@ const nsSankeyModal = {
 		const sheetId = 3,
 			dictionary = excelInfoData[sheetId];
 
+			log(subject)
+
 		const btnHtml = dictionary
 			.filter((o) => o.LANGUAGE === REF.language && o.SUBJECT === subject)
 			.reduce((acc, cur) => {
