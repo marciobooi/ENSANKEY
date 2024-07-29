@@ -16,7 +16,7 @@
 
 /* fix z-index of legend modal */
 #legend-box-modal {
-  z-index: 0 !important;
+  /* z-index: 0 !important; */
   opacity: 1;
 }
 

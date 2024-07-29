@@ -52,6 +52,7 @@ var legendBoxNameSpace = {
     fillLegendContent: function () {
         const content = document.createElement("ol");
         var fuelList = [];
+        log()
         $.each(fuelMap(REF.fuels, REF.flowDisagg), function (idx, obj) {
             if (dataNameSpace.fuelListDrawn.contains(obj)) {
                 fuelList.push(obj);
@@ -62,6 +63,7 @@ var legendBoxNameSpace = {
 
         $.each(fuelList, function (idx, obj) {
             const elIcon = mkIconElement();
+            log(elIcon)
             const elText = mkFuelTextElement();
             const elAnchor = mkAnchorElement(obj);
             const elLegendItem = mkLegendElement();
@@ -132,9 +134,7 @@ var legendBoxNameSpace = {
             function getFuelColor() {
                 const i = getFuelIdx();
                 let colour =
-                    REF.highlight !== "_" && !REF.highlight.contains(i.toString())
-                        ? "rgb(150, 176, 176)"
-                        : fuelColors[obj];
+                REF.highlight !== "_" && !REF.highlight.contains(i.toString()) ? "rgb(150, 176, 176)" : fuelColors[obj];
                 colour = REF.flowDisagg ? colour : fuelColors["TOTAL"];
                 return colour;
             }

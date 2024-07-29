@@ -25,61 +25,61 @@ ALL ABOUT FUEL CODES
 fuelColors = {
 
   // All products aggregate
-  "TOTAL": "#32AFAF", // ESTAT theme 8
+  "TOTAL": "#0E47CB", // ESTAT theme 8
 
   // coal family
-  "SFF_P1000": "#800000", // maroon: tailormade theme
-  "C0121": "#A0522D", // sienna
-  "C0129": "#493D26", // mocha
-  "C0220": "#D2B48C", // tan
-  "C0311": "#F4A460", // sandybrown
-  "SFF_OTH": "#D2691E", // chocolate
+  "SFF_P1000": "#AA5F18", // maroon: tailormade theme
+  "C0121": "#C19006", // sienna
+  "C0129": "#734921", // mocha
+  "C0220": "#e04040", // tan
+  "C0311": "#982630", // sandybrown
+  "SFF_OTH": "#FF8080", // chocolate
 
   // oil family
-  "O4000": "#14375A", // ESTAT theme 1 (darker 50 %)
-  "O4100_TOT": "#191970", // midnightblue
-  "O4200-4500": "#95B9C7", // babyblue
-  "O4652XR5210B": " #4169E1", // royalblue
-  "O4661XR5230B": "#483D8B", // darkslateblue
-  "O4671XR5220B": "#4682B4", // steelblue
-  "O4680": "#318F9B", // another blue
-  "PP_OTH": "#0000FF", // blue
+  "O4000": "#2644A7", // ESTAT theme 1 (darker 50 %)
+  "O4100_TOT": "#17256B", // midnightblue
+  "O4200-4500": "#9CC1FA", // babyblue
+  "O4652XR5210B": " #738CE5", // royalblue
+  "O4661XR5230B": "#388AE2", // darkslateblue
+  "O4671XR5220B": "#104F99", // steelblue
+  "O4680": "#A5DAF9", // another blue
+  "PP_OTH": "#80BFFA", // blue
 
   // gas family
-  "G3000_C0350-370": "#FAA519", // ESTAT theme 3
-  "G3000": "#FFA500", // orange
-  "C0350-0370": "#FF7F50", // coral
+  "G3000_C0350-370": "#B09120", // ESTAT theme 3
+  "G3000": "#C6AF5D", // orange
+  "C0350-0370": "#866110", // coral
 
   // renewables family
-  "RA000": "#5FB441", // ESTAT theme 5
-  "RA100": "#41A317", // limegreen
-  "RA300": "#228B22", // forestgreen
-  "RA410": "#006400", // darkgreen
-  "RA420": "#00FF7F", // springgreen
-  "R5110-5150_W6000RI": "#8FBC8F", // darkseagreen
-  "R5200": "#20B2AA", // lightseagreen
-  "W6210": "#7FFFD4", //Aquamarine
-  "R5300": "#556B2F", //DarkOliveGreen
-  "RA200": "#8FBC8F", //DarkSeaGreen
-  "RA600": "#ADFF2F", //GreenYellow
-  "RA500_5160": "#4E8975", // seagreen
+  "RA000": "#33A033", // ESTAT theme 5
+  "RA100": "#007243", // limegreen
+  "RA300": "#A2DDB2", // forestgreen
+  "RA410": "#6DB56D", // darkgreen
+  "RA420": "#208486", // springgreen
+  "R5110-5150_W6000RI": "#00525C", // darkseagreen
+  "R5200": "#92C1C0", // lightseagreen
+  "W6210": "red", //Aquamarine
+  "R5300": "red", //DarkOliveGreen
+  "RA200": "red", //DarkSeaGreen
+  "RA600": "red", //GreenYellow
+  "RA500_5160": "#5FADAD", // seagreen
 
 
   // waste family
-  "W6100_6220": "#FFD700", // gold: tailormade theme
-  "W6100": "#CCCC00", // dark yellow 1
-  "W6220": "#FFE87C", // sunyellow
+  "W6100_6220": "#FBC11D", // gold: tailormade theme
+  "W6100": "#FBC11D", // dark yellow 1
+  "W6220": "#E6B800", // sunyellow
 
   // non-aggregate families:
   // nuclear heat
-  "N900H": "#C84B96", // ESTAT theme 2
+  "N900H": "#B656BD", // ESTAT theme 2
 
 
   // derived heat
-  "H8000": "#F9C0A6", // ESTAT theme 9 (lighter 60 %)
+  "H8000": "#672DC4", // ESTAT theme 9 (lighter 60 %)
 
   // electricity
-  "E7000": "#D73C41", // ESTAT theme 6
+  "E7000": "#AF155C", // ESTAT theme 6
 
 };
 

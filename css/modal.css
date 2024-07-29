@@ -93,7 +93,7 @@ fill:var(--c-p)
   bottom: 14%;
   left: 1%;
   max-width: 24rem;
-  
+  z-index: 99999999999;
 }
 
 .ecl-modal__body:is(:last-child) {

@@ -297,7 +297,7 @@ nodeNameSpace = {
 				.attr("id", "node_" + n.code)
 				.style("opacity", opacity)
 				// .style("fill", "#195757") // black opacity 0.5 over green
-				.style("fill", "#1e6969") // black opacity 0.4 over green
+				.style("fill", "black") // black opacity 0.4 over green
 				// .style("fill", "#237a7a") // black opacity 0.3 over green
 				.on("mousedown", graphMouseDown)
 				.on("mouseup", graphMouseUp)
