@@ -104,7 +104,7 @@
   <script type="text/javascript" src="js/sankey/functions.js"></script>
 		<script type="text/javascript" src="js/sankey/sankey.js"></script>
   <script type="text/javascript" src="js/sankey/create-toolbar.js"></script>
-  <!-- <script type="text/javascript" src="js/sankey/loader.js"></script> -->
+  <script type="text/javascript" src="js/sankey/flow-dialog-box.js"></script>
   <script type="text/javascript" src="js/sankey/chartsTable.js" async></script>
   <script type="text/javascript" src="js/sankey/chartsControls.js" async></script>
   <script defer type="text/javascript" src="https://europa.eu/webtools/load.js"></script>
@@ -191,6 +191,29 @@
   </main>
 
   <div id="componentFooter"></div>
+
+<div class="content"><a class='bold'
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16416335&RdoSearch=BEGIN&TxtSearch=&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank"><b>Tous les produits</b></a> est la somme de tous les produits énergétiques et se compose des
+  familles de carburants suivantes: <a href="#"
+    onclick="flowboxNameSpace.glossaryFlow('SFF_P1000','Combustibles solides');">Combustibles solides</a> (charbon), <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16416285&RdoSearch=BEGIN&TxtSearch=&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank">produits pétroliers totaux</a> (<a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16445285&RdoSearch=BEGIN&TxtSearch=&CboTheme=36940303&IsTer=&IntCurrentPage=4&ter_valid=0"
+    target="_blank">pétrole brut</a> et produits pétroliers), <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16477785&RdoSearch=BEGIN&TxtSearch=&CboTheme=36940303&IsTer=&IntCurrentPage=8&ter_valid=0"
+    target="_blank">gaz</a>, <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16537385&RdoSearch=BEGIN&TxtSearch=nuclear&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank">chaleur nucléaire</a>, <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16452285&RdoSearch=BEGIN&TxtSearch=derived%20heat&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank">chaleur</a>, <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=16576935&RdoSearch=BEGIN&TxtSearch=renewable&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank">énergies renouvelables</a>, <a href="#"
+    onclick="flowboxNameSpace.glossaryFlow('E7000','Energie électrique');">électricité</a> and <a
+    href="http://ec.europa.eu/eurostat/ramon/nomenclatures/index.cfm?TargetUrl=DSP_GLOSSARY_NOM_DTL_VIEW&StrNom=CODED2&StrLanguageCode=EN&IntKey=33012391&RdoSearch=BEGIN&TxtSearch=waste&CboTheme=36940303&IsTer=&IntCurrentPage=1&ter_valid=0"
+    target="_blank">déchets (non renouvelables)</a>. </div>
+
+
 
   <script src="js/sankey/external/highcharts.js"></script>
   <script src="js/sankey/external/exporting.js"></script>
