@@ -25,7 +25,7 @@ ALL ABOUT FUEL CODES
 fuelColors = {
 
   // All products aggregate
-  "TOTAL": "#0E47CB", // ESTAT theme 8
+  "TOTAL": "#7D8088", // ESTAT theme 8
 
   // coal family
   "SFF_P1000": "#AA5F18", // maroon: tailormade theme
@@ -58,16 +58,16 @@ fuelColors = {
   "RA420": "#208486", // springgreen
   "R5110-5150_W6000RI": "#00525C", // darkseagreen
   "R5200": "#92C1C0", // lightseagreen
-  "W6210": "red", //Aquamarine
-  "R5300": "red", //DarkOliveGreen
-  "RA200": "red", //DarkSeaGreen
-  "RA600": "red", //GreenYellow
+  "W6210": "#388AE2 ", //Aquamarine
+  "R5300": "#104F99", //DarkOliveGreen
+  "RA200": "#A5DAF9", //DarkSeaGreen
+  "RA600": "#80BFFA", //GreenYellow
   "RA500_5160": "#5FADAD", // seagreen
 
 
   // waste family
   "W6100_6220": "#FBC11D", // gold: tailormade theme
-  "W6100": "#FBC11D", // dark yellow 1
+  "W6100": "#CCA300", // dark yellow 1
   "W6220": "#E6B800", // sunyellow
 
   // non-aggregate families:
@@ -76,7 +76,7 @@ fuelColors = {
 
 
   // derived heat
-  "H8000": "#672DC4", // ESTAT theme 9 (lighter 60 %)
+  "H8000": "#003399", // ESTAT theme 9 (lighter 60 %)
 
   // electricity
   "E7000": "#AF155C", // ESTAT theme 6

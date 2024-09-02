@@ -21,8 +21,8 @@ function populateCountries() {
 
   const countriesAggregates = ["EU27_2020"];
   const EU_COUNTRY_CODES = ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE"];
-  const EFTA_COUNTRY_CODES = ["IS", "NO"];
-  const ENLARGEMENT_COUNTRY_CODES = ["AL", "BA", "ME", "MK", "RS", "TR", "XK"];
+  const EFTA_COUNTRY_CODES = ["IS", "LI", "NO"];
+  const ENLARGEMENT_COUNTRY_CODES = ["BA", "ME", "MK", "AL", "RS", "TR", "XK"];
   const OTHER_THIRD_COUNTRY_CODES = ["UA", "MD", "GE"];
 
   const html = /*html*/`      
