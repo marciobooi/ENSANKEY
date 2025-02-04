@@ -113,15 +113,7 @@ g .flow :hover {
   stroke-opacity: 0.4;
 }
 
-#footer {
-  background-color: #dcdcdc;
-  bottom: 0;
-  height: auto;
-  position: absolute;
-  width: 100%;
-  position: fixed;
-  z-index: 50;
-}
+
 
 .bold {
   font-weight: bold;
