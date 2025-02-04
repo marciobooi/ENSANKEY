@@ -63,7 +63,6 @@ var legendBoxNameSpace = {
 
         $.each(fuelList, function (idx, obj) {
             const elIcon = mkIconElement();
-            log(elIcon)
             const elText = mkFuelTextElement();
             const elAnchor = mkAnchorElement(obj);
             const elLegendItem = mkLegendElement();

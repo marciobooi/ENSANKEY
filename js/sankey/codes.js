@@ -106,6 +106,11 @@ const aggregateFuels = [
   "G3000_C0350-370", //"Gas",
   "RA000",  //"Renewable energies",
   "W6100_6220", //"Waste",
+  "PP_OTH",
+  "O4200-4500",
+  "SFF_OTH",
+  "RA500_5160",
+  "R5200",
   "TOTAL", //"All products",
 ];
 
@@ -159,6 +164,8 @@ function getExtendedFuelArray() {
 }
 
 const fuelListForSankeyDB = getExtendedFuelArray();
+
+console.log(fuelListForSankeyDB);
 
 const reducedFuelListForDataApi = (function () {
   const uniqueArray = getExtendedFuelArray()
