@@ -25,6 +25,8 @@ var nsTimeChart = {
 			return makeFuelSeries();
 		}
 
+
+
 		function makeFlowSeries() {
 			const series = {};
 			const geos = REF.geos.split(",");
@@ -49,10 +51,11 @@ var nsTimeChart = {
 		function makeFuelSeries() {
 			const series = {};
 			const geos = REF.geos.split(",");
-			const fuelCodes = fuelMap("TOTAL", true);
-			const unit = REF.unit;
+			const fuelCodes = fuelMap(REF.fuels, true);
+			const unit = REF.unit;	
 
 			fuelCodes.forEach((fuel) => {
+
 				series[fuel] = { seriesName: languageNameSpace.labels[fuel] };
 				timeSeries.forEach((year) => {
 					const value = geos.reduce((acc, geo) => {
@@ -60,6 +63,7 @@ var nsTimeChart = {
 					}, 0);
 					series[fuel][year] = value;
 				});
+		
 			});
 
 			return series;
@@ -135,7 +139,7 @@ var nsTimeChart = {
 function drawTimeChart(idNode, xAxisCategories, chartSeriesAligned) {
 	let labelCountries = [];
 
-	
+
 
 	$.each(countriesEB, function (idx, obj) {
 		if (jQuery.inArray(idx, REF.geos.split(",")) > -1) {

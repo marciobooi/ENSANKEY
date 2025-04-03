@@ -165,8 +165,6 @@ function getExtendedFuelArray() {
 
 const fuelListForSankeyDB = getExtendedFuelArray();
 
-console.log(fuelListForSankeyDB);
-
 const reducedFuelListForDataApi = (function () {
   const uniqueArray = getExtendedFuelArray()
     .filter(fuel => fuel !== "TOTAL")

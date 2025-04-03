@@ -379,8 +379,6 @@ const nsSankeyModal = {
 				return acc;
 			}, "");
 
-			log(btnHtml)
-
 		return btnHtml;
 	},
 
