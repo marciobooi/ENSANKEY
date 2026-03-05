@@ -94,9 +94,9 @@ var messageboxNameSpace = {
 function createModalTemplate({ id, title, body, footer, checkbox, ssKey }) {
   return `
     <dialog data-ecl-auto-init="Modal" data-ecl-modal-toggle="modal-toggle" id="${id}" aria-modal="true" class="ecl-modal ecl-modal--information ecl-modal--s" aria-labelledby="modal-example-header">
-      <div class="ecl-modal__container ecl-container">
+        <div class="ecl-modal__container ecl-container">
         <div class="ecl-modal__content">
-          <header class="ecl-modal__header">
+          <header class="ecl-modal__header" role="presentation">
 			<span class="iconContainerSvg">
 				<i class="fa-solid fa-info"></i>
 			</span>

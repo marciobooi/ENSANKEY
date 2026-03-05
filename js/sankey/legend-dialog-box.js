@@ -13,7 +13,7 @@ var legendBoxNameSpace = {
         const modalContent = `
         <dialog id="legend-box-modal" aria-modal="true" class="ecl-modal draggable-modal" aria-labelledby="legend-modal-header" open>
                 <div class="ecl-modal__content legend_container">
-                    <header class="ecl-modal__header draggable-handle">
+                    <header class="ecl-modal__header draggable-handle" role="presentation">
                         <div class="ecl-modal__header-content" id="legend-modal-header">${languageNameSpace.labels["LEGEND_TITLE"]}</div>
                     </header>
                     <div class="ecl-modal__body">

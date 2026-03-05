@@ -274,9 +274,9 @@ const nsSankeyModal = {
 	modalEnvelopeHtml: function (params) {
 
 
-       return /*html*/ `<div class="ecl-modal__container ecl-container">
-          <div class="ecl-modal__content">
-            <header class="ecl-modal__header">
+			 return /*html*/ `<div class="ecl-modal__container ecl-container">
+					<div class="ecl-modal__content">
+						<header class="ecl-modal__header" role="presentation">
               <div class="ecl-modal__header-content" id="modal-example-header">${params.title}</div>
               <button class="ecl-button ecl-button--tertiary ecl-modal__close ecl-button--icon-only" type="button" data-ecl-modal-close>
                 <span class="ecl-button__container">
