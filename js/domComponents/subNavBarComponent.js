@@ -28,7 +28,7 @@ class SubNavbar {
 
             <div class="collapse navbar-collapse" id="navbarScroll">
               <ul id="sankeyToolbox"
-                role="menubar" aria-label="Sankey graph toolbox"
+                role="toolbar" aria-label="Sankey graph toolbox"
                 class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll"
                 style="--bs-scroll-height: 50vw;">
                 <div id="btnGroup"></div>

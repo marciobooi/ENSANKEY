@@ -21,14 +21,15 @@ function populateCountries() {
 
   const countriesAggregates = ["EU27_2020"];
   const EU_COUNTRY_CODES = ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE"];
-  const EFTA_COUNTRY_CODES = ["IS", "LI", "NO"];
+  const EFTA_COUNTRY_CODES = ["IS", "NO"];
   const ENLARGEMENT_COUNTRY_CODES = ["BA", "ME", "MK", "AL", "RS", "TR", "XK"];
   const OTHER_THIRD_COUNTRY_CODES = ["UA", "MD", "GE"];
 
   const html = /*html*/`      
-    <div class="ecl-form-group" role="application">
+    <div class="ecl-form-group">
       <div class="ecl-select__container">
-        <select class="ecl-select" id="selectCountries" name="country" required="" multiple="" 
+        <select class="ecl-select" id="selectCountries" name="country" required="" multiple=""
+          aria-label="${languageNameSpace.labels['COUNTRY']}"
           data-ecl-auto-init="Select" 
           data-ecl-select-multiple="true"
           data-ecl-select-default="${languageNameSpace.labels["SELITEN"]}" 

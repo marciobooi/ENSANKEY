@@ -475,7 +475,6 @@ const nsToolbar = {
 		link.setAttribute("href", "#");
 		link.classList.add("btn", "ecl-button", "ecl-button--primary");
 		link.setAttribute("data-bs-toggle", args.type);
-		link.setAttribute("role", "menuitem");
 		link.setAttribute("title", nsToolbar.tooltipText(args));
 		if (args.type === "dropdown") {
 			// link.classList.add("dropdown-toggle");

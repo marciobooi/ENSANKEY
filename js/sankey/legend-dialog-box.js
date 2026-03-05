@@ -87,6 +87,7 @@ var legendBoxNameSpace = {
                 el.id = "legend-" + obj.toLowerCase();
 
                 el.setAttribute("onclick", `nsMainModal.legendDialogBox('${obj}', ${i}, 'legend-box-modal'); return false;`);
+                el.setAttribute("aria-label", getFuelName(obj));
 
                 return el;
             }
@@ -97,10 +98,6 @@ var legendBoxNameSpace = {
                 return 0; // Placeholder, replace with actual logic
             }
             
-            // Example usage
-            document.body.appendChild(mkAnchorElement('TOTAL'));
-            
-
             function mkFuelTextElement() {
                 const fuelTextEl = document.createElement("span");
                 fuelTextEl.className = "title";

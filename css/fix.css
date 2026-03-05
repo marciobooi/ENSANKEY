@@ -32,3 +32,9 @@ dl, ol, ul {
 .globan-invalid-domain {
     display: none !important;
 }
+
+/* Accessibility: fix insufficient contrast on the webtools testing banner (WCAG 2 AAA) */
+.wt-globan--invalid-domain b,
+.wt-globan--invalid-domain .wt-noconflict {
+    color: #000000 !important;
+}
