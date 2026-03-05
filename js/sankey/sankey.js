@@ -138,8 +138,12 @@ var sankeyNameSpace = {
 	sankeyContainer: function (containerId) {
 		return d3
 			.select("#diagramContainer" + containerId)
-			.append("svg")
-			.attr("id", "svg-container" + containerId)
+					.append("svg")
+					.attr("id", "svg-container" + containerId)
+					// The diagram is interactive (zoom/pan). Expose it as a region rather than a static image
+					.attr("role", "region")
+					.attr("aria-labelledby", "header-title-label")
+					.attr("tabindex", "0")
 			.classed("svg-content", true)
 			.append("g") //probably not needed
 			.call(sankeyNameSpace.zoom)
