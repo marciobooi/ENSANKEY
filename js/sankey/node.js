@@ -141,10 +141,10 @@ nodeNameSpace = {
 		labelNode
 		.attr("class", "labelNode");
 
-		//add the node name
+		//add the node name (use distinct id to avoid duplicates)
 		nameNode
 		.attr("class", "nameNode")
-		.attr("id", "energyValue_" + n.code)
+		.attr("id", "energyName_" + n.code)
 		.attr("x", txLabel)
 		.attr("y", tyName)
 		.attr("display", displayName)
@@ -290,17 +290,19 @@ nodeNameSpace = {
 			var nodeClass = n.code + ref;
 			// opacity = .5;
 
-			nodeContainer
+			var pathEl = nodeContainer
 				.append("path")
 				.attr("d", pathPoly.join(" "))
 				.attr("class", nodeClass)
-				.attr("id", "node_" + n.code)
 				.style("opacity", opacity)
-				// .style("fill", "#195757") // black opacity 0.5 over green
-				.style("fill", "black") // black opacity 0.4 over green
-				// .style("fill", "#237a7a") // black opacity 0.3 over green
+				.style("fill", "black")
 				.on("mousedown", graphMouseDown)
-				.on("mouseup", graphMouseUp)
+				.on("mouseup", graphMouseUp);
+
+			// Only assign the stable id to the visible node shape to avoid duplicate IDs
+			if (opacity > 0.5) {
+				pathEl.attr("id", "node_" + n.code);
+			}
 				// .append("title")
 				// .text(function () {
 				// 	var value = `${n.name}: ${energyValue}`;
