@@ -31,7 +31,16 @@ class ZoomControls {
   
     addToDOM(targetElement) {
       const container = document.querySelector(targetElement);
-      container.appendChild(this.zoomControls);
+      if (!container) return;
+
+      // If the target is the placeholder container with the same id, reuse it
+      if (container.id === 'zoomControls') {
+        container.classList.add('zoomControls', 'd-flex');
+        // append inner content directly to avoid creating a duplicate element with same id
+        container.appendChild(this.zoomContent);
+      } else {
+        container.appendChild(this.zoomControls);
+      }
     }
   }
   

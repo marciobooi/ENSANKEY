@@ -141,28 +141,28 @@ class Navbar {
 
 
 
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" aria-label="Share on X (Twitter)" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-  <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
-  <i class="fa-brands fa-x-twitter" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
+    <span class="ecl-u-sr-only">Share on X</span>
+    <i class="fa-brands fa-x-twitter ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" aria-label="Share on Facebook" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-  <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
-  <i class="fa-brands fa-facebook" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
+    <span class="ecl-u-sr-only">Share on Facebook</span>
+    <i class="fa-brands fa-facebook ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial("linkedin");">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" aria-label="Share on LinkedIn" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-  <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
-  <i class="fa-brands fa-linkedin" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
+    <span class="ecl-u-sr-only">Share on LinkedIn</span>
+    <i class="fa-brands fa-linkedin ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn" type="submit" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" aria-label="Send feedback by email" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-  <span class="ecl-button__label" data-ecl-label="true">Primary button</span>
-  <i class="fas fa-envelope" class="ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>    
+    <span class="ecl-u-sr-only">Send feedback</span>
+    <i class="fas fa-envelope ecl-icon ecl-icon--xs ecl-button__icon envelop" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
 

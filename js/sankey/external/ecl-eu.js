@@ -3644,7 +3644,8 @@ var ECL = (function (e, moment) {
         this.search.setAttribute("placeholder", this.textSearch || ""),
         // Provide an id for the search input and an autocomplete token to satisfy WCAG 1.3.5 Identify Input Purpose
         this.search.id = this.selectMultipleId + "-search";
-        this.search.setAttribute("autocomplete", "search"),
+        // For this filter/search input prefer disabling browser autofill to avoid unwanted suggestions
+        this.search.setAttribute("autocomplete", "off"),
         this.search.addEventListener("keyup", this.handleSearch),
         this.search.addEventListener("search", this.handleSearch),
         this.searchContainer.appendChild(this.search),
@@ -3730,9 +3731,10 @@ var ECL = (function (e, moment) {
                         '"]'
                     ))
                   : ((i = document.createElement("div")),
-                    (t = document.createElement("h5")).classList.add(
-                      "ecl-select__multiple-group__title"
-                    ),
+                    (t = document.createElement("div")),
+                    t.classList.add("ecl-select__multiple-group__title"),
+                    t.setAttribute("role", "heading"),
+                    t.setAttribute("aria-level", "2"),
                     (t.innerHTML = e.parentNode.getAttribute("label")),
                     i.appendChild(t),
                     i.setAttribute(
