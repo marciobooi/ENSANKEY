@@ -28,7 +28,7 @@ function populateCountries() {
   const html = /*html*/`      
     <div class="ecl-form-group">
       <div class="ecl-select__container">
-        <select class="ecl-select" id="selectCountries" name="country" required="" multiple=""
+        <select class="ecl-select" id="selectCountries" name="country" required="" multiple="" autocomplete="country-name"
           aria-label="${languageNameSpace.labels['COUNTRY']}"
           data-ecl-auto-init="Select" 
           data-ecl-select-multiple="true"
@@ -70,6 +70,8 @@ function populateCountries() {
       const input = document.querySelector('#containerCountry input.ecl-select__multiple-toggle');
       if (input) {
         input.setAttribute('aria-label', labelDescription || languageNameSpace.labels['COUNTRY'] || 'Country');
+        // Provide autocomplete so assistive technologies and browsers can identify the input purpose (WCAG 1.3.5)
+        input.setAttribute('autocomplete', 'country-name');
       }
     } catch (e) {
       // ignore

@@ -3642,6 +3642,9 @@ var ECL = (function (e, moment) {
         this.search.classList.add("ecl-text-input"),
         this.search.setAttribute("type", "search"),
         this.search.setAttribute("placeholder", this.textSearch || ""),
+        // Provide an id for the search input and an autocomplete token to satisfy WCAG 1.3.5 Identify Input Purpose
+        this.search.id = this.selectMultipleId + "-search";
+        this.search.setAttribute("autocomplete", "search"),
         this.search.addEventListener("keyup", this.handleSearch),
         this.search.addEventListener("search", this.handleSearch),
         this.searchContainer.appendChild(this.search),
