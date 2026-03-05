@@ -33,9 +33,65 @@ function tutorial() {
 
 	isOpen = true
 
+	// Observe tooltip container to ensure any created tooltip has an accessible name
+	try {
+		const refLayer = document.querySelector('body > div.introjs-tooltipReferenceLayer');
+		function ensureTooltipName(tooltipEl) {
+			if (!tooltipEl) return;
+			try {
+				const titleEl = tooltipEl.querySelector('.introjs-tooltip-title');
+				if (titleEl) {
+					if (!titleEl.id) titleEl.id = 'introjs-tooltip-title-' + (currentStep || 0);
+					tooltipEl.setAttribute('aria-labelledby', titleEl.id);
+				} else {
+					tooltipEl.setAttribute('aria-label', languageNameSpace.labels['MENU_TUTORIAL'] || 'Tutorial');
+				}
+			} catch (e) {}
+		}
+
+		if (refLayer) {
+			// handle any existing tooltip
+			const existing = refLayer.querySelector('.introjs-tooltip.customTooltip');
+			ensureTooltipName(existing);
+
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((m) => {
+					m.addedNodes.forEach((node) => {
+						if (node.nodeType !== 1) return;
+						if (node.classList && node.classList.contains('introjs-tooltip')) {
+							ensureTooltipName(node);
+						} else {
+							const found = node.querySelector && node.querySelector('.introjs-tooltip.customTooltip');
+							if (found) ensureTooltipName(found);
+						}
+					});
+				});
+			});
+			observer.observe(refLayer, { childList: true, subtree: true });
+		}
+	} catch (e) {
+		// ignore
+	}
+
 	introProfile.onchange(function () {
 
 		currentStep = this._currentStep
+
+		// Ensure the tooltip (role="dialog") has an accessible name
+		try {
+			const tooltipEl = document.querySelector('body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltip.customTooltip');
+			if (tooltipEl) {
+				const titleEl = tooltipEl.querySelector('.introjs-tooltip-title');
+				if (titleEl) {
+					if (!titleEl.id) titleEl.id = 'introjs-tooltip-title-' + currentStep;
+					tooltipEl.setAttribute('aria-labelledby', titleEl.id);
+				} else {
+					tooltipEl.setAttribute('aria-label', languageNameSpace.labels['MENU_TUTORIAL'] || 'Tutorial');
+				}
+			}
+		} catch (e) {
+			// ignore
+		}
 
 		if (currentStep === 0) {
 			document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").innerHTML = languageNameSpace.labels['BTN_CLOSE']
@@ -62,7 +118,8 @@ function tutorial() {
 		"id": "tutorialClose",
 		"tabindex": "0",
 		"href": "javascript:",
-		"class": "ecl-button ecl-button--primary"
+		"class": "ecl-button ecl-button--primary",
+		"style": "background-color:#264b9e"
 	});
 
 	document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").innerHTML = languageNameSpace.labels['BTN_CLOSE']
