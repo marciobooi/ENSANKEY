@@ -6,7 +6,7 @@ class HorizontalTimeline {
       this.autoplayTimeline = document.createElement('div');
       this.autoplayTimeline.id = 'autoplay-timeline';
       this.autoplayTimeline.className = 'autoplay';
-      this.autoplayTimeline.setAttribute('tabindex', '0');
+      // autoplay timeline wrapper should not be focusable itself; contained controls are focusable
   
       const eventsWrapper = document.createElement('div');
       eventsWrapper.className = 'events-wrapper';

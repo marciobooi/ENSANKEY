@@ -64,6 +64,27 @@ function populateCountries() {
 
   $(target).append(html);
 
+  // Accessibility: ensure the ECL-generated input gets an accessible name
+  function setCountryInputLabel() {
+    try {
+      const input = document.querySelector('#containerCountry input.ecl-select__multiple-toggle');
+      if (input) {
+        input.setAttribute('aria-label', labelDescription || languageNameSpace.labels['COUNTRY'] || 'Country');
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
+  // Try immediately and also watch for dynamic insertion by ECL
+  setCountryInputLabel();
+  try {
+    const container = document.getElementById('containerCountry');
+    if (container) {
+      const mo = new MutationObserver(function () { setCountryInputLabel(); });
+      mo.observe(container, { childList: true, subtree: true });
+    }
+  } catch (e) {}
+
   $(document).on('mouseover', `#containerCountry > div > div > div.ecl-select__multiple > div:nth-child(1) > input`, function(event) {
     $('#containerCountry > div > div > div.ecl-select__multiple > div:nth-child(1) > input').hover(
       function() {

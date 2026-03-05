@@ -28,6 +28,18 @@ var timelineNameSpace = {
             create: function() {
                 var handle = $("#timeline-slider .ui-slider-handle");
                 handle.append('<div id="sliderTimePeriod"><span>' + REF.year + '</span></div>');
+                try {
+                    var min = $(this).slider('option', 'min');
+                    var max = $(this).slider('option', 'max');
+                    var val = $(this).slider('value');
+                    // set ARIA on the handle(s)
+                    handle.attr('role', 'slider');
+                    handle.attr('aria-orientation', 'horizontal');
+                    handle.attr('aria-valuemin', min);
+                    handle.attr('aria-valuemax', max);
+                    handle.attr('aria-valuenow', val);
+                    handle.attr('aria-label', languageNameSpace.labels['YEAR_SLIDER'] || 'Year slider');
+                } catch (e) {}
                 $(this).slider('value', REF.year);
 
                 // Add the grey background for the part of the slider after the handle
