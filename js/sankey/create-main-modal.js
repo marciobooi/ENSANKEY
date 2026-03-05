@@ -391,17 +391,17 @@ const nsSankeyModal = {
 		<ul class="nav flex-column">
 			<li class="nav-item">
 				<button class="ecl-button nav-link" id="btn-flow-toggle">
-					<i class="fas fa-stream"></i>
+					<i class="fas fa-stream" aria-hidden="true" focusable="false"></i>
 				</button>
 			</li>
 			<li class="nav-item">
 				<button class="ecl-button nav-link" id="btn-flow-highlight">
-					<i class="fas fa-highlighter"></i>
+					<i class="fas fa-highlighter" aria-hidden="true" focusable="false"></i>
 				</button>
 			</li>
 			<li class="nav-item">
 				<button class="ecl-button nav-link" id="btn-fuel-family">
-					<i class="fas fa-expand-arrows-alt"></i>
+					<i class="fas fa-expand-arrows-alt" aria-hidden="true" focusable="false"></i>
 				</button>
 			</li>
 		</ul>`;
@@ -410,18 +410,18 @@ const nsSankeyModal = {
 	nodeToolbarHtml: function () {
 		return `
       <button class="ecl-button nav-link" id="btn-node-toggle">
-        <i class="fas fa-project-diagram fa-1x"></i>
+		  <i class="fas fa-project-diagram fa-1x" aria-hidden="true" focusable="false"></i>
 			</button>
       <button class="ecl-button nav-link" id="time-chart">
-        <i class="fas fa-chart-line fa-1x"></i>
+		  <i class="fas fa-chart-line fa-1x" aria-hidden="true" focusable="false"></i>
         <span>${languageNameSpace.labels["TIME_GRAPHS"]}</span>
       </button>
       <button class="ecl-button nav-link" id="pie-chart">
-        <i class="fas fa-chart-pie fa-1x"></i>
+		  <i class="fas fa-chart-pie fa-1x" aria-hidden="true" focusable="false"></i>
         <span>${languageNameSpace.labels["PIE_CHARTS"]}</span>
       </button>
       <button class="ecl-button nav-link" id="bar-chart">
-        <i class="fas fa-chart-bar fa-1x"></i>
+		  <i class="fas fa-chart-bar fa-1x" aria-hidden="true" focusable="false"></i>
         <span>${languageNameSpace.labels["BAR_CHARTS"]}</span>
       </button>`;
 	},

@@ -64,9 +64,9 @@ class ChartControls {
               ${
                 idChart === "barChartCombo"
                   ? `
-              <li class="nav-item dropdown px-1" id="ChartTogle" role="none">
+                  <li class="nav-item dropdown px-1" id="ChartTogle" role="none">
                 <a href="#" class="ecl-button ecl-button--primary" data-bs-toggle="dropdown" role="menuitem" title="Toggle percentage" aria-haspopup="true" aria-expanded="true" id="tb-togle-percentage">
-                  <i class="fas fa-percentage"></i>
+                  <i class="fas fa-percentage" aria-hidden="true" focusable="false"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="stackingToggleDropdown">
                   <li>
@@ -92,17 +92,17 @@ class ChartControls {
               }
               <li class="nav-item button px-1" id="printChart" role="none">
                 <button id="printBtn" title="Print chart" class="ecl-button ecl-button--primary" type="button" class="me-2" aria-label="print chart" onclick="chartObject.print()">
-                  <i class="fas fa-print"></i>
+                  <i class="fas fa-print" aria-hidden="true" focusable="false"></i>
                 </button>
               </li>
               <li class="nav-item button px-1" id="downloadChart" role="none">
                 <button id="downloadBtn" title="Download chart image" type="button" class="ecl-button ecl-button--primary" aria-label="download chart image" onclick="chartObject.exportChart()">
-                  <i class="fas fa-download"></i>
+                  <i class="fas fa-download" aria-hidden="true" focusable="false"></i>
                 </button>
               </li>
               <li class="nav-item button px-1" id="downloadExcel" role="none">
                 <button id="excelBtn" title="Download chart data" type="button" class="ecl-button ecl-button--primary" aria-label="download chart data" onclick="chartObject.downloadXLS()">
-                  <i class="fas fa-file-excel"></i>
+                  <i class="fas fa-file-excel" aria-hidden="true" focusable="false"></i>
                 </button>
               </li>
               <li class="nav-item button px-1" id="closeChart" role="none">

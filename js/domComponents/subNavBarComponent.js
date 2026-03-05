@@ -12,12 +12,13 @@ class SubNavbar {
           <div class="container-fluid">
 
             <div id="dimension-labels" class="flex-grow-1 data-loading">
-              <i class="fas fa-globe">
-                <span class="visually-hidden">Selected country</span>
-                <span class="sankey-category geo text-wrap"></span></i>
-              <i class="fas fa-swatchbook">
-                <span class="visually-hidden">Selected unit</span>
-                <span class="sankey-category units text-wrap"></span></i>
+              <i class="fas fa-globe" aria-hidden="true" focusable="false"></i>
+              <span class="visually-hidden">Selected country</span>
+              <span class="sankey-category geo text-wrap"></span>
+              <i class="fas fa-swatchbook" aria-hidden="true" focusable="false"></i>
+              <span class="visually-hidden">Selected unit</span>
+              <span class="sankey-category units text-wrap"></span>
+              
 
             </div>
 

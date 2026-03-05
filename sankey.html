@@ -134,7 +134,7 @@
     <div id="navbar-container"></div>
     <div id="euGlobanContainer"><div>
   </header>
-  <main id="maincontent">
+  <main id="maincontent" tabindex="-1">
 
     <dialog data-ecl-auto-init="Modal" id="sankey-primary-modal" aria-modal="true" class="ecl-modal ecl-modal--l" aria-labelledby="modal-example-header"></dialog>   
 
@@ -173,7 +173,7 @@
     <div id="timeLineComponent">
       <div id="autoplay-timeline" class="autoplay">
         <button id="autoplay-start" aria-label="timeline animation start" class="btn btn-sm btn-primary" type="button">
-          <i class="fas fa-play"></i>
+          <i class="fas fa-play" aria-hidden="true" focusable="false"></i>
         </button>
       </div>
       <div id="timeline-slider"></div>
@@ -279,6 +279,16 @@
   //       };
 
   //     });
+    // Replace presentational <b> elements injected by external widgets with
+    // decorative spans to avoid using the <b> element for styling only.
+    document.querySelectorAll('header b.wt-noconflict').forEach(function(b){
+      var span = document.createElement('span');
+      span.className = b.className || '';
+      span.innerHTML = b.innerHTML;
+      span.setAttribute('aria-hidden', 'true');
+      b.parentNode.replaceChild(span, b);
+    });
+
     });
     window.addEventListener("wtReady", function () {
       $wt.render("euGlobanContainer", {

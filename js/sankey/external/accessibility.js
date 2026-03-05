@@ -118,7 +118,39 @@
                 function () { var a = this.chart, d = a.langFormat("accessibility.svgContainerLabel", { chartTitle: y(a) }); a.renderer.box && d.length && a.renderer.box.setAttribute("aria-label", d) }; c.prototype.setGraphicContainerAttrs = function () { var a = this.chart, d = a.langFormat("accessibility.graphicContainerLabel", { chartTitle: y(a) }); d.length && a.container.setAttribute("aria-label", d) }; c.prototype.setRenderToAttrs = function () {
                     var a = this.chart, d = "disabled" !== a.options.accessibility.landmarkVerbosity, b = a.langFormat("accessibility.chartContainerLabel",
                         { title: y(a), chart: a }); b && (a.renderTo.setAttribute("role", d ? "region" : "group"), a.renderTo.setAttribute("aria-label", b))
-                }; c.prototype.makeCreditsAccessible = function () { var a = this.chart, d = a.credits; d && (d.textStr && d.element.setAttribute("aria-label", a.langFormat("accessibility.credits", { creditsStr: n(d.textStr) })), w(a, d.element)) }; c.prototype.getKeyboardNavigation = function () { var a = this.chart; return new h(a, { keyCodeMap: [], validate: function () { return !0 }, init: function () { var d = a.accessibility; d && d.keyboardNavigation.tabindexContainer.focus() } }) };
+                };
+                c.prototype.makeCreditsAccessible = function () {
+                    var a = this.chart, d = a.credits;
+                    if (d && d.textStr) {
+                        try {
+                            var creditEl = d.element;
+                            if (creditEl && creditEl.nodeName && creditEl.nodeName.toLowerCase() === 'text') {
+                                var svgNS = 'http://www.w3.org/2000/svg';
+                                var titleEl = creditEl.querySelector && creditEl.querySelector('title');
+                                if (!titleEl) {
+                                    titleEl = document.createElementNS(svgNS, 'title');
+                                    creditEl.insertBefore(titleEl, creditEl.firstChild);
+                                }
+                                titleEl.textContent = a.langFormat('accessibility.credits', { creditsStr: n(d.textStr) });
+                                if (creditEl.onclick || (creditEl.getAttribute && creditEl.getAttribute('href'))) {
+                                    creditEl.setAttribute('role', 'link');
+                                    creditEl.setAttribute('tabindex', 0);
+                                } else {
+                                    creditEl.removeAttribute && creditEl.removeAttribute('aria-label');
+                                }
+                            } else if (d.element && d.element.setAttribute) {
+                                d.element.setAttribute('aria-label', a.langFormat('accessibility.credits', { creditsStr: n(d.textStr) }));
+                            }
+                            w(a, d.element);
+                        } catch (e) {
+                            d.element && d.element.setAttribute && d.element.setAttribute('aria-label', a.langFormat('accessibility.credits', { creditsStr: n(d.textStr) }));
+                            w(a, d.element);
+                        }
+                    } else if (d) {
+                        w(a, d.element);
+                    }
+                };
+                c.prototype.getKeyboardNavigation = function () { var a = this.chart; return new h(a, { keyCodeMap: [], validate: function () { return !0 }, init: function () { var d = a.accessibility; d && d.keyboardNavigation.tabindexContainer.focus() } }) };
             c.prototype.destroy = function () { this.chart.renderTo.setAttribute("aria-hidden", !0) }; return c
         }(a)
     }); A(a, "Accessibility/FocusBorder.js", [a["Core/Renderer/SVG/SVGLabel.js"], a["Core/Utilities.js"]], function (a, h) {
