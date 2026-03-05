@@ -321,23 +321,23 @@ const nsSankeyModal = {
             <div id="dialog-picture-credit" style="font-size: .7rem">${creditsEl.outerHTML}</div>
           </div>
     
-          <!-- nav tabs -->
-          <nav class="navTabsMenu">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
-              <button class="nav-link" id="nav-meta-tab" data-bs-toggle="tab" data-bs-target="#nav-meta" type="button"
-                role="tab" aria-controls="nav-meta" aria-selected="false">
-                <span class="fa-stack fa-1x" aria-hidden="true">
-                  <i class="far fa-file fa-stack-2x"></i>
-                  <strong class="fa-stack-1x icon-meta-text">M</strong>
-                </span>
-              </button>
-              <button class="nav-link" id="nav-dataset-tab" data-bs-toggle="tab" data-bs-target="#nav-dataset" type="button" role="tab" aria-controls="nav-dataset" aria-selected="false">
-                <i class="fas fa-database fa-2x"></i>
-              </button>
-            </div>
-          </nav>
+					<!-- nav tabs -->
+					<nav class="navTabsMenu" aria-label="${languageNameSpace.labels['TABS'] || 'Details tabs'}">
+						<div class="nav nav-tabs" id="nav-tab" role="tablist">
+							<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+								type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
+							<button class="nav-link" id="nav-meta-tab" data-bs-toggle="tab" data-bs-target="#nav-meta" type="button"
+								role="tab" aria-controls="nav-meta" aria-selected="false" aria-labelledby="nav-meta-title">
+								<span class="fa-stack fa-1x" aria-hidden="true">
+									<i class="far fa-file fa-stack-2x"></i>
+									<strong class="fa-stack-1x icon-meta-text">M</strong>
+								</span>
+							</button>
+							<button class="nav-link" id="nav-dataset-tab" data-bs-toggle="tab" data-bs-target="#nav-dataset" type="button" role="tab" aria-controls="nav-dataset" aria-selected="false" aria-labelledby="nav-dataset-title">
+								<i class="fas fa-database fa-2x" aria-hidden="true"></i>
+							</button>
+						</div>
+					</nav>
         </div>          
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-label="Description">
