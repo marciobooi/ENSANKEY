@@ -60,7 +60,7 @@ class ChartControls {
 					</button>
 				</div>
 			</div>            
-            <ul id="chartBtns" role="menubar" aria-label="pie graph toolbox" class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vw;">
+            <ul id="chartBtns" role="toolbar" aria-label="pie graph toolbox" class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 50vw;">
               ${
                 idChart === "barChartCombo"
                   ? `

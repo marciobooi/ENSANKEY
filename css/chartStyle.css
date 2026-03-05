@@ -36,7 +36,7 @@
 #pieChartCombo, #barChartCombo, #lineChartCombo {
     border: 1px solid var(--nav-color);
     font-size: 20px;
-    color: #5d5f61;
+    color: #222222;
     width: auto;
     border-radius: 0;
 }
