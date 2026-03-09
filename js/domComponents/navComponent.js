@@ -85,7 +85,7 @@ class Navbar {
     this.navbar.innerHTML = /*html*/`
     <div class="col-6 col-lg-6">
       <div id="header-title">
-        <h1 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h1>
+        <h2 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h2>
       </div>
     </div>
 
