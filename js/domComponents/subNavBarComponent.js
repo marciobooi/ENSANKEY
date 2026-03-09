@@ -12,14 +12,16 @@ class SubNavbar {
           <div class="container-fluid">
 
             <div id="dimension-labels" class="flex-grow-1 data-loading">
-              <i class="fas fa-globe" aria-hidden="true" focusable="false"></i>
-              <span class="visually-hidden">Selected country</span>
-              <span class="sankey-category geo text-wrap"></span>
-              <i class="fas fa-swatchbook" aria-hidden="true" focusable="false"></i>
-              <span class="visually-hidden">Selected unit</span>
-              <span class="sankey-category units text-wrap"></span>
-              
-
+              <div class="flex">
+                <i class="fas fa-globe" aria-hidden="true" focusable="false"></i>
+                <span class="visually-hidden">Selected country</span>
+                <span class="sankey-category geo text-wrap"></span>
+              </div>
+              <div class="flex">
+                <i class="fas fa-swatchbook" aria-hidden="true" focusable="false"></i>
+                <span class="visually-hidden">Selected unit</span>
+                <span class="sankey-category units text-wrap"></span>
+              </div>  
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
