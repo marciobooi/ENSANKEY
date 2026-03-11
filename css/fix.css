@@ -60,3 +60,31 @@ dl, ol, ul {
   border: 2px solid #000000;
   z-index: 1000000;
 }
+
+
+.tooltip {
+    /* position: absolute !important; */
+    background: #ffffff !important;
+    padding: 5px 10px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    /* opacity: 0 !important; */
+    pointer-events: none !important;
+    /* transition: opacity 0.2s ease-in-out !important; */
+    border: 4px solid #0e47cb !important;
+    border-radius: 10px !important;
+    z-index: 9999999999 !important;
+}
+
+.tooltip.show {
+    opacity: 1 !important;
+}
+
+
+.ecl-button--icon-only .ecl-button__icon {
+    display: flex;
+    align-items: center;
+    /* align-content: center; */
+    justify-content: center;
+}

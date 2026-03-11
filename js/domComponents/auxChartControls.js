@@ -85,9 +85,9 @@ class ChartControls {
                   </li>
                 </ul>
               </li>
-              <li><button id="toggleAgregates" class="ecl-button ecl-button--primary" title="${
+                  <li><button id="toggleAgregates" class="ecl-button ecl-button--primary" title="${
                 languageNameSpace.labels["TOGGLEAGREGATES"]
-              }"><i class="fa-solid fa-layer-group"></i></button></li>`
+              }" aria-label="${languageNameSpace.labels["TOGGLEAGREGATES"]}"><i class="fa-solid fa-layer-group" aria-hidden="true" focusable="false"></i></button></li>`
                   : ""
               }
               <li class="nav-item button px-1" id="printChart" role="none">
@@ -107,7 +107,7 @@ class ChartControls {
               </li>
               <li class="nav-item button px-1" id="closeChart" role="none">
                 <button id="btnCloseModalChart" title="Close chart" type="button" class="ecl-button ecl-button--primary" aria-label="Close" onclick="nsCharts.initChartState('close')">
-                  <i class="fas fa-times"></i>
+                  <i class="fas fa-times" aria-hidden="true" focusable="false"></i>
                 </button>
               </li>
             </ul>

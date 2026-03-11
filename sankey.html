@@ -114,6 +114,7 @@
 	<script defer type="text/javascript" src="js/domComponents/timeLineComponent.js"></script>
 	<script defer type="text/javascript" src="js/domComponents/auxChartControls.js"></script>
 	<script defer type="text/javascript" src="js/sankey/populateCountries.js"></script>
+	<script defer type="text/javascript" src="js/sankey/tooltip.js"></script>
 
 
 
@@ -288,6 +289,8 @@
       span.setAttribute('aria-hidden', 'true');
       b.parentNode.replaceChild(span, b);
     });
+
+  enableTooltips(); 
 
     });
     window.addEventListener("wtReady", function () {
