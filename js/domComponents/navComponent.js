@@ -91,7 +91,7 @@ class Navbar {
 
     <div class="col-3 col-lg-2" id="lang-section">
       <button id="toggleLanguageBtn" type="button" class="ecl-button ecl-button--secondary" aria-expanded="false" aria-label="Change language, current language is English">
-        <i class="fas fa-globe" focusable="false" aria-hidden="true"></i>
+        <i class="fas fa-globe" focusable="false"></i>
         <span id="lang-selection-text">English</span>
       </button>
       <div class="ecl-site-header__language-container" id="language-list-overlay" data-ecl-language-list-overlay="" aria-labelledby="ecl-site-header__language-title" role="dialog" aria-modal="true">
@@ -141,28 +141,28 @@ class Navbar {
 
 
 
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" aria-label="${languageNameSpace.labels['twitter']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
     <span class="ecl-u-sr-only">${languageNameSpace.labels['twitter']}</span>
-    <i class="fa-brands fa-x-twitter ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
+    <i class="fa-brands fa-x-twitter ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" aria-label="${languageNameSpace.labels['facebook']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
     <span class="ecl-u-sr-only">${languageNameSpace.labels['facebook']}</span>
-    <i class="fa-brands fa-facebook ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
+    <i class="fa-brands fa-facebook ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" aria-label="${languageNameSpace.labels['linkedIn']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
     <span class="ecl-u-sr-only">${languageNameSpace.labels['linkedIn']}</span>
-    <i class="fa-brands fa-linkedin ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
+    <i class="fa-brands fa-linkedin ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" aria-label="${languageNameSpace.labels['email']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
     <span class="ecl-u-sr-only">${languageNameSpace.labels['email']}</span>
-    <i class="fas fa-envelope ecl-icon ecl-icon--xs ecl-button__icon envelop" focusable="false" aria-hidden="true" data-ecl-icon></i>
+    <i class="fas fa-envelope ecl-icon ecl-icon--xs ecl-button__icon envelop" focusable="false" data-ecl-icon></i>
   </span>
 </button>
 

@@ -176,7 +176,7 @@
     <div id="timeLineComponent">
       <div id="autoplay-timeline" class="autoplay">
         <button id="autoplay-start" aria-label="Start diagram animation" class="btn btn-sm btn-primary" type="button">
-          <i class="fas fa-play" aria-hidden="true" focusable="false"></i>
+          <i class="fas fa-play" focusable="false"></i>
         </button>
       </div>
       <div id="timeline-slider"></div>
@@ -310,7 +310,6 @@
             var span = document.createElement('span');
             span.className = b.className || '';
             span.innerHTML = b.innerHTML;
-            span.setAttribute('aria-hidden', 'true');
             b.parentNode.replaceChild(span, b);
             replaced = true;
           });
