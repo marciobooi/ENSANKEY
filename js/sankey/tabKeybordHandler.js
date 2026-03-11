@@ -91,3 +91,20 @@ class TabsAutomatic {
     this.setSelectedTab(event.currentTarget);
   }
 }
+
+// Prevent the page from auto-scrolling when Tab focus moves into the Sankey
+// diagram SVG elements (nodes/flows) or the Highcharts chart container.
+// Both sets of elements have tabindex="0" for keyboard accessibility, but the
+// browser's default scroll-into-view behaviour is unwanted here because the
+// diagram/chart is already in the viewport when the user is navigating.
+document.addEventListener('focus', function (event) {
+  var target = event.target;
+  if (!target || typeof target.closest !== 'function') return;
+  if (target.closest('#diagramContainer') || target.closest('#chartContainer')) {
+    var x = window.scrollX;
+    var y = window.scrollY;
+    requestAnimationFrame(function () {
+      window.scrollTo(x, y);
+    });
+  }
+}, true);
