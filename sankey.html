@@ -173,7 +173,7 @@
 
     <div id="timeLineComponent">
       <div id="autoplay-timeline" class="autoplay">
-        <button id="autoplay-start" aria-label="timeline animation start" class="btn btn-sm btn-primary" type="button">
+        <button id="autoplay-start" aria-label="Start diagram animation" class="btn btn-sm btn-primary" type="button">
           <i class="fas fa-play" aria-hidden="true" focusable="false"></i>
         </button>
       </div>
@@ -234,6 +234,10 @@
       if (typeof sankeyNameSpace !== "undefined") sankeyNameSpace.buildSankey();
       sankeyToolsNameSpace.initZoom();
 
+      // Set autoplay button aria-label from loaded translations
+      var autoplayBtn = document.getElementById('autoplay-start');
+      if (autoplayBtn) autoplayBtn.setAttribute('aria-label', languageNameSpace.labels['START_ANIMATION']);
+
       if (!sessionStorage.getItem('isTourFinished'))
         setTimeout(() => { tutorial() }, sessionStorage.isVisited ? 1500 : 3000);
 
@@ -280,16 +284,6 @@
   //       };
 
   //     });
-    // Replace presentational <b> elements injected by external widgets with
-    // decorative spans to avoid using the <b> element for styling only.
-    document.querySelectorAll('header b.wt-noconflict').forEach(function(b){
-      var span = document.createElement('span');
-      span.className = b.className || '';
-      span.innerHTML = b.innerHTML;
-      span.setAttribute('aria-hidden', 'true');
-      b.parentNode.replaceChild(span, b);
-    });
-
   enableTooltips(); 
 
     });
@@ -299,6 +293,25 @@
         lang: langLowerCase,
         theme: "dark",
       });
+
+      // Replace <b> elements injected by webtools with <span> once they appear.
+      // Using MutationObserver ensures the replacement runs after async rendering.
+      var header = document.querySelector('header');
+      if (header) {
+        var bObserver = new MutationObserver(function () {
+          var replaced = false;
+          header.querySelectorAll('b.wt-noconflict').forEach(function (b) {
+            var span = document.createElement('span');
+            span.className = b.className || '';
+            span.innerHTML = b.innerHTML;
+            span.setAttribute('aria-hidden', 'true');
+            b.parentNode.replaceChild(span, b);
+            replaced = true;
+          });
+          if (replaced) bObserver.disconnect();
+        });
+        bObserver.observe(header, { childList: true, subtree: true });
+      }
     });
 
     // async function initialize() {

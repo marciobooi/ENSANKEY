@@ -85,7 +85,7 @@ class Navbar {
     this.navbar.innerHTML = /*html*/`
     <div class="col-6 col-lg-6">
       <div id="header-title">
-        <h2 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h2>
+        <h1 id="header-title-label">${languageNameSpace.labels['HEADER_TITLE']}</h1>
       </div>
     </div>
 
@@ -109,19 +109,19 @@ class Navbar {
           <div class="ecl-site-header__language-category ecl-site-header__language-category--3-col" data-ecl-language-list-eu="">
               <div class="ecl-site-header__language-category-title">${languageNameSpace.labels['OFFICIAL']}</div>
               <ul class="ecl-site-header__language-list">
-              <li class="ecl-site-header__language-item" id="EN" data-lang="EN" tabindex="0">
+              <li class="ecl-site-header__language-item" id="EN" data-lang="EN" tabindex="0" role="button">
                 <span class="ecl-link ecl-link--standalone ecl-site-header__language-link">
                   <span class="ecl-site-header__language-link-code">en</span>
                   <span class="ecl-site-header__language-link-label">English</span>
                 </span>
               </li>
-              <li class="ecl-site-header__language-item" id="DE"  data-lang="DE" tabindex="0">
+              <li class="ecl-site-header__language-item" id="DE"  data-lang="DE" tabindex="0" role="button">
                 <span class="ecl-link ecl-link--standalone ecl-site-header__language-link">
                   <span class="ecl-site-header__language-link-code">de</span>
                   <span class="ecl-site-header__language-link-label">Deutsch</span>
                 </span>
               </li>
-              <li class="ecl-site-header__language-item" id="FR" data-lang="FR" tabindex="0">
+              <li class="ecl-site-header__language-item" id="FR" data-lang="FR" tabindex="0" role="button">
                 <span class="ecl-link ecl-link--standalone ecl-site-header__language-link">
                   <span class="ecl-site-header__language-link-code">fr</span>
                   <span class="ecl-site-header__language-link-label">français</span>
@@ -141,27 +141,27 @@ class Navbar {
 
 
 
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" aria-label="Share on X (Twitter)" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" aria-label="${languageNameSpace.labels['twitter']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">Share on X</span>
+    <span class="ecl-u-sr-only">${languageNameSpace.labels['twitter']}</span>
     <i class="fa-brands fa-x-twitter ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" aria-label="Share on Facebook" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" aria-label="${languageNameSpace.labels['facebook']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">Share on Facebook</span>
+    <span class="ecl-u-sr-only">${languageNameSpace.labels['facebook']}</span>
     <i class="fa-brands fa-facebook ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" aria-label="Share on LinkedIn" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" aria-label="${languageNameSpace.labels['linkedIn']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">Share on LinkedIn</span>
+    <span class="ecl-u-sr-only">${languageNameSpace.labels['linkedIn']}</span>
     <i class="fa-brands fa-linkedin ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" aria-label="Send feedback by email" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" aria-label="${languageNameSpace.labels['email']}" onclick="sankeyToolsNameSpace.shareSocial(event);">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">Send feedback</span>
+    <span class="ecl-u-sr-only">${languageNameSpace.labels['email']}</span>
     <i class="fas fa-envelope ecl-icon ecl-icon--xs ecl-button__icon envelop" focusable="false" aria-hidden="true" data-ecl-icon></i>
   </span>
 </button>
@@ -235,7 +235,7 @@ selectLanguage(langItem) {
   // Update button text with the selected language
   const langLabel = langItem.querySelector(".ecl-site-header__language-link-label").textContent;
   this.langSelection.innerHTML = `<i class="fas fa-globe" focusable="false" aria-hidden="true"></i>${langLabel}`;
-  this.langSelection.setAttribute("aria-label", `Change language, current language is ${langLabel}`); 
+  this.langSelection.setAttribute("aria-label", `${languageNameSpace.labels['CHANGE_LANGUAGE']} ${langLabel}`);
 
 }
 
@@ -243,9 +243,29 @@ selectLanguage(langItem) {
 
 toggleDropdown() {
   var dropdown = this.langSelection.nextElementSibling;
-  dropdown.classList.toggle("visible");
+  const isOpening = !dropdown.classList.contains('visible');
+  dropdown.classList.toggle('visible');
 
-  document.querySelector("#toggleLanguageBtn").focus()
+  // Hide/restore background content from assistive technologies
+  // when the language dialog opens/closes (WCAG 1.3.2 / aria-modal support)
+  ['main', '#componentFooter', '#euGlobanContainer'].forEach(function (sel) {
+    var el = document.querySelector(sel);
+    if (el) {
+      isOpening ? el.setAttribute('aria-hidden', 'true') : el.removeAttribute('aria-hidden');
+    }
+  });
+
+  // Hide/restore the other columns in the navbar that sit outside the dialog
+  var langSection = this.navbar.querySelector('#lang-section');
+  if (langSection) {
+    Array.from(langSection.parentElement.children).forEach(function (child) {
+      if (child !== langSection) {
+        isOpening ? child.setAttribute('aria-hidden', 'true') : child.removeAttribute('aria-hidden');
+      }
+    });
+  }
+
+  document.querySelector('#toggleLanguageBtn').focus();
 }
 
 handleButtonKeyDown(event) {

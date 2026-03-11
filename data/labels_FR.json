@@ -377,7 +377,15 @@
 "EUCTR": "Pays de l'UE",
 "EFTA": "Pays de l'AELE",
 "ENLARGEMENT": "Pays en élargissement",
-"OTHERCTR": "Autres pays tiers"
+"OTHERCTR": "Autres pays tiers",
 
+"ZOOM_IN": "Agrandir",
+"ZOOM_OUT": "Réduire",
+"CHANGE_LANGUAGE": "Changer de langue, langue actuelle :",
+
+"twitter": "Partager sur X (Twitter)",
+"facebook": "Partager sur Facebook",
+"linkedIn": "Partager sur LinkedIn",
+"email": "Envoyer un commentaire par e-mail"
 
 }

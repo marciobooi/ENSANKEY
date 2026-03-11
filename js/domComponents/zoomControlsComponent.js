@@ -8,9 +8,9 @@ class ZoomControls {
       this.zoomContent.id = 'zoom-content';
       this.zoomContent.className = 'ui-widget-content';
   
-      this.zoomInButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'in', 'Zoom in', '<i class="fas fa-plus" aria-hidden="true" focusable="false"></i>');
-      this.zoomResetButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary px-1 my-0', 'reset', '100% - reset zoom', '<span id="zoom-reset" style="font-size: x-small;">100%</span>');
-      this.zoomOutButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'out', 'Zoom out', '<i class="fas fa-minus" aria-hidden="true" focusable="false"></i>');
+      this.zoomInButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'in', languageNameSpace.labels['ZOOM_IN'], '<i class="fas fa-plus" aria-hidden="true" focusable="false"></i>');
+      this.zoomResetButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary px-1 my-0', 'reset', languageNameSpace.labels['ZOOM_RESET'], '<span id="zoom-reset" style="font-size: x-small;">100%</span>');
+      this.zoomOutButton = this.createZoomButton('btn-zoom ecl-button ecl-button--primary', 'out', languageNameSpace.labels['ZOOM_OUT'], '<i class="fas fa-minus" aria-hidden="true" focusable="false"></i>');
   
       this.zoomContent.appendChild(this.zoomInButton);
       this.zoomContent.appendChild(this.zoomResetButton);

@@ -378,6 +378,15 @@
 "EUCTR": "EU countries",
 "EFTA": "EFTA countries",
 "ENLARGEMENT": "Enlargement countries",
-"OTHERCTR": "Other third countries"
+"OTHERCTR": "Other third countries",
+
+"ZOOM_IN": "Zoom in",
+"ZOOM_OUT": "Zoom out",
+"CHANGE_LANGUAGE": "Change language, current language is",
+
+"twitter": "Share on X (Twitter)",
+"facebook": "Share on Facebook",
+"linkedIn": "Share on LinkedIn",
+"email": "Send feedback by email"
 
 }

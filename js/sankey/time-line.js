@@ -161,8 +161,10 @@ var timelineNameSpace = {
         const timeBtnIcon = $("#autoplay-start > i");
         if (this.isAutoplayStarted) {
             $(timeBtnIcon).removeClass("fa-play").addClass("fa-stop");
+            $("#autoplay-start").attr("aria-label", languageNameSpace.labels['STOP_ANIMATION']);
         } else {
             $(timeBtnIcon).removeClass("fa-stop").addClass("fa-play");
+            $("#autoplay-start").attr("aria-label", languageNameSpace.labels['START_ANIMATION']);
         }
     },
 
