@@ -136,6 +136,8 @@
     <div id="euGlobanContainer"><div>
   </header>
   <main id="maincontent" tabindex="-1">
+    <!-- Primary page heading for assistive technologies; visually hidden -->
+    <h1 class="ecl-u-sr-only" id="main-page-title"></h1>
 
     <dialog data-ecl-auto-init="Modal" id="sankey-primary-modal" aria-modal="true" class="ecl-modal ecl-modal--l" aria-labelledby="modal-example-header"></dialog>   
 
@@ -233,6 +235,10 @@
 
       if (typeof sankeyNameSpace !== "undefined") sankeyNameSpace.buildSankey();
       sankeyToolsNameSpace.initZoom();
+
+      // Set primary page H1 and autoplay button from loaded translations
+      var pageTitle = document.getElementById('main-page-title');
+      if (pageTitle) pageTitle.textContent = languageNameSpace.labels['HEADER_TITLE'];
 
       // Set autoplay button aria-label from loaded translations
       var autoplayBtn = document.getElementById('autoplay-start');
