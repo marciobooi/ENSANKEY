@@ -136,13 +136,60 @@ var nsMainModal = {
 			}
 		  }
 	  
-		  // Function to close the modal
-		  function closeModal() {
-			if (modal.hasAttribute('open')) {
-			  modal.close();
-			}
-		  }
+// Function to close the modal and clean up the focus trap
+	  function closeModal() {
+		if (modal.hasAttribute('open')) {
+		  modal.close();
+		  document.removeEventListener('keydown', trapFocus, true);
+		  // Return focus to the element that opened the modal
+		  var launcher = params.launcherId ? document.getElementById(params.launcherId) : null;
+		  if (launcher) launcher.focus();
+		}
+	  }
 
+	  var focusableSelectors = [
+		'button:not([disabled])',
+		'[href]',
+		'input:not([disabled])',
+		'select:not([disabled])',
+		'textarea:not([disabled])',
+		'[tabindex]:not([tabindex="-1"])'
+	  ].join(', ');
+
+	  function getFocusable() {
+		return Array.from(modal.querySelectorAll(focusableSelectors)).filter(function (el) {
+		  return getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
+		});
+	  }
+
+	  // Focus trap attached to document in capture phase so it intercepts Tab
+	  // before the browser can move focus to the browser chrome.
+	  function trapFocus(e) {
+		if (e.key === 'Escape') {
+		  e.preventDefault();
+		  closeModal();
+		  return;
+		}
+		if (e.key !== 'Tab') return;
+
+		// Always intercept Tab while the modal is open
+		e.preventDefault();
+
+		var focusable = getFocusable();
+		if (!focusable.length) return;
+
+		var current = focusable.indexOf(document.activeElement);
+
+		if (e.shiftKey) {
+		  // Shift+Tab: go to previous, wrap to last
+		  var prev = current <= 0 ? focusable.length - 1 : current - 1;
+		  focusable[prev].focus();
+		} else {
+		  // Tab: go to next, wrap to first
+		  var next = current === focusable.length - 1 ? 0 : current + 1;
+		  focusable[next].focus();
+		}
+	  }
 
 
 		ECL.autoInit();
@@ -154,6 +201,14 @@ var nsMainModal = {
 
 		closeButton.addEventListener('click', closeModal);
 		closeButtonMenu.addEventListener('click', closeModal);
+
+		// Attach focus trap to document in capture phase so Tab is intercepted
+		// before the browser moves focus outside the modal (e.g. to the URL bar).
+		document.addEventListener('keydown', trapFocus, true);
+
+		// Move initial focus into the modal
+		var focusable = getFocusable();
+		if (focusable.length) focusable[0].focus();
 
 		var tablists = document.querySelectorAll('[role=tablist].automatic');
 		for (var i = 0; i < tablists.length; i++) {
