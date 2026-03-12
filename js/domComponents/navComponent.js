@@ -141,27 +141,23 @@ class Navbar {
 
 
 
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn twitter" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);" aria-label="${languageNameSpace.labels['twitter']}">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">${languageNameSpace.labels['twitter']}</span>
     <i class="fa-brands fa-x-twitter ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn facebook" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);" aria-label="${languageNameSpace.labels['facebook']}">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">${languageNameSpace.labels['facebook']}</span>
     <i class="fa-brands fa-facebook ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn linkedin" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);" aria-label="${languageNameSpace.labels['linkedIn']}">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">${languageNameSpace.labels['linkedIn']}</span>
     <i class="fa-brands fa-linkedin ecl-icon ecl-icon--xs ecl-button__icon" focusable="false" data-ecl-icon></i>
   </span>
 </button>
-<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);">
+<button class="ecl-button ecl-button--primary ecl-button--icon-only navBtn envelop" type="button" onclick="sankeyToolsNameSpace.shareSocial(event);" aria-label="${languageNameSpace.labels['email']}">
   <span class="ecl-button__container">
-    <span class="ecl-u-sr-only">${languageNameSpace.labels['email']}</span>
     <i class="fas fa-envelope ecl-icon ecl-icon--xs ecl-button__icon envelop" focusable="false" data-ecl-icon></i>
   </span>
 </button>

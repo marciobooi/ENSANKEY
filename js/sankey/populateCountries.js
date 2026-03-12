@@ -166,6 +166,54 @@ function populateCountries() {
 
   ECL.autoInit();
 
+  // Fix: Patch the ECL Select's handleFocusout so clicking non-focusable
+  // children (e.g. <span class="ecl-checkbox__box">) doesn't close the dropdown.
+  // The original handler fires before the click resolves, sees relatedTarget
+  // outside the component, and hides the dropdown prematurely.
+  // We replace it with a deferred check that lets the click settle first.
+  var eclSelect = document.getElementById('selectCountries');
+  if (eclSelect && eclSelect.ECLSelect) {
+    var eclInstance = eclSelect.ECLSelect;
+    var selectMultipleEl = eclInstance.selectMultiple;
+    var searchContainerEl = eclInstance.searchContainer;
+
+    // Track whether the last pointer down started inside the select; helps avoid
+    // premature close when focus temporarily leaves to a non-focusable element.
+    var lastPointerInside = false;
+    var clearPointerFlag = function () {
+      lastPointerInside = false;
+    };
+    selectMultipleEl.addEventListener('mousedown', function () {
+      lastPointerInside = true;
+      setTimeout(clearPointerFlag, 0);
+    }, true);
+
+    // Remove the original focusout handler
+    selectMultipleEl.removeEventListener('focusout', eclInstance.handleFocusout);
+
+    // Replace with a deferred version
+    eclInstance.handleFocusout = function (e) {
+      // Use requestAnimationFrame so the click event can finish and
+      // focus can settle on the correct element before we decide to close.
+      requestAnimationFrame(function () {
+        var active = document.activeElement;
+        var dropdownVisible = searchContainerEl && searchContainerEl.style.display === 'block';
+        var inside = selectMultipleEl && active ? selectMultipleEl.contains(active) : false;
+
+        if (dropdownVisible && lastPointerInside) {
+          console.log('[DEBUG] focusout ignored (pointer was inside, active=', active, ')');
+          return;
+        }
+
+        if (dropdownVisible && !inside) {
+          console.log('[DEBUG] focusout closing dropdown (active=', active, ')');
+          searchContainerEl.style.display = 'none';
+        }
+      });
+    };
+    selectMultipleEl.addEventListener('focusout', eclInstance.handleFocusout);
+  }
+
   const selectAllContainer = document.querySelector('.ecl-select__multiple');
 
   function countSelectedElements(countriesString) {
