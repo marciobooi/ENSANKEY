@@ -226,8 +226,17 @@
   
 
   <script>
-    const lang = (typeof REF !== 'undefined' && REF.language) ? REF.language : "en",
-      langLowerCase = lang.toLowerCase();
+    function getLangFromUrl() {
+      var params = new URLSearchParams(window.location.search);
+      var urlLang = params.get("language");
+      return urlLang ? urlLang : null;
+    }
+
+    const langSource = (typeof REF !== 'undefined' && REF.language)
+      ? REF.language
+      : (getLangFromUrl() || "EN");
+    const lang = langSource.toString();
+    const langLowerCase = lang.toLowerCase();
     $(document).ready(function () {
       document.documentElement.lang = langLowerCase;
 
@@ -289,7 +298,7 @@
     });
     window.addEventListener("wtReady", function () {
       $wt.render("euGlobanContainer", {
-        utility: "globan",
+        service: "globan",
         lang: langLowerCase,
         theme: "dark",
       });

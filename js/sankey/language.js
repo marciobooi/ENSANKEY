@@ -110,10 +110,31 @@ var languageNameSpace = {
 
 	//Set language function
 	setLanguage: function (language) {
-		REF.language = language;
+		var normalized = (language || "").toString();
+		var langUpper = normalized.toUpperCase();
+		var langLower = normalized.toLowerCase();
+
+		REF.language = langUpper;
 		dataNameSpace.setRefURL();
 		// function in basiccs file to check the trailor cardinal at the end of the url
-		checkCardinalInUrl()
+		checkCardinalInUrl();
+
+		if (typeof document !== "undefined") {
+			document.documentElement.lang = langLower;
+		}
+
+		// Re-render webtools globan widget with the selected language
+		if (typeof $wt !== "undefined") {
+			if ($wt.globan && typeof $wt.globan.regenerate === "function") {
+				$wt.globan.regenerate({ lang: langLower, theme: "dark" });
+			} else if (typeof $wt.render === "function") {
+				$wt.render("euGlobanContainer", {
+					service: "globan",
+					lang: langLower,
+					theme: "dark",
+				});
+			}
+		}
 
 		location.reload();
 	},

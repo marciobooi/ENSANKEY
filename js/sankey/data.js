@@ -179,7 +179,9 @@ var dataNameSpace = {
 		var refURL = getUrlVars();
 		for (var ref in dataNameSpace.ref) {
 			if (typeof refURL[ref] === "undefined") continue;
-			dataNameSpace.ref[ref] = refURL[ref];
+			dataNameSpace.ref[ref] = ref === "language"
+				? refURL[ref].toString().toUpperCase()
+				: refURL[ref];
 
 			if (ref === "geos" && dataNameSpace.ref[ref] === "EU27") {
 				dataNameSpace.ref[ref] = "EU27_2020";
