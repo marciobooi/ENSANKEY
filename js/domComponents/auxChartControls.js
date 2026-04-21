@@ -52,10 +52,7 @@ class ChartControls {
 				<div class="ecl-select__icon">
 					<button class="ecl-button ecl-button--ghost ecl-button--icon-only" type="button" tabindex="-1">
 						<span class="ecl-button__container">
-							<span class="ecl-button__label" data-ecl-label="true">Toggle dropdown</span>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="ecl-icon ecl-icon--s ecl-button__icon" focusable="false" aria-hidden="true">
-							<path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
-							</svg>
+		​       <div class="ecl-select__icon"><svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 24 24" enable-background="new 0 0 24 24" focusable="false" aria-hidden="true" class="ecl-icon ecl-icon--s ecl-select__icon-shape ecl-icon--rotate-180"><path d="M18.2 17.147c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4l-7.1-7.1c-.4-.4-1-.4-1.4 0l-7 7c-.3.4-.3 1 .1 1.4.4.4 1 .4 1.4 0l6.2-6.2 6.4 6.3z"></path></svg></div>
 						</span>
 					</button>
 				</div>

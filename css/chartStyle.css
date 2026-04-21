@@ -3,7 +3,7 @@
     height: 100%;
 }
 
-#chartContainer {
+/* #chartContainer {
     width: 95vw;
     height: 65vh;
     position: absolute;
@@ -13,7 +13,7 @@
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     display: none;
-}
+} */
 
 /* #btnCloseModalChart {
     background-color: white;
