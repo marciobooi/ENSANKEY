@@ -59,6 +59,14 @@ const nsToolbarConf = {
 			type: "button",
 		},
 		{
+			tbItemId: "tb-insights",
+			fn: "createInsightsMenuitem",
+			ddItemId: "tb-insights-btn",
+			tooltipText: "MENU_INSIGHTS",
+			icon: "fas fa-lightbulb",
+			type: "button",
+		},
+		{
 			tbItemId: "tb-tutorial",
 			fn: "createTutorialMenuitem",
 			ddItemId: "tb-tutorial-btn",
@@ -423,6 +431,14 @@ const nsToolbar = {
 	},
 
 	createReloadMenuitem: function (args) {
+		const navItemLink = this.navItemLink(args, "button");
+		const navItem = this.navItem(args, "button");
+		navItem.appendChild(navItemLink);
+		document.getElementById(container).appendChild(navItem);
+		return navItemLink;
+	},
+
+	createInsightsMenuitem: function (args) {
 		const navItemLink = this.navItemLink(args, "button");
 		const navItem = this.navItem(args, "button");
 		navItem.appendChild(navItemLink);
@@ -883,6 +899,11 @@ const nsToolbarHandler = {
 				location.assign(location.origin + location.pathname);
 			});
 		}
+		if (args.fn === "createInsightsMenuitem") {
+			this.setEventListener(element, ["click"], function (e) {
+				insightsNameSpace.openInsightsModal();
+			});
+		}
 		if (args.fn === "createTutorialMenuitem") {
 			this.setEventListener(element, ["click", "keydown"], function (e) {
 				if (e.key === "Enter" || e.key === " " || e.type === "click") {
@@ -927,6 +948,13 @@ $(document).ready(function () {
 	 * if the function returns 1, it means there is no need to set handlers
 	 * if the function returns an element, it means we need to set handlers to the element
 	 */
+	// Inject insights translation keys dynamically before building the toolbar
+	if (typeof insightsNameSpace !== "undefined") {
+		const insightsLang = (REF?.language || 'EN').toUpperCase();
+		const insightsLabels = insightsNameSpace.labels[insightsLang] || insightsNameSpace.labels.EN;
+		languageNameSpace.labels["MENU_INSIGHTS"] = insightsLabels.MENU_INSIGHTS;
+	}
+
 	nsToolbarConf.args.forEach(function (item, index) {
 		const newBtn =
 			index === 0 ? nsToolbarCountry[item.fn](item) : nsToolbar[item.fn](item);

@@ -1,0 +1,276 @@
+/* 
+   Energy Flow Insights Modal Styling
+   Light ECL-compliant design matching the Eurostat theme
+*/
+
+:root {
+  --insights-bg: rgba(243, 246, 252, 0.98);
+  --insights-border-color: #d8e1eb;
+  --insights-text-primary: #1e293b;
+  --insights-text-secondary: #576575;
+  --insights-accent: #0e47cb;
+  --insights-accent-hover: #0b39a2;
+  --insights-card-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --insights-font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.energy-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--insights-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999999;
+  overflow-y: auto;
+  color: var(--insights-text-primary);
+  font-family: var(--insights-font);
+  animation: insightsFadeIn 0.2s ease-out;
+  z-index: 9999999999999 !important;
+}
+
+@keyframes insightsFadeIn {
+  from { opacity: 0; transform: scale(1.01); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.energy-modal-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  position: relative;
+}
+
+/* Close button styling */
+.energy-modal-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 1.5rem;
+  background: #ffffff;
+  border: 1px solid var(--insights-border-color);
+  color: var(--insights-text-primary);
+  font-size: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.energy-modal-close-btn:hover {
+  background: var(--insights-accent);
+  color: #ffffff;
+  transform: rotate(90deg);
+  border-color: var(--insights-accent);
+}
+
+/* Hero Section */
+.energy-modal .hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--insights-border-color);
+}
+
+.energy-modal .hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--insights-accent);
+  letter-spacing: -0.025em;
+}
+
+.energy-modal .hero-subtitle {
+  color: var(--insights-text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+/* Summary Card */
+.energy-modal .insights-summary-card {
+  background: #eef4ff;
+  border: 1px solid #b4d0ff;
+  border-left: 6px solid var(--insights-accent);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  box-shadow: var(--insights-card-shadow);
+}
+
+.energy-modal .insights-summary-card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--insights-accent);
+  margin-bottom: 0.5rem;
+}
+
+.energy-modal .insights-summary-card p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+/* KPI Grid */
+.energy-modal .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.energy-modal .kpi-card {
+  background: #ffffff;
+  border: 1px solid var(--insights-border-color);
+  border-top: 4px solid var(--insights-accent);
+  border-radius: 4px;
+  padding: 1.25rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  box-shadow: var(--insights-card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.energy-modal .kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.energy-modal .kpi-label {
+  color: var(--insights-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.energy-modal .kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--insights-text-primary);
+  line-height: 1.2;
+}
+
+/* Section styling */
+.energy-modal section {
+  background: #ffffff;
+  border: 1px solid var(--insights-border-color);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--insights-card-shadow);
+}
+
+.energy-modal section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--insights-accent);
+  border-left: 4px solid var(--insights-accent);
+  padding-left: 0.75rem;
+}
+
+/* Charts Containers */
+.insights-chart-container {
+  width: 100%;
+  height: 350px;
+  background: #f8fafc;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--insights-border-color);
+  overflow: hidden;
+}
+
+/* Lists and paragraphs */
+.energy-modal section ul,
+.energy-modal section ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+}
+
+.energy-modal section li {
+  color: var(--insights-text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.energy-modal section li strong {
+  color: var(--insights-accent);
+}
+
+/* Tables styling */
+.energy-modal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.energy-modal th, 
+.energy-modal td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--insights-border-color);
+  color: var(--insights-text-primary);
+}
+
+.energy-modal th {
+  color: var(--insights-text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  background: #f8fafc;
+}
+
+.energy-modal tr:last-child td {
+  border-bottom: none;
+}
+
+.energy-modal tr:hover td {
+  background: #f1f5f9;
+}
+
+/* Custom scrollbar */
+.energy-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.energy-modal::-webkit-scrollbar-track {
+  background: var(--insights-bg);
+}
+
+.energy-modal::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.energy-modal::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .energy-modal-content {
+    padding: 1.5rem 1rem;
+  }
+  .energy-modal .hero h1 {
+    font-size: 1.8rem;
+  }
+  .energy-modal section {
+    padding: 1rem;
+  }
+}
