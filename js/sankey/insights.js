@@ -198,6 +198,21 @@ var insightsNameSpace = {
     const totalLosses = transLosses + distLosses;
     const energyLossesPct = gae !== 0 ? (totalLosses / gae) * 100 : 0;
 
+    // Helper to get translated loss source names
+    const getLossSourceName = (code, defaultName) => {
+      const keyMap = {
+        "F4_6": "T2_6_1",
+        "F4_7": "T2_7",
+        "F4_8": "T2_8",
+        "F4_9": "T2_9",
+        "F4_10": "T2_10",
+        "F4_11": "T2_11",
+        "F4_12": "T2_12"
+      };
+      const key = keyMap[code];
+      return (key && langLabels[key]) ? langLabels[key] : defaultName;
+    };
+
     // Largest Loss Source
     const lossFlows = [
       { code: "F4_6", name: "Refineries" },
@@ -209,14 +224,17 @@ var insightsNameSpace = {
       { code: "F4_12", name: "Other transformation" }
     ];
     let maxLossValue = -1;
-    let largestLossSource = "N/A";
+    let largestLossSourceCode = "";
+    let largestLossSourceDefault = "N/A";
     lossFlows.forEach(flow => {
       const val = this.getVal(flow.code);
       if (val > maxLossValue) {
         maxLossValue = val;
-        largestLossSource = flow.name;
+        largestLossSourceCode = flow.code;
+        largestLossSourceDefault = flow.name;
       }
     });
+    const largestLossSource = largestLossSourceCode ? getLossSourceName(largestLossSourceCode, largestLossSourceDefault) : "N/A";
 
     // Consumption by Sector
     const ind = this.getVal("F6_1_1_1");
@@ -229,12 +247,12 @@ var insightsNameSpace = {
     const otherSectors = fishing + nsp;
 
     const sectorConsumption = [
-      { name: "Industry", val: ind, share: totalFEC > 0 ? (ind / totalFEC) * 100 : 0 },
-      { name: "Transport", val: tra, share: totalFEC > 0 ? (tra / totalFEC) * 100 : 0 },
-      { name: "Households", val: hh, share: totalFEC > 0 ? (hh / totalFEC) * 100 : 0 },
-      { name: "Commercial & Public Services", val: cp, share: totalFEC > 0 ? (cp / totalFEC) * 100 : 0 },
-      { name: "Agriculture & Forestry", val: af, share: totalFEC > 0 ? (af / totalFEC) * 100 : 0 },
-      { name: "Other", val: otherSectors, share: totalFEC > 0 ? (otherSectors / totalFEC) * 100 : 0 }
+      { code: "N6_1_1_1", name: "Industry", val: ind, share: totalFEC > 0 ? (ind / totalFEC) * 100 : 0 },
+      { code: "N6_1_1_2", name: "Transport", val: tra, share: totalFEC > 0 ? (tra / totalFEC) * 100 : 0 },
+      { code: "E6_1_1_3_2", name: "Households", val: hh, share: totalFEC > 0 ? (hh / totalFEC) * 100 : 0 },
+      { code: "E6_1_1_3_1", name: "Commercial & Public Services", val: cp, share: totalFEC > 0 ? (cp / totalFEC) * 100 : 0 },
+      { code: "E6_1_1_3_3", name: "Agriculture & Forestry", val: af, share: totalFEC > 0 ? (af / totalFEC) * 100 : 0 },
+      { code: "E6_1_1_3_5", name: "Other", val: otherSectors, share: totalFEC > 0 ? (otherSectors / totalFEC) * 100 : 0 }
     ];
 
     let largestConsumingSector = "N/A";
@@ -242,7 +260,7 @@ var insightsNameSpace = {
     sectorConsumption.forEach(sector => {
       if (sector.share > largestSectorShare) {
         largestSectorShare = sector.share;
-        largestConsumingSector = sector.name;
+        largestConsumingSector = langLabels[sector.code] || sector.name;
       }
     });
 
@@ -265,7 +283,7 @@ var insightsNameSpace = {
       fuel.share = share;
       if (share > largestSourceShare) {
         largestSourceShare = share;
-        largestEnergySource = fuel.name;
+        largestEnergySource = langLabels[fuel.code] || fuel.name;
       }
     });
 
@@ -343,6 +361,28 @@ var insightsNameSpace = {
       }
     }
 
+    // Helper to get translated node/link names for top flows
+    const getFlowTranslationWithFallback = (fallback) => {
+      const nameMap = {
+        "Primary production": "E1_1_2",
+        "Available from all sources": "N1",
+        "Recovered and recycled": "E1_1_1",
+        "Imports": "E1_2",
+        "Available after transformation": "N6",
+        "Exports": "E6_3",
+        "Stock draw": "E1_3",
+        "Stock build": "E6_2",
+        "Transformation": "T2",
+        "Transformation losses": "E4",
+        "Final energy consumption": "N6_1_1",
+        "Final non-energy consumption": "N6_1_2",
+        "Energy sector consumption": "E6_5",
+        "Distribution losses": "E6_6"
+      };
+      const transKey = nameMap[fallback];
+      return (transKey && langLabels[transKey]) ? langLabels[transKey] : fallback;
+    };
+
     // Top Flows Listing
     const flowsToCompare = [
       { code: "F1_1_2", source: "Primary production", target: "Available from all sources" },
@@ -362,9 +402,11 @@ var insightsNameSpace = {
 
     const topFlows = flowsToCompare.map(f => {
       const val = this.getVal(f.code);
+      const translatedSource = getFlowTranslationWithFallback(f.source);
+      const translatedTarget = getFlowTranslationWithFallback(f.target);
       return {
-        source: f.source,
-        target: f.target,
+        source: translatedSource,
+        target: translatedTarget,
         value: this.formatValWithSpaces(val, 2) + " " + unit,
         numericVal: val
       };
@@ -386,7 +428,7 @@ var insightsNameSpace = {
       // GAE Trend
       const gaeChange = prevMetrics.gae > 0 ? ((currentMetrics.gae - prevMetrics.gae) / prevMetrics.gae) * 100 : 0;
       trends.push({
-        metric: "Gross Available Energy",
+        metric: langLabels.METRIC_GAE || "Gross Available Energy",
         previous: this.formatValWithSpaces(prevMetrics.gae, 2) + " " + unit,
         current: this.formatValWithSpaces(currentMetrics.gae, 2) + " " + unit,
         change: (gaeChange >= 0 ? "+" : "") + this.formatValWithSpaces(gaeChange, 1) + "%",
@@ -396,7 +438,7 @@ var insightsNameSpace = {
       // FEC Trend
       const fecChange = prevMetrics.fec > 0 ? ((currentMetrics.fec - prevMetrics.fec) / prevMetrics.fec) * 100 : 0;
       trends.push({
-        metric: "Final Energy Consumption",
+        metric: langLabels.METRIC_FEC || "Final Energy Consumption",
         previous: this.formatValWithSpaces(prevMetrics.fec, 2) + " " + unit,
         current: this.formatValWithSpaces(currentMetrics.fec, 2) + " " + unit,
         change: (fecChange >= 0 ? "+" : "") + this.formatValWithSpaces(fecChange, 1) + "%",
@@ -406,7 +448,7 @@ var insightsNameSpace = {
       // Renewable Share Trend
       const renChange = currentMetrics.renShare - prevMetrics.renShare;
       trends.push({
-        metric: "Renewable Share",
+        metric: langLabels.RENEWABLE_SHARE || "Renewable Share",
         previous: this.formatValWithSpaces(prevMetrics.renShare, 1) + "%",
         current: this.formatValWithSpaces(currentMetrics.renShare, 1) + "%",
         change: (renChange >= 0 ? "+" : "") + this.formatValWithSpaces(renChange, 1) + " pp",
@@ -416,7 +458,7 @@ var insightsNameSpace = {
       // Import Dependency Trend
       const impChange = currentMetrics.impDep - prevMetrics.impDep;
       trends.push({
-        metric: "Import Dependency",
+        metric: langLabels.IMPORT_DEP || "Import Dependency",
         previous: this.formatValWithSpaces(prevMetrics.impDep, 1) + "%",
         current: this.formatValWithSpaces(currentMetrics.impDep, 1) + "%",
         change: (impChange >= 0 ? "+" : "") + this.formatValWithSpaces(impChange, 1) + " pp",
@@ -435,12 +477,20 @@ var insightsNameSpace = {
       electrificationRate: this.formatValWithSpaces(electrificationRate, 1),
       selfSufficiency: this.formatValWithSpaces(selfSufficiency, 1),
       keyTakeaways: {
-        largestEnergySource: `The largest energy source is <strong>${largestEnergySource}</strong>, representing <strong>${this.formatValWithSpaces(largestSourceShare, 1)}%</strong> of the total Gross Available Energy.`,
-        largestConsumingSector: `The largest energy consumer is the <strong>${largestConsumingSector}</strong> sector, representing <strong>${this.formatValWithSpaces(largestSectorShare, 1)}%</strong> of the final energy consumption.`,
+        largestEnergySource: (langLabels.TAKEAWAY_LARGEST_SOURCE || "The largest energy source is <strong>{source}</strong>, representing <strong>{share}%</strong> of the total Gross Available Energy.")
+          .replace("{source}", largestEnergySource)
+          .replace("{share}", this.formatValWithSpaces(largestSourceShare, 1)),
+        largestConsumingSector: (langLabels.TAKEAWAY_LARGEST_CONSUMER || "The largest energy consumer is the <strong>{sector}</strong> sector, representing <strong>{share}%</strong> of the final energy consumption.")
+          .replace("{sector}", largestConsumingSector)
+          .replace("{share}", this.formatValWithSpaces(largestSectorShare, 1)),
         importDependency: importDependency >= 0 
-          ? `The dependency on energy imports is <strong>${this.formatValWithSpaces(importDependency, 1)}%</strong>. Net imports supply the major share of energy needs.`
-          : `The region is a net exporter of energy, with an import dependency rate of <strong>${this.formatValWithSpaces(importDependency, 1)}%</strong>.`,
-        transformationLosses: `Transformation and distribution losses represent <strong>${this.formatValWithSpaces(energyLossesPct, 1)}%</strong> of Gross Available Energy, with the most significant losses occurring in <strong>${largestLossSource}</strong>.`
+          ? (langLabels.TAKEAWAY_IMPORT_DEP_POSITIVE || "The dependency on energy imports is <strong>{share}%</strong>. Net imports supply the major share of energy needs.")
+              .replace("{share}", this.formatValWithSpaces(importDependency, 1))
+          : (langLabels.TAKEAWAY_IMPORT_DEP_NEGATIVE || "The region is a net exporter of energy, with an import dependency rate of <strong>{share}%</strong>.")
+              .replace("{share}", this.formatValWithSpaces(importDependency, 1)),
+        transformationLosses: (langLabels.TAKEAWAY_LOSSES || "Transformation and distribution losses represent <strong>{share}%</strong> of Gross Available Energy, with the most significant losses occurring in <strong>{source}</strong>.")
+          .replace("{share}", this.formatValWithSpaces(energyLossesPct, 1))
+          .replace("{source}", largestLossSource)
       },
       sources: {
         imports: importsAbs,
@@ -448,7 +498,7 @@ var insightsNameSpace = {
         stockChanges: stockChangesAbs
       },
       fuelMix: fuelMix.map(f => ({
-        name: f.name,
+        name: langLabels[f.code] || f.name,
         share: this.formatValWithSpaces(f.share, 1),
         change: "0.0"
       })),
@@ -459,7 +509,7 @@ var insightsNameSpace = {
         largestSource: largestLossSource
       },
       consumptionBySector: sectorConsumption.map(s => ({
-        name: s.name,
+        name: langLabels[s.code] || s.name,
         share: this.formatValWithSpaces(s.share, 1)
       })),
       energyMix: {
@@ -491,6 +541,10 @@ var insightsNameSpace = {
     const modal = document.createElement("div");
     modal.className = "energy-modal";
     modal.id = "energy-insights-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "insights-modal-title");
+    modal.setAttribute("tabindex", "-1");
 
     // Handle more than one country selected (Combined values indicator)
     const geosCount = REF.geos.split(",").length;
@@ -499,26 +553,27 @@ var insightsNameSpace = {
     let trendsHtml = "";
     if (data.trends && data.trends.length > 0) {
       trendsHtml = `
-      <section>
-        <h2>${langLabels.YOY_TRENDS} (${prevYear} → ${currentYear})</h2>
+      <section role="region" aria-labelledby="yoy-trends-heading">
+        <h2 id="yoy-trends-heading">${langLabels.YOY_TRENDS} (${prevYear} → ${currentYear})</h2>
         <p class="section-desc">${langLabels.DESC_YOY_TRENDS || ""}</p>
-        <div id="trend-chart" class="insights-chart-container"></div>
-        <table>
+        <div id="trend-chart" class="insights-chart-container" aria-hidden="true"></div>
+        <table aria-labelledby="yoy-trends-heading">
+          <caption class="visually-hidden">${langLabels.YOY_TRENDS} (${prevYear} → ${currentYear})</caption>
           <thead>
             <tr>
-              <th>${langLabels.METRIC}</th>
-              <th>${langLabels.PREVIOUS} (${prevYear})</th>
-              <th>${langLabels.CURRENT} (${currentYear})</th>
-              <th>${langLabels.CHANGE}</th>
+              <th scope="col" class="text-left">${langLabels.METRIC}</th>
+              <th scope="col" class="text-right">${langLabels.PREVIOUS} (${prevYear})</th>
+              <th scope="col" class="text-right">${langLabels.CURRENT} (${currentYear})</th>
+              <th scope="col" class="text-right">${langLabels.CHANGE}</th>
             </tr>
           </thead>
           <tbody>
             ${data.trends.map(trend => `
               <tr>
-                <td>${trend.metric}</td>
-                <td>${trend.previous}</td>
-                <td>${trend.current}</td>
-                <td class="${trend.positive ? 'trend-positive' : 'trend-negative'}"><strong>${trend.change}</strong></td>
+                <td class="text-left">${trend.metric}</td>
+                <td class="text-right">${trend.previous}</td>
+                <td class="text-right">${trend.current}</td>
+                <td class="text-right ${trend.positive ? 'trend-positive' : 'trend-negative'}"><strong>${trend.change}</strong></td>
               </tr>
             `).join("")}
           </tbody>
@@ -534,7 +589,7 @@ var insightsNameSpace = {
         </button>
 
         <header class="hero">
-          <h1>${langLabels.MODAL_TITLE}</h1>
+          <h1 id="insights-modal-title">${langLabels.MODAL_TITLE}</h1>
           <div class="hero-subtitle">
             <strong>${combinedIndicator}</strong>${REF.geos.split(",").map(c => countriesEB[c] || c).join(" + ")} | ${REF.year} | ${energyUnits[unit].label}
           </div>
@@ -545,7 +600,7 @@ var insightsNameSpace = {
             <p>${langLabels.SUMMARY_TEXT}</p>
           </div>
 
-          <div class="kpi-grid">
+          <div class="kpi-grid" role="list" aria-label="Key Performance Indicators">
             ${this.renderKPI(langLabels.IMPORT_DEP, data.importDependency + "%", "IMPORT_DEP")}
             ${this.renderKPI(langLabels.RENEWABLE_SHARE, data.renewableShare + "%", "RENEWABLE_SHARE")}
             ${this.renderKPI(langLabels.ENERGY_LOST, data.energyLosses + "%", "ENERGY_LOST")}
@@ -557,115 +612,117 @@ var insightsNameSpace = {
           </div>
         </header>
 
-        <section>
-          <h2>${langLabels.KEY_TAKEAWAYS}</h2>
+        <section role="region" aria-labelledby="takeaways-heading">
+          <h2 id="takeaways-heading">${langLabels.KEY_TAKEAWAYS}</h2>
           <p class="section-desc">${langLabels.DESC_KEY_TAKEAWAYS || ""}</p>
-          <ul>
-            <li>${data.keyTakeaways.largestEnergySource}</li>
-            <li>${data.keyTakeaways.largestConsumingSector}</li>
-            <li>${data.keyTakeaways.importDependency}</li>
-            <li>${data.keyTakeaways.transformationLosses}</li>
+          <ul role="list" aria-label="${langLabels.KEY_TAKEAWAYS}">
+            <li role="listitem">${data.keyTakeaways.largestEnergySource}</li>
+            <li role="listitem">${data.keyTakeaways.largestConsumingSector}</li>
+            <li role="listitem">${data.keyTakeaways.importDependency}</li>
+            <li role="listitem">${data.keyTakeaways.transformationLosses}</li>
           </ul>
         </section>
 
-        <section>
-          <h2>${langLabels.SOURCE_BREAKDOWN}</h2>
+        <section role="region" aria-labelledby="source-breakdown-heading">
+          <h2 id="source-breakdown-heading">${langLabels.SOURCE_BREAKDOWN}</h2>
           <p class="section-desc">${langLabels.DESC_SOURCE_BREAKDOWN || ""}</p>
-          <div id="source-breakdown-chart" class="insights-chart-container"></div>
-          <ul>
-            <li><strong>${langLabels.IMPORTS}:</strong> ${data.sources.imports}</li>
-            <li><strong>${langLabels.DOMESTIC_PROD}:</strong> ${data.sources.domesticProduction}</li>
-            <li><strong>${langLabels.STOCK_CHANGES}:</strong> ${data.sources.stockChanges}</li>
+          <div id="source-breakdown-chart" class="insights-chart-container" aria-hidden="true"></div>
+          <ul role="list" aria-label="${langLabels.SOURCE_BREAKDOWN}">
+            <li role="listitem"><strong>${langLabels.IMPORTS}:</strong> ${data.sources.imports}</li>
+            <li role="listitem"><strong>${langLabels.DOMESTIC_PROD}:</strong> ${data.sources.domesticProduction}</li>
+            <li role="listitem"><strong>${langLabels.STOCK_CHANGES}:</strong> ${data.sources.stockChanges}</li>
           </ul>
         </section>
 
-        <section>
-          <h2>${langLabels.FUEL_MIX}</h2>
+        <section role="region" aria-labelledby="fuel-mix-heading">
+          <h2 id="fuel-mix-heading">${langLabels.FUEL_MIX}</h2>
           <p class="section-desc">${langLabels.DESC_FUEL_MIX || ""}</p>
-          <div id="fuel-mix-chart" class="insights-chart-container"></div>
-          <table>
+          <div id="fuel-mix-chart" class="insights-chart-container" aria-hidden="true"></div>
+          <table aria-labelledby="fuel-mix-heading">
+            <caption class="visually-hidden">${langLabels.FUEL_MIX}</caption>
             <thead>
               <tr>
-                <th>Fuel</th>
-                <th>Share (%)</th>
+                <th scope="col" class="text-left">${langLabels.FUEL_LABEL || "Fuel"}</th>
+                <th scope="col" class="text-right">${langLabels.SHARE_PCT || "Share (%)"}</th>
               </tr>
             </thead>
             <tbody>
               ${data.fuelMix.map(fuel => `
                 <tr>
-                  <td>${fuel.name}</td>
-                  <td><strong>${fuel.share}%</strong></td>
+                  <td class="text-left">${fuel.name}</td>
+                  <td class="text-right"><strong>${fuel.share}%</strong></td>
                 </tr>
               `).join("")}
             </tbody>
           </table>
         </section>
 
-        <section>
-          <h2>${langLabels.ENERGY_LOSSES}</h2>
+        <section role="region" aria-labelledby="energy-losses-heading">
+          <h2 id="energy-losses-heading">${langLabels.ENERGY_LOSSES}</h2>
           <p class="section-desc">${langLabels.DESC_ENERGY_LOSSES || ""}</p>
-          <div id="energy-losses-chart" class="insights-chart-container"></div>
-          <ul>
-            <li><strong>Total Losses:</strong> ${data.losses.total}%</li>
-            <li><strong>Transformation Losses:</strong> ${data.losses.transformation}%</li>
-            <li><strong>Distribution Losses:</strong> ${data.losses.distribution}%</li>
-            <li><strong>Largest Loss Source:</strong> ${data.losses.largestSource}</li>
+          <div id="energy-losses-chart" class="insights-chart-container" aria-hidden="true"></div>
+          <ul role="list" aria-label="${langLabels.ENERGY_LOSSES}">
+            <li role="listitem"><strong>${langLabels.TOTAL_LOSSES || "Total Losses"}:</strong> ${data.losses.total}%</li>
+            <li role="listitem"><strong>${langLabels.TRANS_LOSSES || "Transformation Losses"}:</strong> ${data.losses.transformation}%</li>
+            <li role="listitem"><strong>${langLabels.DIST_LOSSES || "Distribution Losses"}:</strong> ${data.losses.distribution}%</li>
+            <li role="listitem"><strong>${langLabels.LARGEST_LOSS_SOURCE || "Largest Loss Source"}:</strong> ${data.losses.largestSource}</li>
           </ul>
         </section>
 
-        <section>
-          <h2>${langLabels.CONS_BY_SECTOR}</h2>
+        <section role="region" aria-labelledby="sector-consumption-heading">
+          <h2 id="sector-consumption-heading">${langLabels.CONS_BY_SECTOR}</h2>
           <p class="section-desc">${langLabels.DESC_CONS_BY_SECTOR || ""}</p>
-          <div id="sector-chart" class="insights-chart-container"></div>
-          <table>
+          <div id="sector-chart" class="insights-chart-container" aria-hidden="true"></div>
+          <table aria-labelledby="sector-consumption-heading">
+            <caption class="visually-hidden">${langLabels.CONS_BY_SECTOR}</caption>
             <thead>
               <tr>
-                <th>Sector</th>
-                <th>Share (%)</th>
+                <th scope="col" class="text-left">${langLabels.SECTOR_LABEL || "Sector"}</th>
+                <th scope="col" class="text-right">${langLabels.SHARE_PCT || "Share (%)"}</th>
               </tr>
             </thead>
             <tbody>
               ${data.consumptionBySector.map(sector => `
                 <tr>
-                  <td>${sector.name}</td>
-                  <td><strong>${sector.share}%</strong></td>
+                  <td class="text-left">${sector.name}</td>
+                  <td class="text-right"><strong>${sector.share}%</strong></td>
                 </tr>
               `).join("")}
             </tbody>
           </table>
         </section>
 
-        <section>
-          <h2>${langLabels.FOSSIL_VS_LOW}</h2>
+        <section role="region" aria-labelledby="fossil-vs-low-heading">
+          <h2 id="fossil-vs-low-heading">${langLabels.FOSSIL_VS_LOW}</h2>
           <p class="section-desc">${langLabels.DESC_FOSSIL_VS_LOW || ""}</p>
-          <div id="fossil-mix-chart" class="insights-chart-container"></div>
-          <ul>
-            <li><strong>${langLabels.FOSSIL_FUELS}:</strong> ${data.energyMix.fossil}%</li>
-            <li><strong>${langLabels.LOW_CARBON}:</strong> ${data.energyMix.lowCarbon}%</li>
-            <li><strong>${langLabels.RENEWABLES} (subcategory):</strong> ${data.energyMix.renewables}%</li>
+          <div id="fossil-mix-chart" class="insights-chart-container" aria-hidden="true"></div>
+          <ul role="list" aria-label="${langLabels.FOSSIL_VS_LOW}">
+            <li role="listitem"><strong>${langLabels.FOSSIL_FUELS}:</strong> ${data.energyMix.fossil}%</li>
+            <li role="listitem"><strong>${langLabels.LOW_CARBON}:</strong> ${data.energyMix.lowCarbon}%</li>
+            <li role="listitem"><strong>${langLabels.RENEWABLES} (subcategory):</strong> ${data.energyMix.renewables}%</li>
           </ul>
         </section>
 
         ${trendsHtml}
 
-        <section>
-          <h2>${langLabels.TOP_FLOWS}</h2>
+        <section role="region" aria-labelledby="top-flows-heading">
+          <h2 id="top-flows-heading">${langLabels.TOP_FLOWS}</h2>
           <p class="section-desc">${langLabels.DESC_TOP_FLOWS || ""}</p>
-          <ol>
+          <ol role="list" aria-label="${langLabels.TOP_FLOWS}">
             ${data.topFlows.map(flow => `
-              <li>
+              <li role="listitem">
                 <strong>${flow.source}</strong> &rarr; <strong>${flow.target}</strong>
                 <span style="color: var(--insights-accent); font-weight: 600;">(${flow.value})</span>
               </li>
             `).join("")}
           </ol>
         </section>
-        <section>
-          <h2>${langLabels.STRATEGIC_INSIGHTS}</h2>
+        <section role="region" aria-labelledby="strategic-insights-heading">
+          <h2 id="strategic-insights-heading">${langLabels.STRATEGIC_INSIGHTS}</h2>
           <p class="section-desc">${langLabels.DESC_STRATEGIC_INSIGHTS || ""}</p>
-          <div class="strategic-grid">
+          <div class="strategic-grid" role="list" aria-label="${langLabels.STRATEGIC_INSIGHTS}">
             <!-- Transformation Efficiency -->
-            <div class="strategic-card">
+            <div class="strategic-card" role="listitem">
               <div class="strategic-card-header">
                 <h3>${langLabels.TRANS_EFF_TITLE}</h3>
                 <span class="strategic-val">${data.transformationEfficiency}%</span>
@@ -677,10 +734,10 @@ var insightsNameSpace = {
             </div>
 
             <!-- Sectoral Grid Electrification -->
-            <div class="strategic-card">
+            <div class="strategic-card" role="listitem">
               <div class="strategic-card-header">
                 <h3>${langLabels.SECTOR_ELEC_TITLE}</h3>
-                <span class="strategic-val">Ind: ${data.industryElectrification}% / Tra: ${data.transportElectrification}%</span>
+                <span class="strategic-val">${langLabels.SHORT_IND || "Ind"}: ${data.industryElectrification}% / ${langLabels.SHORT_TRA || "Tra"}: ${data.transportElectrification}%</span>
               </div>
               <p class="strategic-desc">
                 <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.SECTOR_ELEC_WHAT}<br>
@@ -689,33 +746,33 @@ var insightsNameSpace = {
             </div>
 
             <!-- Renewable Mix Breakdown -->
-            <div class="strategic-card">
+            <div class="strategic-card" role="listitem">
               <div class="strategic-card-header">
                 <h3>${langLabels.REN_MIX_TITLE}</h3>
-                <span class="strategic-val">Wind: ${data.windRenMix}% / Solar: ${data.solarRenMix}%</span>
+                <span class="strategic-val">${langLabels.SHORT_WIND || "Wind"}: ${data.windRenMix}% / ${langLabels.SHORT_SOLAR || "Solar"}: ${data.solarRenMix}%</span>
               </div>
               <p class="strategic-desc">
                 <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.REN_MIX_WHAT}<br>
                 <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.REN_MIX_WHY}<br>
-                <strong>Breakdown:</strong> Wind: ${data.windRenMix}%, Solar: ${data.solarRenMix}%, Hydro: ${data.hydroRenMix}%, Others: ${data.otherRenMix}%
+                <strong>${langLabels.LABEL_BREAKDOWN || "Breakdown"}:</strong> ${langLabels.SHORT_WIND || "Wind"}: ${data.windRenMix}%, ${langLabels.SHORT_SOLAR || "Solar"}: ${data.solarRenMix}%, ${langLabels.SHORT_HYDRO || "Hydro"}: ${data.hydroRenMix}%, ${langLabels.SHORT_OTHERS || "Others"}: ${data.otherRenMix}%
               </p>
             </div>
 
             <!-- Import Risk (Geopolitical Concentration) -->
-            <div class="strategic-card">
+            <div class="strategic-card" role="listitem">
               <div class="strategic-card-header">
                 <h3>${langLabels.IMPORT_RISK_TITLE}</h3>
-                <span class="strategic-val">Gas: ${data.gasImportRisk}% / Oil: ${data.oilImportRisk}%</span>
+                <span class="strategic-val">${langLabels.SHORT_GAS || "Gas"}: ${data.gasImportRisk}% / ${langLabels.SHORT_OIL || "Oil"}: ${data.oilImportRisk}%</span>
               </div>
               <p class="strategic-desc">
                 <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.IMPORT_RISK_WHAT}<br>
                 <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.IMPORT_RISK_WHY}<br>
-                <strong>GAE Share:</strong> Oil & Petroleum: ${data.oilImportRisk}%, Natural Gas: ${data.gasImportRisk}%, Solid Fuels (Coal): ${data.coalImportRisk}%
+                <strong>${langLabels.LABEL_GAE_SHARE || "GAE Share"}:</strong> ${langLabels.O4000 || "Oil & Petroleum"}: ${data.oilImportRisk}%, ${langLabels.G3000_C0350-370 || "Natural Gas"}: ${data.gasImportRisk}%, ${langLabels.SFF_P1000 || "Solid Fuels (Coal)"}: ${data.coalImportRisk}%
               </p>
             </div>
 
             <!-- Non-Energy Use Footprint -->
-            <div class="strategic-card">
+            <div class="strategic-card" role="listitem">
               <div class="strategic-card-header">
                 <h3>${langLabels.NON_ENERGY_TITLE}</h3>
                 <span class="strategic-val">${data.nonEnergyFootprint}%</span>
@@ -728,15 +785,15 @@ var insightsNameSpace = {
           </div>
         </section>
 
-        <section>
-          <h2>${langLabels.ADVANCED_INSIGHTS}</h2>
+        <section role="region" aria-labelledby="advanced-insights-heading">
+          <h2 id="advanced-insights-heading">${langLabels.ADVANCED_INSIGHTS}</h2>
           <p class="section-desc">${langLabels.DESC_ADVANCED_INSIGHTS || ""}</p>
-          <ul>
-            <li><strong>${langLabels.TRANS_OIL_DEP}:</strong> ${data.transportOilDependency}%</li>
-            <li><strong>${langLabels.REN_ELEC_SHARE}:</strong> ${data.renewableElectricityShare}%</li>
-            <li><strong>${langLabels.IND_SHARE}:</strong> ${data.industryShare}%</li>
-            <li><strong>${langLabels.HOUSEHOLD_SHARE}:</strong> ${data.householdShare}%</li>
-            <li><strong>${langLabels.PER_CAPITA}:</strong> ${data.perCapitaEnergyUse}</li>
+          <ul role="list" aria-label="${langLabels.ADVANCED_INSIGHTS}">
+            <li role="listitem"><strong>${langLabels.TRANS_OIL_DEP}:</strong> ${data.transportOilDependency}%</li>
+            <li role="listitem"><strong>${langLabels.REN_ELEC_SHARE}:</strong> ${data.renewableElectricityShare}%</li>
+            <li role="listitem"><strong>${langLabels.IND_SHARE}:</strong> ${data.industryShare}%</li>
+            <li role="listitem"><strong>${langLabels.HOUSEHOLD_SHARE}:</strong> ${data.householdShare}%</li>
+            <li role="listitem"><strong>${langLabels.PER_CAPITA}:</strong> ${data.perCapitaEnergyUse}</li>
           </ul>
         </section>
 
@@ -745,6 +802,7 @@ var insightsNameSpace = {
 
     document.body.appendChild(modal);
     document.body.style.overflow = "hidden"; // Disable background scrolling
+    modal.focus(); // Shift focus to the modal dialog
 
     // Event handler for closing modal
     const closeModal = () => {
@@ -753,6 +811,8 @@ var insightsNameSpace = {
         modalEl.remove();
         document.body.style.overflow = ""; // Restore scrolling
         document.removeEventListener("keydown", handleKeyDown);
+        const btn = document.getElementById("tb-insights-btn");
+        if (btn) btn.focus();
       }
     };
 
@@ -793,7 +853,7 @@ var insightsNameSpace = {
       `;
     }
     return `
-      <div class="kpi-card">
+      <div class="kpi-card" role="listitem">
         <div>
           <div class="kpi-label">${label}</div>
           <div class="kpi-value">${value}</div>

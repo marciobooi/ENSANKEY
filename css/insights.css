@@ -29,6 +29,18 @@
   font-family: var(--insights-font);
   animation: insightsFadeIn 0.2s ease-out;
   z-index: 9999999999999 !important;
+  outline: none;
+}
+
+.energy-modal .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 @keyframes insightsFadeIn {
@@ -367,4 +379,17 @@
 .energy-modal .strategic-desc strong {
   color: var(--insights-text-primary);
 }
+
+.energy-modal .text-left {
+  text-align: left !important;
+}
+
+.energy-modal .text-right {
+  text-align: right !important;
+}
+
+.energy-modal .text-center {
+  text-align: center !important;
+}
+
 
