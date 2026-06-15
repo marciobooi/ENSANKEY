@@ -474,5 +474,6 @@
 "DESC_YOY_TRENDS": "Dieser Abschnitt überwacht die jährliche Entwicklung wichtiger Indikatoren und zeigt, wie sich die Gesamtenergieverfügbarkeit, der Endverbrauch, die erneuerbaren Anteile und die Importabhängigkeit im Vergleich zum Vorjahr verändert haben.",
 "DESC_TOP_FLOWS": "Dieser Abschnitt listet die zehn größten Energieflüsse (Transaktionen) innerhalb der Energiebilanz auf und hebt die Hauptpfade von der Produktion und den Importen bis zum Endverbrauch hervor.",
 "DESC_STRATEGIC_INSIGHTS": "Eine tiefe Analyse der strukturellen und geopolitischen Aspekte des Energiesystems, die die Konzentration der Versorgungsrisiken, die Elektrifizierungsraten, die Vielfalt der erneuerbaren Energien und die Umwandlungsverluste der Raffinerien misst.",
-"DESC_ADVANCED_INSIGHTS": "Dieser Abschnitt bietet spezifische Indikatoren von Interesse, wie z. B. die Abhängigkeit des Verkehrssektors von Erdöl, den Anteil erneuerbarer Energien an der Elektrizitätsproduktion und den Energieverbrauch pro Kopf."
+"DESC_ADVANCED_INSIGHTS": "Dieser Abschnitt bietet spezifische Indikatoren von Interesse, wie z. B. die Abhängigkeit des Verkehrssektors von Erdöl, den Anteil erneuerbarer Energien an der Elektrizitätsproduktion und den Energieverbrauch pro Kopf.",
+"LOADING": "Laden..."
 }

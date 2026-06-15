@@ -901,7 +901,54 @@ const nsToolbarHandler = {
 		}
 		if (args.fn === "createInsightsMenuitem") {
 			this.setEventListener(element, ["click"], function (e) {
-				insightsNameSpace.openInsightsModal();
+				if (element.classList.contains("loading")) return;
+
+				if (typeof insightsNameSpace === "undefined") {
+					element.classList.add("loading");
+					const originalIcon = element.querySelector("i").className;
+					element.querySelector("i").className = "fas fa-spinner fa-spin";
+
+					const overlay = document.createElement("div");
+					overlay.className = "ecl-spinner__overlay ecl-spinner__overlay--visible";
+					overlay.id = "insights-loader-overlay";
+					overlay.style.zIndex = "99999998";
+					document.body.appendChild(overlay);
+
+					const spinner = document.createElement("div");
+					spinner.className = "ecl-spinner ecl-spinner--visible ecl-spinner--centered ecl-spinner--l";
+					spinner.id = "insights-loader";
+					spinner.style.position = "fixed";
+					spinner.style.top = "50%";
+					spinner.style.left = "50%";
+					spinner.style.transform = "translate(-50%, -50%)";
+					spinner.style.zIndex = "99999999";
+					spinner.innerHTML = `
+						<svg class="ecl-spinner__loader" viewBox="25 25 50 50">
+							<circle class="ecl-spinner__circle" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+						</svg>
+						<span class="ecl-spinner__text" style="font-weight: 700; color: #1e293b;">${languageNameSpace.labels.LOADING || "Loading..."}</span>
+					`;
+					document.body.appendChild(spinner);
+
+					$.getScript("js/sankey/insights.js")
+						.done(function () {
+							$("#insights-loader-overlay").remove();
+							$("#insights-loader").remove();
+							element.querySelector("i").className = originalIcon;
+							element.classList.remove("loading");
+							insightsNameSpace.openInsightsModal();
+						})
+						.fail(function (jqxhr, settings, exception) {
+							console.error("Failed to load insights.js:", exception);
+							$("#insights-loader-overlay").remove();
+							$("#insights-loader").remove();
+							element.querySelector("i").className = originalIcon;
+							element.classList.remove("loading");
+							alert("Failed to load Energy Flow Insights.");
+						});
+				} else {
+					insightsNameSpace.openInsightsModal();
+				}
 			});
 		}
 		if (args.fn === "createTutorialMenuitem") {

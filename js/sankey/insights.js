@@ -7,21 +7,8 @@
  * combined values notice, and summary card with translations.
  */
 
-const insightsNameSpace = {
+var insightsNameSpace = {
 
-  POPULATION: {
-    "EU27_2020": 447000000,
-    "BE": 11500000, "BG": 6900000, "CZ": 10700000, "DK": 5800000,
-    "DE": 83200000, "EE": 1300000, "IE": 5000000, "EL": 10700000,
-    "ES": 47300000, "FR": 67400000, "HR": 4000000, "IT": 59600000,
-    "CY": 900000, "LV": 1900000, "LT": 2800000, "LU": 630000,
-    "HU": 9700000, "MT": 500000, "NL": 17400000, "AT": 8900000,
-    "PL": 37800000, "PT": 10300000, "RO": 19200000, "SI": 2100000,
-    "SK": 5400000, "FI": 5500000, "SE": 10400000, "IS": 360000,
-    "NO": 5400000, "ME": 620000, "MK": 2000000, "AL": 2800000,
-    "RS": 6900000, "TR": 83600000, "XK": 1800000, "UA": 41000000,
-    "MD": 2600000, "BA": 3300000, "GE": 3700000
-  },
 
   getLang: function() {
     return (REF?.language || 'EN').toUpperCase();
@@ -84,11 +71,87 @@ const insightsNameSpace = {
     return { gae, fec, impDep, renShare };
   },
 
-  openInsightsModal: function() {
+  POPULATION_CACHE: {},
+
+  loadPopulationData: async function(geos, year) {
+    const missingGeos = geos.filter(g => !this.POPULATION_CACHE[`${g}_${year}`]);
+    if (missingGeos.length === 0) return;
+
+    // Build Eurostat API query for demo_pjan
+    const query = {
+      dataset: "demo_pjan",
+      lang: this.getLang().toLowerCase(),
+      filter: {
+        geo: missingGeos,
+        time: [String(year)],
+        sex: ["T"],
+        age: ["TOTAL"]
+      }
+    };
+
+    try {
+      const ds = await EuroJSONstat.fetchDataset(query);
+      if (ds && ds.class !== "error") {
+        missingGeos.forEach(geo => {
+          try {
+            const val = ds.Data({ geo: geo, sex: "T", age: "TOTAL", time: String(year) }, false);
+            if (val && !isNaN(val) && val > 0) {
+              this.POPULATION_CACHE[`${geo}_${year}`] = val;
+            }
+          } catch(e) {
+            console.warn(`Failed to read population for ${geo} in ${year}:`, e);
+          }
+        });
+      }
+    } catch(err) {
+      console.warn("Failed to fetch live population from Eurostat:", err);
+    }
+  },
+
+  openInsightsModal: async function() {
+    // Show spinner if not already showing (e.g. if opened without script lazy load)
+    let overlay = document.getElementById("insights-loader-overlay");
+    let spinner = document.getElementById("insights-loader");
+    
+    if (!overlay) {
+      const btn = document.getElementById("tb-insights-btn");
+      if (btn) {
+        btn.classList.add("loading");
+        const icon = btn.querySelector("i");
+        if (icon) icon.className = "fas fa-spinner fa-spin";
+      }
+
+      overlay = document.createElement("div");
+      overlay.className = "ecl-spinner__overlay ecl-spinner__overlay--visible";
+      overlay.id = "insights-loader-overlay";
+      overlay.style.zIndex = "99999998";
+      document.body.appendChild(overlay);
+
+      spinner = document.createElement("div");
+      spinner.className = "ecl-spinner ecl-spinner--visible ecl-spinner--centered ecl-spinner--l";
+      spinner.id = "insights-loader";
+      spinner.style.position = "fixed";
+      spinner.style.top = "50%";
+      spinner.style.left = "50%";
+      spinner.style.transform = "translate(-50%, -50%)";
+      spinner.style.zIndex = "99999999";
+      spinner.innerHTML = `
+        <svg class="ecl-spinner__loader" viewBox="25 25 50 50">
+          <circle class="ecl-spinner__circle" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+        </svg>
+        <span class="ecl-spinner__text" style="font-weight: 700; color: #1e293b;">${languageNameSpace.labels.LOADING || "Loading..."}</span>
+      `;
+      document.body.appendChild(spinner);
+    }
+
     const langLabels = this.getLabels();
     const currentYear = Number(REF.year);
     const prevYear = currentYear - 1;
     const unit = REF.unit;
+    const geos = REF.geos.split(",");
+
+    // Fetch population data live from Eurostat
+    await this.loadPopulationData(geos, currentYear);
 
     // Primary values
     const imp = this.getVal("F1_2");
@@ -262,7 +325,11 @@ const insightsNameSpace = {
     // Per capita calculations
     let totalPopulation = 0;
     REF.geos.split(",").forEach(geo => {
-      totalPopulation += this.POPULATION[geo] || 0;
+      const cacheKey = `${geo}_${currentYear}`;
+      const livePop = this.POPULATION_CACHE[cacheKey];
+      if (livePop && livePop > 0) {
+        totalPopulation += livePop;
+      }
     });
 
     let perCapitaEnergyUse = "N/A";
@@ -700,6 +767,16 @@ const insightsNameSpace = {
 
     // Render Highcharts
     this.renderCharts(data);
+
+    // Clean up loading animation
+    $("#insights-loader-overlay").remove();
+    $("#insights-loader").remove();
+    const btn = document.getElementById("tb-insights-btn");
+    if (btn) {
+      btn.classList.remove("loading");
+      const icon = btn.querySelector("i");
+      if (icon) icon.className = "fas fa-lightbulb";
+    }
   },
 
   renderKPI: function(label, value, key) {

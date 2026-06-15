@@ -474,5 +474,6 @@
 "DESC_YOY_TRENDS": "This section monitors the annual progress of key indicators, showing how total energy availability, final consumption, renewable shares, and import dependency changed from the previous year.",
 "DESC_TOP_FLOWS": "This section ranks the largest energy transactions (flows) inside the energy balance, highlighting the main pathways from production and imports to final consumption.",
 "DESC_STRATEGIC_INSIGHTS": "A deep dive into structural and geopolitical aspects of the energy system, measuring supply risk concentration, electrification rates, renewable diversity, and refinery conversion losses.",
-"DESC_ADVANCED_INSIGHTS": "This section provides specific indicators of interest, such as transport sector oil reliance, renewable electricity penetration, and energy consumption per capita."
+"DESC_ADVANCED_INSIGHTS": "This section provides specific indicators of interest, such as transport sector oil reliance, renewable electricity penetration, and energy consumption per capita.",
+"LOADING": "Loading..."
 }

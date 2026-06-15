@@ -473,5 +473,6 @@
 "DESC_YOY_TRENDS": "Cette section surveille la progression annuelle des indicateurs clés, montrant l'évolution d'une année sur l'autre de la disponibilité totale d'énergie, de la consommation finale, des parts renouvelables et de la dépendance aux importations.",
 "DESC_TOP_FLOWS": "Cette section classe les flux d'énergie les plus importants au sein du bilan énergétique, mettant en évidence les principales trajectoires de la production et des importations jusqu'à la consommation finale.",
 "DESC_STRATEGIC_INSIGHTS": "Une analyse approfondie des aspects structurels et géopolitiques du système énergétique, mesurant la concentration des risques d'approvisionnement, les taux d'électrification, la diversité des renouvelables et les pertes de conversion des raffineries.",
-"DESC_ADVANCED_INSIGHTS": "Cette section fournit des indicateurs d'intérêt spécifiques, tels que la dépendance au pétrole du secteur des transports, la pénétration de l'électricité renouvelable et la consommation d'énergie par habitant."
+"DESC_ADVANCED_INSIGHTS": "Cette section fournit des indicateurs d'intérêt spécifiques, tels que la dépendance au pétrole du secteur des transports, la pénétration de l'électricité renouvelable et la consommation d'énergie par habitant.",
+"LOADING": "Chargement..."
 }
