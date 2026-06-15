@@ -948,12 +948,7 @@ $(document).ready(function () {
 	 * if the function returns 1, it means there is no need to set handlers
 	 * if the function returns an element, it means we need to set handlers to the element
 	 */
-	// Inject insights translation keys dynamically before building the toolbar
-	if (typeof insightsNameSpace !== "undefined") {
-		const insightsLang = (REF?.language || 'EN').toUpperCase();
-		const insightsLabels = insightsNameSpace.labels[insightsLang] || insightsNameSpace.labels.EN;
-		languageNameSpace.labels["MENU_INSIGHTS"] = insightsLabels.MENU_INSIGHTS;
-	}
+
 
 	nsToolbarConf.args.forEach(function (item, index) {
 		const newBtn =

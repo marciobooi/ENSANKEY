@@ -8,143 +8,6 @@
  */
 
 const insightsNameSpace = {
-  labels: {
-    EN: {
-      MENU_INSIGHTS: "Energy Flow Insights",
-      MODAL_TITLE: "EU Energy Flow Insights",
-      IMPORT_DEP: "Import Dependency",
-      RENEWABLE_SHARE: "Renewable Share",
-      ENERGY_LOST: "Energy Lost",
-      LARGEST_CONSUMER: "Largest Consumer",
-      LARGEST_SOURCE: "Largest Energy Source",
-      FOSSIL_DEP: "Fossil Fuel Dependence",
-      ELECTRIFICATION: "Electrification Rate",
-      SELF_SUFFICIENCY: "Self Sufficiency",
-      MAIN_SANKEY: "Main Sankey Diagram Summary",
-      KEY_TAKEAWAYS: "Key Takeaways",
-      SOURCE_BREAKDOWN: "Energy Source Breakdown",
-      FUEL_MIX: "Gross Available Energy Fuel Mix",
-      ENERGY_LOSSES: "Energy Losses and Efficiency",
-      CONS_BY_SECTOR: "Final Energy Consumption by Sector",
-      FOSSIL_VS_LOW: "Fossil vs Low-Carbon Sources",
-      YOY_TRENDS: "Year-over-Year Key Trends",
-      TOP_FLOWS: "Top 10 Energy Flows",
-      ADVANCED_INSIGHTS: "Advanced Insights & Indicators",
-      IMPORTS: "Imports",
-      DOMESTIC_PROD: "Domestic Production",
-      STOCK_CHANGES: "Stock Changes",
-      TOTAL_LOSSES: "Total Losses",
-      TRANS_LOSSES: "Transformation Losses",
-      DIST_LOSSES: "Distribution Losses",
-      FOSSIL_FUELS: "Fossil Fuels",
-      LOW_CARBON: "Low Carbon",
-      RENEWABLES: "Renewables",
-      CLOSE_BUTTON: "Close",
-      METRIC: "Metric",
-      PREVIOUS: "Previous Year",
-      CURRENT: "Current Year",
-      CHANGE: "Change",
-      NO_DATA: "No data available",
-      TRANS_OIL_DEP: "Transport Oil Dependency",
-      REN_ELEC_SHARE: "Renewable Electricity Share",
-      IND_SHARE: "Industry Share",
-      HOUSEHOLD_SHARE: "Household Share",
-      PER_CAPITA: "Per Capita Energy Use",
-      SUMMARY_TITLE: "About Energy Flow Insights",
-      SUMMARY_TEXT: "This factsheet provides a comprehensive overview of the energy system for the selected geographic region, year, and unit. It highlights key performance indicators (KPIs) such as import dependency, renewable energy shares, electrification, and transformation losses to help monitor energy transition trends.",
-      COMBINED_VALUES_FOR: "Combined values for: "
-    },
-    DE: {
-      MENU_INSIGHTS: "Energiefluss-Erkenntnisse",
-      MODAL_TITLE: "EU-Energiefluss-Erkenntnisse",
-      IMPORT_DEP: "Importabhängigkeit",
-      RENEWABLE_SHARE: "Erneuerbarer Anteil",
-      ENERGY_LOST: "Energieverlust",
-      LARGEST_CONSUMER: "Größter Verbraucher",
-      LARGEST_SOURCE: "Größte Energiequelle",
-      FOSSIL_DEP: "Abhängigkeit von fossilen Brennstoffen",
-      ELECTRIFICATION: "Elektrifizierungsrate",
-      SELF_SUFFICIENCY: "Selbstversorgung",
-      MAIN_SANKEY: "Haupt-Sankey-Diagramm Zusammenfassung",
-      KEY_TAKEAWAYS: "Wichtige Erkenntnisse",
-      SOURCE_BREAKDOWN: "Energiequellen-Aufteilung",
-      FUEL_MIX: "Brennstoffmix des Bruttoinlandsverbrauchs",
-      ENERGY_LOSSES: "Energieverluste und Effizienz",
-      CONS_BY_SECTOR: "Verbrauch nach Sektoren",
-      FOSSIL_VS_LOW: "Fossil vs. kohlenstoffarm",
-      YOY_TRENDS: "Entwicklung im Vorjahresvergleich",
-      TOP_FLOWS: "Top 10 Energieflüsse",
-      ADVANCED_INSIGHTS: "Erweiterte Einblicke",
-      IMPORTS: "Importe",
-      DOMESTIC_PROD: "Inländische Produktion",
-      STOCK_CHANGES: "Bestandsänderungen",
-      TOTAL_LOSSES: "Gesamtverluste",
-      TRANS_LOSSES: "Umwandlungsverluste",
-      DIST_LOSSES: "Verteilungsverluste",
-      FOSSIL_FUELS: "Fossile Brennstoffe",
-      LOW_CARBON: "Kohlenstoffarm",
-      RENEWABLES: "Erneuerbare Energien",
-      CLOSE_BUTTON: "Schließen",
-      METRIC: "Metrik",
-      PREVIOUS: "Vorheriges Jahr",
-      CURRENT: "Aktuelles Jahr",
-      CHANGE: "Änderung",
-      NO_DATA: "Keine Daten verfügbar",
-      TRANS_OIL_DEP: "Ölabhängigkeit des Verkehrs",
-      REN_ELEC_SHARE: "Anteil erneuerbarer Elektrizität",
-      IND_SHARE: "Industrieanteil",
-      HOUSEHOLD_SHARE: "Haushaltsanteil",
-      PER_CAPITA: "Energieverbrauch pro Kopf",
-      SUMMARY_TITLE: "Über die Energiefluss-Erkenntnisse",
-      SUMMARY_TEXT: "Dieses Infoblatt bietet einen umfassenden Überblick über das Energiesystem für die ausgewählte Region, das Jahr und die Einheit. Es hebt wichtige Leistungsindikatoren (KPIs) wie die Importabhängigkeit, den Anteil erneuerbarer Energien, die Elektrifizierung und die Umwandlungsverluste hervor, um Trends beim Übergang zur sauberen Energie zu überwachen.",
-      COMBINED_VALUES_FOR: "Kombinierte Werte für: "
-    },
-    FR: {
-      MENU_INSIGHTS: "Perspectives de flux d'énergie",
-      MODAL_TITLE: "Perspectives des flux énergétiques de l'UE",
-      IMPORT_DEP: "Dépendance aux importations",
-      RENEWABLE_SHARE: "Part renouvelable",
-      ENERGY_LOST: "Énergie perdue",
-      LARGEST_CONSUMER: "Plus grand consommateur",
-      LARGEST_SOURCE: "Plus grande source d'énergie",
-      FOSSIL_DEP: "Dépendance aux combustibles fossiles",
-      ELECTRIFICATION: "Taux d'électrification",
-      SELF_SUFFICIENCY: "Autosuffisance",
-      MAIN_SANKEY: "Résumé du diagramme de Sankey",
-      KEY_TAKEAWAYS: "Points clés",
-      SOURCE_BREAKDOWN: "Répartition des sources",
-      FUEL_MIX: "Mix de combustibles de l'énergie brute disponible",
-      ENERGY_LOSSES: "Pertes d'énergie et efficacité",
-      CONS_BY_SECTOR: "Consommation par secteur",
-      FOSSIL_VS_LOW: "Fossile vs faible émission",
-      YOY_TRENDS: "Tendances d'une année sur l'autre",
-      TOP_FLOWS: "Top 10 des flux",
-      ADVANCED_INSIGHTS: "Perspectives avancées",
-      IMPORTS: "Importations",
-      DOMESTIC_PROD: "Production nationale",
-      STOCK_CHANGES: "Variations de stocks",
-      TOTAL_LOSSES: "Pertes totales",
-      TRANS_LOSSES: "Pertes de transformation",
-      DIST_LOSSES: "Pertes de distribution",
-      FOSSIL_FUELS: "Combustibles fossiles",
-      LOW_CARBON: "Bas carbone",
-      RENEWABLES: "Énergies renouvelables",
-      CLOSE_BUTTON: "Fermer",
-      METRIC: "Métrique",
-      PREVIOUS: "Année précédente",
-      CURRENT: "Année en cours",
-      CHANGE: "Variation",
-      NO_DATA: "Aucune donnée disponible",
-      TRANS_OIL_DEP: "Dépendance au pétrole des transports",
-      REN_ELEC_SHARE: "Part de l'électricité renouvelable",
-      IND_SHARE: "Part de l'industrie",
-      HOUSEHOLD_SHARE: "Part des ménages",
-      PER_CAPITA: "Consommation d'énergie par habitant",
-      SUMMARY_TITLE: "À propos des perspectives des flux énergétiques",
-      SUMMARY_TEXT: "Cette fiche d'information présente un aperçu complet du système énergétique pour la région géographique, l'année et l'unité sélectionnées. Elle met en évidence des indicateurs de performance clés (KPI) tels que la dépendance aux importations, la part des énergies renouvelables, l'électrification et les pertes de transformation pour aider à suivre les tendances de la transition énergétique.",
-      COMBINED_VALUES_FOR: "Valeurs combinées pour : "
-    }
-  },
 
   POPULATION: {
     "EU27_2020": 447000000,
@@ -165,8 +28,7 @@ const insightsNameSpace = {
   },
 
   getLabels: function() {
-    const lang = this.getLang();
-    return this.labels[lang] || this.labels.EN;
+    return languageNameSpace.labels;
   },
 
   // Number formatting with spaces helper
@@ -356,6 +218,47 @@ const insightsNameSpace = {
     const industryShare = totalFEC > 0 ? (ind / totalFEC) * 100 : 0;
     const householdShare = totalFEC > 0 ? (hh / totalFEC) * 100 : 0;
 
+    // Strategic Insights & Indicators Calculations
+    // 1. Transformation Efficiency
+    const transInput = this.getVal("F2_1");
+    const transOutput = this.getVal("F2_2");
+    const transformationEfficiency = transInput > 0 ? (transOutput / transInput) * 100 : 0;
+
+    // 2. Sectoral Grid Electrification
+    const indElec = this.getVal("F6_1_1_1", "E7000");
+    const indTotal = this.getVal("F6_1_1_1", "TOTAL");
+    const industryElectrification = indTotal > 0 ? (indElec / indTotal) * 100 : 0;
+
+    const traElec = this.getVal("F6_1_1_2", "E7000");
+    const traTotal = this.getVal("F6_1_1_2", "TOTAL");
+    const transportElectrification = traTotal > 0 ? (traElec / traTotal) * 100 : 0;
+
+    // 3. Renewable Mix Breakdown
+    const totalRenewables = this.getGaeForFuel("RA000");
+    const windRen = this.getGaeForFuel("RA300");
+    const solarRen = this.getGaeForFuel("RA410") + this.getGaeForFuel("RA420");
+    const hydroRen = this.getGaeForFuel("RA100");
+    const otherRen = Math.max(0, totalRenewables - (windRen + solarRen + hydroRen));
+
+    const windShareOfRenewables = totalRenewables > 0 ? (windRen / totalRenewables) * 100 : 0;
+    const solarShareOfRenewables = totalRenewables > 0 ? (solarRen / totalRenewables) * 100 : 0;
+    const hydroShareOfRenewables = totalRenewables > 0 ? (hydroRen / totalRenewables) * 100 : 0;
+    const otherShareOfRenewables = totalRenewables > 0 ? (otherRen / totalRenewables) * 100 : 0;
+
+    // 4. Import Risk (Geopolitical Concentration)
+    const gasImports = this.getVal("F1_2", "G3000_C0350-370");
+    const oilImports = this.getVal("F1_2", "O4000");
+    const coalImports = this.getVal("F1_2", "SFF_P1000");
+
+    const gasImportRisk = gae > 0 ? (gasImports / gae) * 100 : 0;
+    const oilImportRisk = gae > 0 ? (oilImports / gae) * 100 : 0;
+    const coalImportRisk = gae > 0 ? (coalImports / gae) * 100 : 0;
+
+    // 5. Non-Energy Use Footprint
+    const nonEnergyConsumption = this.getVal("F6_1_2", "TOTAL");
+    const finalEnergyConsumption = this.getVal("F6_1_1", "TOTAL");
+    const nonEnergyFootprint = finalEnergyConsumption > 0 ? (nonEnergyConsumption / finalEnergyConsumption) * 100 : 0;
+
     // Per capita calculations
     let totalPopulation = 0;
     REF.geos.split(",").forEach(geo => {
@@ -503,7 +406,18 @@ const insightsNameSpace = {
       renewableElectricityShare: this.formatValWithSpaces(renewableElectricityShare, 1),
       industryShare: this.formatValWithSpaces(industryShare, 1),
       householdShare: this.formatValWithSpaces(householdShare, 1),
-      perCapitaEnergyUse: perCapitaEnergyUse
+      perCapitaEnergyUse: perCapitaEnergyUse,
+      transformationEfficiency: this.formatValWithSpaces(transformationEfficiency, 1),
+      industryElectrification: this.formatValWithSpaces(industryElectrification, 1),
+      transportElectrification: this.formatValWithSpaces(transportElectrification, 1),
+      windRenMix: this.formatValWithSpaces(windShareOfRenewables, 1),
+      solarRenMix: this.formatValWithSpaces(solarShareOfRenewables, 1),
+      hydroRenMix: this.formatValWithSpaces(hydroShareOfRenewables, 1),
+      otherRenMix: this.formatValWithSpaces(otherShareOfRenewables, 1),
+      gasImportRisk: this.formatValWithSpaces(gasImportRisk, 1),
+      oilImportRisk: this.formatValWithSpaces(oilImportRisk, 1),
+      coalImportRisk: this.formatValWithSpaces(coalImportRisk, 1),
+      nonEnergyFootprint: this.formatValWithSpaces(nonEnergyFootprint, 1)
     };
 
     // Render Modal DOM
@@ -520,6 +434,7 @@ const insightsNameSpace = {
       trendsHtml = `
       <section>
         <h2>${langLabels.YOY_TRENDS} (${prevYear} → ${currentYear})</h2>
+        <p class="section-desc">${langLabels.DESC_YOY_TRENDS || ""}</p>
         <div id="trend-chart" class="insights-chart-container"></div>
         <table>
           <thead>
@@ -564,19 +479,20 @@ const insightsNameSpace = {
           </div>
 
           <div class="kpi-grid">
-            ${this.renderKPI(langLabels.IMPORT_DEP, data.importDependency + "%")}
-            ${this.renderKPI(langLabels.RENEWABLE_SHARE, data.renewableShare + "%")}
-            ${this.renderKPI(langLabels.ENERGY_LOST, data.energyLosses + "%")}
-            ${this.renderKPI(langLabels.LARGEST_CONSUMER, data.largestConsumingSector)}
-            ${this.renderKPI(langLabels.LARGEST_SOURCE, data.largestEnergySource)}
-            ${this.renderKPI(langLabels.FOSSIL_DEP, data.fossilFuelShare + "%")}
-            ${this.renderKPI(langLabels.ELECTRIFICATION, data.electrificationRate + "%")}
-            ${this.renderKPI(langLabels.SELF_SUFFICIENCY, data.selfSufficiency + "%")}
+            ${this.renderKPI(langLabels.IMPORT_DEP, data.importDependency + "%", "IMPORT_DEP")}
+            ${this.renderKPI(langLabels.RENEWABLE_SHARE, data.renewableShare + "%", "RENEWABLE_SHARE")}
+            ${this.renderKPI(langLabels.ENERGY_LOST, data.energyLosses + "%", "ENERGY_LOST")}
+            ${this.renderKPI(langLabels.LARGEST_CONSUMER, data.largestConsumingSector, "LARGEST_CONSUMER")}
+            ${this.renderKPI(langLabels.LARGEST_SOURCE, data.largestEnergySource, "LARGEST_SOURCE")}
+            ${this.renderKPI(langLabels.FOSSIL_DEP, data.fossilFuelShare + "%", "FOSSIL_DEP")}
+            ${this.renderKPI(langLabels.ELECTRIFICATION, data.electrificationRate + "%", "ELECTRIFICATION")}
+            ${this.renderKPI(langLabels.SELF_SUFFICIENCY, data.selfSufficiency + "%", "SELF_SUFFICIENCY")}
           </div>
         </header>
 
         <section>
           <h2>${langLabels.KEY_TAKEAWAYS}</h2>
+          <p class="section-desc">${langLabels.DESC_KEY_TAKEAWAYS || ""}</p>
           <ul>
             <li>${data.keyTakeaways.largestEnergySource}</li>
             <li>${data.keyTakeaways.largestConsumingSector}</li>
@@ -587,6 +503,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.SOURCE_BREAKDOWN}</h2>
+          <p class="section-desc">${langLabels.DESC_SOURCE_BREAKDOWN || ""}</p>
           <div id="source-breakdown-chart" class="insights-chart-container"></div>
           <ul>
             <li><strong>${langLabels.IMPORTS}:</strong> ${data.sources.imports}</li>
@@ -597,6 +514,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.FUEL_MIX}</h2>
+          <p class="section-desc">${langLabels.DESC_FUEL_MIX || ""}</p>
           <div id="fuel-mix-chart" class="insights-chart-container"></div>
           <table>
             <thead>
@@ -618,6 +536,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.ENERGY_LOSSES}</h2>
+          <p class="section-desc">${langLabels.DESC_ENERGY_LOSSES || ""}</p>
           <div id="energy-losses-chart" class="insights-chart-container"></div>
           <ul>
             <li><strong>Total Losses:</strong> ${data.losses.total}%</li>
@@ -629,6 +548,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.CONS_BY_SECTOR}</h2>
+          <p class="section-desc">${langLabels.DESC_CONS_BY_SECTOR || ""}</p>
           <div id="sector-chart" class="insights-chart-container"></div>
           <table>
             <thead>
@@ -650,6 +570,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.FOSSIL_VS_LOW}</h2>
+          <p class="section-desc">${langLabels.DESC_FOSSIL_VS_LOW || ""}</p>
           <div id="fossil-mix-chart" class="insights-chart-container"></div>
           <ul>
             <li><strong>${langLabels.FOSSIL_FUELS}:</strong> ${data.energyMix.fossil}%</li>
@@ -662,6 +583,7 @@ const insightsNameSpace = {
 
         <section>
           <h2>${langLabels.TOP_FLOWS}</h2>
+          <p class="section-desc">${langLabels.DESC_TOP_FLOWS || ""}</p>
           <ol>
             ${data.topFlows.map(flow => `
               <li>
@@ -671,9 +593,77 @@ const insightsNameSpace = {
             `).join("")}
           </ol>
         </section>
+        <section>
+          <h2>${langLabels.STRATEGIC_INSIGHTS}</h2>
+          <p class="section-desc">${langLabels.DESC_STRATEGIC_INSIGHTS || ""}</p>
+          <div class="strategic-grid">
+            <!-- Transformation Efficiency -->
+            <div class="strategic-card">
+              <div class="strategic-card-header">
+                <h3>${langLabels.TRANS_EFF_TITLE}</h3>
+                <span class="strategic-val">${data.transformationEfficiency}%</span>
+              </div>
+              <p class="strategic-desc">
+                <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.TRANS_EFF_WHAT}<br>
+                <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.TRANS_EFF_WHY}
+              </p>
+            </div>
+
+            <!-- Sectoral Grid Electrification -->
+            <div class="strategic-card">
+              <div class="strategic-card-header">
+                <h3>${langLabels.SECTOR_ELEC_TITLE}</h3>
+                <span class="strategic-val">Ind: ${data.industryElectrification}% / Tra: ${data.transportElectrification}%</span>
+              </div>
+              <p class="strategic-desc">
+                <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.SECTOR_ELEC_WHAT}<br>
+                <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.SECTOR_ELEC_WHY}
+              </p>
+            </div>
+
+            <!-- Renewable Mix Breakdown -->
+            <div class="strategic-card">
+              <div class="strategic-card-header">
+                <h3>${langLabels.REN_MIX_TITLE}</h3>
+                <span class="strategic-val">Wind: ${data.windRenMix}% / Solar: ${data.solarRenMix}%</span>
+              </div>
+              <p class="strategic-desc">
+                <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.REN_MIX_WHAT}<br>
+                <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.REN_MIX_WHY}<br>
+                <strong>Breakdown:</strong> Wind: ${data.windRenMix}%, Solar: ${data.solarRenMix}%, Hydro: ${data.hydroRenMix}%, Others: ${data.otherRenMix}%
+              </p>
+            </div>
+
+            <!-- Import Risk (Geopolitical Concentration) -->
+            <div class="strategic-card">
+              <div class="strategic-card-header">
+                <h3>${langLabels.IMPORT_RISK_TITLE}</h3>
+                <span class="strategic-val">Gas: ${data.gasImportRisk}% / Oil: ${data.oilImportRisk}%</span>
+              </div>
+              <p class="strategic-desc">
+                <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.IMPORT_RISK_WHAT}<br>
+                <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.IMPORT_RISK_WHY}<br>
+                <strong>GAE Share:</strong> Oil & Petroleum: ${data.oilImportRisk}%, Natural Gas: ${data.gasImportRisk}%, Solid Fuels (Coal): ${data.coalImportRisk}%
+              </p>
+            </div>
+
+            <!-- Non-Energy Use Footprint -->
+            <div class="strategic-card">
+              <div class="strategic-card-header">
+                <h3>${langLabels.NON_ENERGY_TITLE}</h3>
+                <span class="strategic-val">${data.nonEnergyFootprint}%</span>
+              </div>
+              <p class="strategic-desc">
+                <strong>${langLabels.WHAT_IT_IS}:</strong> ${langLabels.NON_ENERGY_WHAT}<br>
+                <strong>${langLabels.WHY_IT_MATTERS}:</strong> ${langLabels.NON_ENERGY_WHY}
+              </p>
+            </div>
+          </div>
+        </section>
 
         <section>
           <h2>${langLabels.ADVANCED_INSIGHTS}</h2>
+          <p class="section-desc">${langLabels.DESC_ADVANCED_INSIGHTS || ""}</p>
           <ul>
             <li><strong>${langLabels.TRANS_OIL_DEP}:</strong> ${data.transportOilDependency}%</li>
             <li><strong>${langLabels.REN_ELEC_SHARE}:</strong> ${data.renewableElectricityShare}%</li>
@@ -712,11 +702,26 @@ const insightsNameSpace = {
     this.renderCharts(data);
   },
 
-  renderKPI: function(label, value) {
+  renderKPI: function(label, value, key) {
+    const langLabels = languageNameSpace.labels;
+    const what = langLabels["KPI_" + key + "_WHAT"] || "";
+    const why = langLabels["KPI_" + key + "_WHY"] || "";
+    let descHtml = "";
+    if (what && why) {
+      descHtml = `
+        <div class="kpi-desc">
+          <strong>${langLabels.WHAT_IT_IS || "What it is"}:</strong> ${what}<br>
+          <strong>${langLabels.WHY_IT_MATTERS || "Why it matters"}:</strong> ${why}
+        </div>
+      `;
+    }
     return `
       <div class="kpi-card">
-        <div class="kpi-label">${label}</div>
-        <div class="kpi-value">${value}</div>
+        <div>
+          <div class="kpi-label">${label}</div>
+          <div class="kpi-value">${value}</div>
+        </div>
+        ${descHtml}
       </div>
     `;
   },
