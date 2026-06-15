@@ -1,216 +1,95 @@
-let buttonTimer;
-let currentStep;
-let isOpen = false
+/**
+ * tutorial.js
+ * Rewritten using Driver.js v1.x to drive the interactive walkthrough of the Sankey tool.
+ * Maintains the same style, translations, and logic as the original intro.js setup.
+ */
 
-
+let driverObj = null;
+let isOpen = false;
 
 function tutorial() {
-	// closeTutorial();
+  const confTutorial = excelInfoData[4];
+  const lang = REF.language || "EN";
 
-	const introProfile = introJs();
+  // Map the steps dynamically from the excelInfoData config
+  const steps = confTutorial.map((step) => ({
+    element: step.ELEMENT,
+    popover: {
+      title: step[lang + "-title"] || "",
+      description: step[lang + "-intro"] || "",
+      side: "auto"
+    }
+  }));
 
-	const confTutorial = excelInfoData[4];
-	const lang = REF.language || "EN";
-	const steps = confTutorial.map((step) => ({
-		element: step.ELEMENT,
-		title: step[lang + "-title"],
-		intro: step[lang + "-intro"],
-		position: "auto",
-	}));
+  // Initialize Driver.js Obj
+  driverObj = window.driver.js.driver({
+    showProgress: false,
+    animate: true,
+    allowClose: true,
+    overlayColor: "#000",
+    overlayOpacity: 0.4,
+    steps: steps,
+    popoverClass: "customTooltip",
+    onPopoverRender: (popover, { config, state }) => {
+      const activeIndex = driverObj.getActiveIndex();
 
-	introProfile.setOptions({
-		showProgress: false,
-		scrollToElement: false,
-		showBullets: false,
-		autoPosition:false,
-		tooltipClass: "customTooltip",
-		steps: steps,
-	});
+      // Configure close button styles and attributes
+      popover.closeButton.setAttribute("alt", "Close");
+      popover.closeButton.setAttribute("id", "tutorialClose");
+      popover.closeButton.setAttribute("tabindex", "0");
+      popover.closeButton.className = "ecl-button ecl-button--primary driver-popover-close-btn";
+      popover.closeButton.style.backgroundColor = "#264b9e";
+      popover.closeButton.style.color = "white";
 
-	introProfile.onexit(function () { window.scrollTo(0, 0) });
+      // Configure previous button (serves as close button on first step)
+      if (activeIndex === 0) {
+        popover.previousButton.innerHTML = languageNameSpace.labels['BTN_CLOSE'] || "Close";
+        popover.previousButton.classList.add("close");
+      } else {
+        popover.previousButton.innerHTML = languageNameSpace.labels['tutBACK'] || "Back";
+        popover.previousButton.classList.remove("close");
+      }
 
-	introProfile.start();
+      // Configure next button
+      if (activeIndex === steps.length - 1) {
+        popover.nextButton.innerHTML = languageNameSpace.labels['tutFINISH'] || "Finish";
+      } else {
+        popover.nextButton.innerHTML = languageNameSpace.labels['tutNEXT'] || "Next";
+      }
+    },
+    onDestroyStarted: (element, step, { config, state }) => {
+      driverObj.destroy();
+      const button = document.getElementById('tb-tutorial-btn');
+      if (button) button.focus();
+      isOpen = false;
+    }
+  });
 
-	isOpen = true
-
-	// Observe tooltip container to ensure any created tooltip has an accessible name
-	try {
-		const refLayer = document.querySelector('body > div.introjs-tooltipReferenceLayer');
-		function ensureTooltipName(tooltipEl) {
-			if (!tooltipEl) return;
-			try {
-				const titleEl = tooltipEl.querySelector('.introjs-tooltip-title');
-				if (titleEl) {
-					if (!titleEl.id) titleEl.id = 'introjs-tooltip-title-' + (currentStep || 0);
-					tooltipEl.setAttribute('aria-labelledby', titleEl.id);
-				} else {
-					tooltipEl.setAttribute('aria-label', languageNameSpace.labels['MENU_TUTORIAL'] || 'Tutorial');
-				}
-			} catch (e) {}
-		}
-
-		if (refLayer) {
-			// handle any existing tooltip
-			const existing = refLayer.querySelector('.introjs-tooltip.customTooltip');
-			ensureTooltipName(existing);
-
-			const observer = new MutationObserver((mutations) => {
-				mutations.forEach((m) => {
-					m.addedNodes.forEach((node) => {
-						if (node.nodeType !== 1) return;
-						if (node.classList && node.classList.contains('introjs-tooltip')) {
-							ensureTooltipName(node);
-						} else {
-							const found = node.querySelector && node.querySelector('.introjs-tooltip.customTooltip');
-							if (found) ensureTooltipName(found);
-						}
-					});
-				});
-			});
-			observer.observe(refLayer, { childList: true, subtree: true });
-		}
-	} catch (e) {
-		// ignore
-	}
-
-	introProfile.onchange(function () {
-
-		currentStep = this._currentStep
-
-		// Ensure the tooltip (role="dialog") has an accessible name
-		try {
-			const tooltipEl = document.querySelector('body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltip.customTooltip');
-			if (tooltipEl) {
-				const titleEl = tooltipEl.querySelector('.introjs-tooltip-title');
-				if (titleEl) {
-					if (!titleEl.id) titleEl.id = 'introjs-tooltip-title-' + currentStep;
-					tooltipEl.setAttribute('aria-labelledby', titleEl.id);
-				} else {
-					tooltipEl.setAttribute('aria-label', languageNameSpace.labels['MENU_TUTORIAL'] || 'Tutorial');
-				}
-			}
-		} catch (e) {
-			// ignore
-		}
-
-		if (currentStep === 0) {
-			document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").innerHTML = languageNameSpace.labels['BTN_CLOSE']
-			setTimeout(() => {
-				$("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton.introjs-disabled").addClass( "close" )			
-			}, 100);
-		} else {
-			document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").innerHTML = languageNameSpace.labels['tutBACK']
-			$("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").removeClass( "close" )
-
-			$(".introjs-tooltip.customTooltip.introjs-auto").css({
-				"left": "50% !important",
-				"top": "50%",
-				"margin-left": "auto",
-				"margin-top": "auto",
-				"transform": "translate(-50%,-50%)"
-			})
-		}
-	
-	});
-
-	$("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltip-header > a").attr({
-		"alt": "Close",
-		"id": "tutorialClose",
-		"tabindex": "0",
-		"href": "javascript:",
-		"class": "ecl-button ecl-button--primary",
-		"style": "background-color:#264b9e"
-	});
-
-	document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").innerHTML = languageNameSpace.labels['BTN_CLOSE']
-	$("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-prevbutton").addClass( "close " )
+  driverObj.drive();
+  isOpen = true;
 }
 
 function closeTutorial() {
-	buttonTimer = setTimeout("introJs().exit()", 4000);
-	isOpen = false
+  if (driverObj) {
+    driverObj.destroy();
+  }
+  isOpen = false;
 }
 
-btn = document.querySelector("body > div.introjs-tooltipReferenceLayer > div > div.introjs-tooltipbuttons > a.introjs-button.introjs-nextbutton");
-
-$(document).on("click", btn, function () {
-	clearTimeout(buttonTimer);
-});
-
-
-function closeProcess(params) {
-	event.preventDefault();
-	introJs().exit()
-	buttonTimer = setTimeout("introJs().exit()", 4000);
-	clearTimeout(buttonTimer);
-	document.querySelector("#tb-tutorial-btn");
-	const button = document.getElementById('tb-tutorial-btn');
-	button.focus();
-	isOpen = false
+function closeProcess() {
+  closeTutorial();
+  const button = document.getElementById('tb-tutorial-btn');
+  if (button) button.focus();
 }
 
+// Keep a stub function to prevent breaking any callers in create-toolbar.js
+function traptutorialfocus() {
+  // Driver.js handles keyboard focus trapping natively.
+}
 
-$(document).on("click keydown", "#tutorialClose", function(event) {
-	const isClickEvent = event.type === "click";
-	const isKeyEvent = event.type === "keydown" && (event.key === "Escape" || event.key === "Enter" || event.keyCode === 13);
-	if (isClickEvent || isKeyEvent) {
-		closeProcess();
-	}
-  });
-
-
-$(document).on("click keydown", ".close", function(event) {
-	const isClickEvent = event.type === "click";
-	const isKeyEvent = event.type === "keydown" && (event.key === "Escape" || event.key === "Enter" || event.keyCode === 13);
-	if (isClickEvent || isKeyEvent) {
-		closeProcess();
-	}
+// Escape key listener
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && isOpen) {
+    closeProcess();
+  }
 });
-
-  document.addEventListener('keydown', function(event) {
-	if (event.key === 'Escape') {
-		if(isOpen){
-			closeProcess()
-		} 
-	}
-  });
-
-  function traptutorialfocus() {	
-
-	const focusableElements = '.introjs-tooltip.customTooltip.introjs-floating a[role="button"][tabindex="0"]:not([tabindex="-1"])';
-	const element = document.querySelector('.introjs-tooltip.customTooltip.introjs-floating');
-
-	log(element)
-  
-	if (element) {
-	  const focusableContent = element.querySelectorAll(focusableElements);
-	  const firstFocusableElement = focusableContent[0];
-	  const lastFocusableElement = focusableContent[focusableContent.length - 1];
-  
-	  document.addEventListener('keydown', function (e) {
-		const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
-  
-		if (!isTabPressed) {
-		  return;
-		}
-  
-		if (e.shiftKey) {
-		  if (document.activeElement === firstFocusableElement) {
-			lastFocusableElement.focus();
-			e.preventDefault();
-		  }
-		} else {
-		  if (document.activeElement === lastFocusableElement) {
-			firstFocusableElement.focus();
-			e.preventDefault();
-		  }
-		}
-	  });
-  
-	  // Set initial focus on the first focusable element
-	  if (focusableContent.length > 0) {
-		firstFocusableElement.focus();
-	  }
-	}
-  };
-  

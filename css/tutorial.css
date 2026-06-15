@@ -557,3 +557,86 @@ body
   left: 10px;
   border-bottom-color: transparent;
 }
+
+/* ==========================================
+   Driver.js Custom Overrides (EC/ECL Style)
+   ========================================== */
+
+.driver-overlay {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.driver-popover {
+  max-width: 400px !important;
+  width: 370px !important;
+  border-radius: 0px !important;
+  background-color: #fff !important;
+  box-shadow: 0 3px 30px rgba(33, 33, 33, 0.3) !important;
+  padding: 15px !important;
+}
+
+.driver-popover-title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  color: #000 !important;
+  margin-bottom: 10px !important;
+  font-family: "Helvetica Neue", Inter, ui-sans-serif, Arial, sans-serif !important;
+}
+
+.driver-popover-description {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  color: #333 !important;
+  font-family: "Helvetica Neue", Inter, ui-sans-serif, Arial, sans-serif !important;
+}
+
+.driver-popover-close-btn {
+  color: var(--tool-2) !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+.driver-popover-close-btn:hover {
+  color: var(--tool-1) !important;
+}
+
+.driver-popover-footer button {
+  box-sizing: content-box !important;
+  position: relative !important;
+  overflow: visible !important;
+  padding: 0.5rem 1rem !important;
+  border: 1px solid var(--tool-2) !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  font-size: 14px !important;
+  color: white !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  outline: 0 !important;
+  background-color: #264b9e !important;
+  border-radius: 0.2em !important;
+  display: inline-block !important;
+  font-family: "Helvetica Neue", Inter, ui-sans-serif, Arial, sans-serif !important;
+}
+
+.driver-popover-footer button:hover {
+  color: white !important;
+  background-color: var(--tool-1) !important;
+  border-color: var(--tool-1) !important;
+}
+
+.driver-popover-footer button:focus {
+  outline: 0 !important;
+  background-color: var(--tool-1) !important;
+  border-color: var(--tool-1) !important;
+}
+
+.driver-popover-btn-disabled {
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+  background-color: #f4f4f4 !important;
+  color: #9e9e9e !important;
+  border-color: #bdbdbd !important;
+}
+
