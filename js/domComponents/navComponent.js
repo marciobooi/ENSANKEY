@@ -124,7 +124,7 @@ class Navbar {
               <li class="ecl-site-header__language-item" id="FR" data-lang="FR" tabindex="0" role="button">
                 <span class="ecl-link ecl-link--standalone ecl-site-header__language-link">
                   <span class="ecl-site-header__language-link-code">fr</span>
-                  <span class="ecl-site-header__language-link-label">français</span>
+                  <span class="ecl-site-header__language-link-label">Français</span>
                 </span>
               </li>
             </ul>
