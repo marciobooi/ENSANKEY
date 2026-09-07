@@ -1,0 +1,32 @@
+﻿8c45dbe | 2026-06-17 | marcio | feat: implement custom modal and language selection navigation components with associated styles
+86a97ad | 2026-06-15 | marcio | feat: implement energy flow insights modal with multi-language data support
+796fbd9 | 2026-06-15 | marcio | feat: add dynamic toolbar creation, insights module, and multi-language support for Sankey diagrams
+31ca367 | 2026-06-15 | marcio | feat: implement energy insights modal with styling and statistical analysis logic
+874cc03 | 2026-06-15 | marcio | refactor: replace intro.js with Driver.js for interactive tool walkthroughs
+60177f7 | 2026-06-15 | marcio | feat: implement toolbar infrastructure and add insights module support
+938c6dd | 2026-04-21 | marcio | Remove unused Font Awesome webfont files and comment out chart container styles in media queries. Update chart control button icon for improved accessibility.
+bffa3b9 | 2026-03-12 | marcio | enhance language handling by normalizing language input and retrieving language from URL parameters in sankey.html and language.js
+7d219bd | 2026-03-12 | marcio | enhance accessibility by adding aria-labels to social media buttons in Navbar for better screen reader support
+98a19d7 | 2026-03-11 | marcio | enhance modal accessibility by implementing focus trap and returning focus to the launcher element upon closing
+7cb12fa | 2026-03-11 | marcio | enhance keyboard accessibility by preventing auto-scrolling when Tab focus moves into Sankey diagram and Highcharts chart container
+037f81f | 2026-03-11 | marcio | enhance accessibility by changing header from <p> to <h2> for better semantic structure in Navbar, and remove visually hidden primary page heading for assistive technologies in sankey.html
+62724cd | 2026-03-11 | marcio | enhance accessibility by removing unnecessary aria-hidden attributes from icons and ensuring focusable attributes are correctly set in Navbar, SubNavbar, ZoomControls, and sankey.html
+0cb15bf | 2026-03-11 | marcio | enhance accessibility by changing header from <h1> to <p> for better semantic structure in Navbar, and add visually hidden primary page heading for assistive technologies in sankey.html
+ffe2482 | 2026-03-11 | marcio | enhance accessibility by adding language-specific labels for zoom controls, autoplay button, and social sharing, and improve semantic structure by updating header elements
+60e7eb0 | 2026-03-11 | marcio | enhance accessibility by adding tooltip management system with keyboard navigation and improved visibility, and update styles for tooltips and buttons
+f8b5726 | 2026-03-09 | marcio | enhance accessibility by changing header from <h1> to <h2> for better semantic structure and improve script loading by changing async to defer for chartsTable and chartsControls
+ac73a5a | 2026-03-09 | marcio | fix css
+02c1d45 | 2026-03-09 | marcio | enhance accessibility by implementing focus trap for modal dialogs to manage focus and prevent focus escape
+03468c6 | 2026-03-05 | marcio | enhance accessibility by replacing presentational <b> elements with decorative spans to avoid using <b> for styling
+3aa1694 | 2026-03-05 | marcio | enhance accessibility by changing role attribute from 'menubar' to 'toolbar' for chart button navigation
+400fa6e | 2026-03-05 | marcio | enhance accessibility of social share buttons and improve zoom controls element handling
+bcc13bc | 2026-03-05 | marcio | refactor node ID assignment to prevent duplicates and improve clarity in node rendering
+fcbd3df | 2026-03-05 | marcio | enhance accessibility by adding role and aria attributes to the SVG container for improved interaction
+54e88f8 | 2026-03-05 | marcio | enhance accessibility by adding autocomplete attributes to search input and country selection
+cacc089 | 2026-03-05 | marcio | enhance accessibility by adding role attributes to modal headers
+513a305 | 2026-03-05 | marcio | refactor panZoomKeyboard.js for improved element retrieval and add defer attribute to script tags for better loading performance
+4e76ebc | 2026-03-05 | marcio | add skip link for improved accessibility and set main content ID
+c640ba6 | 2026-03-05 | marcio | refactor accessibility attributes for timeline and country input elements
+4a5b977 | 2026-03-05 | marcio | enhance accessibility for nav tabs in modal
+5524442 | 2026-03-05 | marcio | .
+8b31d15 | 2026-03-05 | marcio | .

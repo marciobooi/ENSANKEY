@@ -1,4 +1,12 @@
-var exportImageNameSpace = {  
+var exportImageNameSpace = {
+	// read the geo / unit caption shown in the toolbar. Matched as a descendant of
+	// #dimension-labels so the lookup survives the icon markup being restructured,
+	// and returns "" rather than throwing when the caption is not on the page yet.
+	getDimensionLabel: function (category) {
+		var el = document.querySelector("#dimension-labels .sankey-category." + category);
+		return el ? (el.innerText || el.textContent || "").trim() : "";
+	},
+
 	exportDiagramAsPNG: function () {
 			  var p = {
 				title: "Information",
@@ -16,16 +24,12 @@ var exportImageNameSpace = {
 			  sankeyToolsNameSpace.resetZoom();
 		  
 			  const svgContainer = document.getElementById('svg-container');
-		  
-			  const originalFontSize = '10.34';
-		  
-			  const fontSize = 13; // Adjust the font size as needed
-		  
-			  // Update the font size for labels
-			  d3.select(svgContainer)
-				.selectAll('.labelNode')
-				.style('font-size', fontSize + 'px');  
-		  
+
+			  // Note: labels are wrapped and positioned in node.js against the font size
+			  // they are actually drawn at, so the exported SVG must keep that size —
+			  // scaling .labelNode here desyncs the text from its pre-computed line
+			  // breaks/spacing and makes neighboring labels overlap.
+
 			  // Get the dimensions of the SVG container
 			  const { width, height } = svgContainer.getBoundingClientRect();
 		  
@@ -56,8 +60,8 @@ var exportImageNameSpace = {
 		  
 				// Get the pretitle, title, and subtitle
 				var preTitle = languageNameSpace.labels["EXPORT_HEADER_TITLE"];
-				var title = document.querySelector("#dimension-labels > i.fas.fa-globe > span.sankey-category.geo.text-wrap").innerText;
-				var subtitle = document.querySelector("#dimension-labels > i.fas.fa-swatchbook > span.sankey-category.units.text-wrap").innerText;
+				var title = exportImageNameSpace.getDimensionLabel("geo");
+				var subtitle = exportImageNameSpace.getDimensionLabel("units");
 		  
 				// Set the font styles for pretitle, title, and subtitle
 				const preTitleFont = 'bold 12px Arial';
@@ -152,12 +156,7 @@ var exportImageNameSpace = {
 					downloadLink.click();
 				  };
 				});
-		  
-				// Reset the font size for labels
-				d3.select(svgContainer)
-				  .selectAll('.labelNode')
-				  .style('font-size', originalFontSize + 'px');
-		  
+
 				setTimeout(() => {
 				  $("sankey-secondary-modal").modal("hide");
 				  $("#sankey-secondary-modal").hide();

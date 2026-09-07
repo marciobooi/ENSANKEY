@@ -1,5 +1,15 @@
 var exportToPDFNameSpace = {
   /*
+   read the geo / unit caption shown in the toolbar. Matched as a descendant of
+   #dimension-labels so the lookup survives the icon markup being restructured,
+   and returns "" rather than throwing when the caption is not on the page yet.
+   */
+  getDimensionLabel: function (category) {
+    var el = document.querySelector("#dimension-labels .sankey-category." + category);
+    return el ? (el.innerText || el.textContent || "").trim() : "";
+  },
+
+  /*
    this is used on the click on Save diagram as pdf
    create an image and then use the jspdf library to generate the pdf
    */
@@ -21,15 +31,10 @@ var exportToPDFNameSpace = {
 
     const svgContainer = document.getElementById('svg-container');
 
-    const originalFontSize = '10.34';
-  
-    const fontSize = 13; // Adjust the font size as needed
-
-    // Update the font size for labels
-    d3.select(svgContainer)
-    .selectAll('.labelNode')
-    .style('font-size', fontSize + 'px');  
-
+    // Note: labels are wrapped and positioned in node.js against the font size
+    // they are actually drawn at, so the exported SVG must keep that size —
+    // scaling .labelNode here desyncs the text from its pre-computed line
+    // breaks/spacing and makes neighboring labels overlap.
 
     // Get the dimensions of the SVG container
     const { width, height } = svgContainer.getBoundingClientRect();
@@ -38,8 +43,8 @@ var exportToPDFNameSpace = {
     const doc = new jsPDF('landscape');
 
     var preTitle = languageNameSpace.labels["EXPORT_HEADER_TITLE"];
-    var title = document.querySelector("#dimension-labels > i.fas.fa-globe > span.sankey-category.geo.text-wrap").innerText;
-    var subtitle = document.querySelector("#dimension-labels > i.fas.fa-swatchbook > span.sankey-category.units.text-wrap").innerText;
+    var title = exportToPDFNameSpace.getDimensionLabel("geo");
+    var subtitle = exportToPDFNameSpace.getDimensionLabel("units");
 
     // Add the title and subtitle to the PDF
     doc.setFontSize(12);
@@ -147,13 +152,6 @@ doc.addImage(legendImageData, 'PNG', legendX, legendY, legendWidth, legendHeight
     };
 
 
-    // Update the font size for labels
-    d3.select(svgContainer)
-    .selectAll('.labelNode')
-    .style('font-size', originalFontSize + 'px');
-
-
-    
     setTimeout(() => {
         $("sankey-secondary-modal").modal("hide");
         $("#sankey-secondary-modal").hide();
