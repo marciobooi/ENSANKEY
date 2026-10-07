@@ -23,6 +23,7 @@ var sankeyToolsNameSpace = {
 			"N6_1_1_1": 7,
 			"N6_1_1_2": 8,
 			"N6_1_1_3": 9,
+			"E6_1_1_3_2": 13,
 			"E6_5": 10,
 			"T2_6": 11,
 			"N2_6_1": 11,
@@ -43,6 +44,7 @@ var sankeyToolsNameSpace = {
 		state[stateMap["N6_1_1_1"]] *= state[stateMap["N6_1_1"]];
 		state[stateMap["N6_1_1_2"]] *= state[stateMap["N6_1_1"]];
 		state[stateMap["N6_1_1_3"]] *= state[stateMap["N6_1_1"]];
+		state[stateMap["E6_1_1_3_2"]] *= state[stateMap["N6_1_1_3"]];
 		state[stateMap["T2_6"]] *= state[stateMap["T2"]];
 		state[stateMap["T2_11"]] *= state[stateMap["T2"]];
 
@@ -59,7 +61,7 @@ var sankeyToolsNameSpace = {
 		var state = stateString.split("").map(function (bit) {
 			return bit > 0
 		});
-		if (state.length != 13) {
+		if (state.length != 14) {
 			error("sankeyToolsNameSpace.updateDisaggregationFlags: state length = " + state.length);
 			return;
 		};
@@ -78,6 +80,7 @@ var sankeyToolsNameSpace = {
 		dataNameSpace.isConsumptionForEnergyBranchDisaggregated = state[10];
 		dataNameSpace.isRPITransformationDisaggregated = state[11];
 		dataNameSpace.isEHGTransformationDisaggregated = state[12];
+		dataNameSpace.isHouseholdsDisaggregated = state[13];
 	},
 
 	// calculate diagram width from disaggregation flags
@@ -103,6 +106,10 @@ var sankeyToolsNameSpace = {
 		if (dataNameSpace.isIndustryDisaggregated || dataNameSpace.isTransportDisaggregated || dataNameSpace.isOtherSectorsDisaggregated)
 			width += dataNameSpace.cropDisaggregationIndustryTransportOther;
 
+		// households end uses
+		if (dataNameSpace.isHouseholdsDisaggregated)
+			width += dataNameSpace.cropDisaggregationIndustryTransportOther;
+
 		return width;
 	},
 
@@ -112,7 +119,12 @@ var sankeyToolsNameSpace = {
 		var nbFlows = 0;
 		$.each(flowsList, function (idx, obj) {
 			if (obj.isTiny) return;
-			sumSizeFlows += obj.size();
+			var size = obj.size();
+			if (obj.code === "F6_1_1_3_2" && dataNameSpace.isHouseholdsDisaggregated) {
+				// an expanded node occupies at least the height of its own end-use group
+				size = Math.max(size, sankeyToolsNameSpace.getGroupHeight(sankeyToolsNameSpace.initializeChildFlows(obj)) * imgHeight);
+			}
+			sumSizeFlows += size;
 			nbFlows++;
 		});
 		height = sumSizeFlows / imgHeight + ((nbFlows - 1) * dataNameSpace.paddingNodeGroupY);

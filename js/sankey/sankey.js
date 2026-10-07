@@ -1144,10 +1144,28 @@ var sankeyNameSpace = {
 		$.each(flowList, function (idx, obj) {
 			var code = "E" + obj.code.substring(1, 99);
 			if (typeof sankeyNodes[code] === "undefined") code = "N" + code.substring(1, 99);
-			var targetNode = new sankeyNode(code, new Vec2(x, y), true, false, "E_R");
+
+			// expanded Households node: draw its end uses to the right, the node is centered on them
+			var endUseFlows = null;
+			var slotHeight = obj.size() / imgHeight;
+			var yNode = y;
+			if (obj.code === "F6_1_1_3_2" && dataNameSpace.isHouseholdsDisaggregated && !obj.isTiny) {
+				endUseFlows = sankeyToolsNameSpace.initializeChildFlows(obj);
+				var groupHeight = sankeyToolsNameSpace.getGroupHeight(endUseFlows);
+				if (groupHeight > slotHeight) {
+					yNode += (groupHeight - slotHeight) / 2;
+					slotHeight = groupHeight;
+				}
+			}
+
+			// the label of an expanded node sits above it, since its flows leave to the right
+			var targetNode = new sankeyNode(code, new Vec2(x, yNode), true, false, endUseFlows ? "T" : "E_R");
 			flowNameSpace.draw(sankeyNameSpace.svgSankey, obj, sourceNode, targetNode, 0.4, 0.2, "S", 1.5);
 			if (obj.isTiny) return;
-			y += obj.size() / imgHeight + dataNameSpace.paddingNodeGroupY;
+			if (endUseFlows) {
+				sankeyNameSpace.drawFlowGroup(dataNameSpace.xN6_1_1_X_X_X, targetNode, endUseFlows);
+			}
+			y += slotHeight + dataNameSpace.paddingNodeGroupY;
 		});
 		return (y - dataNameSpace.paddingNodeGroupY);
 

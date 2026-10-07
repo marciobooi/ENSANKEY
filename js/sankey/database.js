@@ -47,6 +47,9 @@ function initializeDB(codes, geoIn, yearIn) {
 	db.size[2] = codes.fuel.length;
 	db.size[3] = year.length;
 
+	// household end uses (nrg_d_hhq) must be composed again into the new arrays
+	sankeyDB.isHouseholdsComposed = false;
+
 	// initialize all values with 0
 	// optimized for memory allocation: using the array constructor
 	sankeyDB.value = new Array(arrayProduct(db.size)).fill(0);
@@ -159,6 +162,9 @@ function composeAndCacheGeoYear(eurobaseDs, flowCodes) {
 			calculateLosses(geo, year);
 		});
 	});
+
+	// households end uses are reconciled with the Households flow just (re)computed
+	if (hhqLoader.dataset) composeHouseholds(hhqLoader.dataset, geos, years);
 }
 
 function computeAllFuels(geo, year, eurobaseDs, flowCodes=[]) {
@@ -166,7 +172,7 @@ function computeAllFuels(geo, year, eurobaseDs, flowCodes=[]) {
 		.Dimension("siec")
 		.id.filter((f) => f !== "TOTAL"); // filter out TOTAL because we do our own aggregation
 	const flowsExcludingLosses = codesSankey.flow.filter(
-		(c) => !c.startsWith("F4")
+		(c) => !c.startsWith("F4") && !hhqFlowCodes.includes(c)
 	);
 	const applyFlowClampToZero = (f, v) => {
 		const clampingFunctions = {
@@ -180,10 +186,14 @@ function computeAllFuels(geo, year, eurobaseDs, flowCodes=[]) {
 	};
 
 	//============================ 1 elementary fuels ============================
+	// household end uses come from another dataset (nrg_d_hhq), see composeAndCacheHouseholds
+	const nrgBalCFlowKeys = Object.keys(flowFormulas).filter(
+		(f) => flowFormulas[f].dataset !== "nrg_d_hhq"
+	);
 	const filteredFlowKeys =
 		flowCodes.length > 0
-			? Object.keys(flowFormulas).filter((f) => flowCodes.includes(f))
-			: Object.keys(flowFormulas);
+			? nrgBalCFlowKeys.filter((f) => flowCodes.includes(f))
+			: nrgBalCFlowKeys;
 	elementaryFuels
 		.filter((fuel) => sankeyDB.dimension.fuel.index.hasOwnProperty(fuel)) // filter out fuels not in Sankey
 		.forEach((fuel) => {
@@ -290,6 +300,127 @@ function calculateLosses(geo, year) {
 }
 // End: computing flows
 
+// Start: household end uses (dataset nrg_d_hhq)
+// The dataset is small (6 balances x 15 products x 42 geos x 15 years), so it is loaded once, as a whole.
+const hhqLoader = { promise: null, dataset: null };
+
+// map the products available in nrg_d_hhq onto the fuels of the Sankey diagram (families and elementary fuels)
+function hhqFuelValues(get) {
+	const solid = get("SFF_P1000_S2000");
+	const oil = get("O4000");
+	const gasOil = get("O4671");
+	const lpg = get("O4630");
+	const otherKerosene = get("O4669");
+	const otherOil = Math.max(oil - gasOil, 0); // oil products other than gas oil
+	const gas = get("G3000");
+	const renewables = get("RA000");
+	const heat = get("H8000");
+	const electricity = get("E7000");
+
+	return {
+		SFF_P1000: solid,
+		SFF_OTH: solid,
+		O4000: oil,
+		O4671XR5220B: gasOil,
+		PP_OTH: otherOil,
+		O4630: lpg,
+		O4669: otherKerosene,
+		O4699: Math.max(otherOil - lpg - otherKerosene, 0),
+		"G3000_C0350-370": gas,
+		G3000: gas,
+		RA000: renewables,
+		RA410: get("RA410"),
+		RA600: get("RA600"),
+		"R5110-5150_W6000RI": get("R5110-5150_W6000RI"),
+		R5300: get("R5300"),
+		H8000: heat,
+		E7000: electricity,
+		TOTAL: solid + oil + gas + renewables + heat + electricity,
+	};
+}
+
+// write the nrg_d_hhq values into sankeyDB (converted from TJ to KTOE)
+// The end uses are reconciled with the Households flow of nrg_bal_c (F6_1_1_3_2): for each fuel they are
+// scaled so that their sum equals the value of the Households node. The two datasets differ slightly.
+function composeHouseholds(ds, geoFilter, yearFilter) {
+	const toKtoe = 1 / energyUnits.TJ.conversionFactor;
+	const dsGeos = ds.Dimension("geo").id.filter((g) => g in sankeyDB.dimension.geo.index);
+	const dsYears = ds.Dimension("time").id.filter((y) => y in sankeyDB.dimension.year.index);
+	const geos = geoFilter ? dsGeos.filter((g) => geoFilter.includes(g)) : dsGeos;
+	const years = yearFilter ? dsYears.filter((y) => yearFilter.includes(y)) : dsYears;
+	const hasUnit = ds.id.includes("unit");
+	const fuels = Object.keys(sankeyDB.dimension.fuel.index);
+
+	geos.forEach((geo) => {
+		years.forEach((year) => {
+			// raw end-use values per flow and fuel
+			const raw = {};
+			hhqFlowCodes.forEach((flow) => {
+				const bal = flowFormulas[flow].operand1[0];
+				const get = (siec) => {
+					const coord = { nrg_bal: bal, siec: siec, time: year, geo: geo };
+					if (hasUnit) coord.unit = codesEurobase.nrg_d_hhq.unit;
+					const v = ds.Data(coord, false);
+					return typeof v === "number" ? Math.max(v, 0) * toKtoe : 0;
+				};
+				raw[flow] = hhqFuelValues(get);
+			});
+
+			fuels.forEach((fuel) => {
+				const sum = hhqFlowCodes.reduce((acc, flow) => acc + (raw[flow][fuel] || 0), 0);
+				const households = sankeyDB.value[getIndex(geo, "F6_1_1_3_2", fuel, year)] || 0;
+				const scale = sum > 0 && households > 0 ? households / sum : 1;
+				hhqFlowCodes.forEach((flow) => {
+					setValue(geo, flow, fuel, year, (raw[flow][fuel] || 0) * scale);
+				});
+			});
+		});
+	});
+	sankeyDB.isHouseholdsComposed = true;
+}
+
+// load nrg_d_hhq (once) and compose it into sankeyDB; returns true when new data was written
+async function composeAndCacheHouseholds(flagRedrawDiagram = false) {
+	if (!hhqLoader.promise) {
+		const query = {
+			dataset: "nrg_d_hhq",
+			lang: REF.language,
+			filter: {
+				nrg_bal: codesEurobase.nrg_d_hhq.nrg_bal,
+				unit: [codesEurobase.nrg_d_hhq.unit],
+			},
+		};
+		hhqLoader.promise = EuroJSONstat.fetchDataset(query)
+			.then((ds) => {
+				if (ds.class === "error") {
+					console.error(ds.label, ds);
+					hhqLoader.promise = null; // allow a retry
+					return null;
+				}
+				hhqLoader.dataset = ds;
+				return ds;
+			})
+			.catch((error) => {
+				console.warn("Failed fetching households query:", error.message);
+				hhqLoader.promise = null;
+				return null;
+			});
+	}
+
+	const ds = await hhqLoader.promise;
+	if (!ds || sankeyDB.isHouseholdsComposed) return false;
+
+	composeHouseholds(ds);
+
+	// the Households node may already be expanded and waiting for this data
+	if (flagRedrawDiagram && dataNameSpace.isHouseholdsDisaggregated) {
+		sankeyNameSpace.drawDiagram();
+	}
+	return true;
+}
+// End: household end uses
+
+
 // Start: load time series values for selected countries
 async function composeAndCacheYearsOfGeo(flagRedrawDiagram = false, t = []) {
 	// console.log("composeAndCacheYearsOfGeo");
@@ -377,6 +508,18 @@ async function composeAndCacheGeosOfYear(
 	if (flagRedrawDiagram) {
 		$("#loader").show();
 		$("#progress").html(languageNameSpace.labels["MSG_18"] + "...");
+	}
+
+	// household end uses live in another dataset: they are loaded as a whole, not per country
+	const requestedHhqCodes = flowCodes.filter((f) => hhqBalCodes.includes(f));
+	if (requestedHhqCodes.length > 0) {
+		flowCodes = flowCodes.filter((f) => !hhqBalCodes.includes(f));
+		await composeAndCacheHouseholds();
+		sankeyDB.isYearBalancesDownloaded[REF.year] =
+			sankeyDB.isYearBalancesDownloaded[REF.year] || {};
+		requestedHhqCodes.forEach((bal) => {
+			sankeyDB.isYearBalancesDownloaded[REF.year][bal] = true;
+		});
 	}
 
 	// filter out already cached flows
@@ -622,6 +765,7 @@ function getEurobaseData(filter) {
 		!debugLevel.lightWeightQuery &&
 			composeAndCacheGeosOfYear((flagRedrawDiagram = false), t);
 			// console.log("is download", sankeyDB.isYearBalancesDownloaded, Object.values(sankeyDB.isYearBalancesDownloaded[REF.year]).length);
+		composeAndCacheHouseholds(true);
 		t[9] = performance.now();
 
 		// test speed of the loadNrgBalSDValues function

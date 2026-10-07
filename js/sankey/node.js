@@ -57,6 +57,10 @@ sankeyNode.prototype.size = function () {
 sankeyNode.prototype.checkEnergyConservation = function (thresh) {
 	if (typeof thresh === "undefined") thresh = dataNameSpace.energyWarningThreshold;
 	if (!this.nodeIn.length || !this.nodeOut.length || this.code.substring(0, 1) === "T") return 0;
+
+	// Households expanded into end uses (nrg_d_hhq, loaded asynchronously): nothing to compare while the
+	// data is still loading, or when the dataset has no end-use data for this country and year
+	if (this.code === "E6_1_1_3_2" && (!sankeyDB.isHouseholdsComposed || this.flowOut.value === 0)) return 0;
 	var fMin = Math.min(Math.abs(this.flowIn.value), Math.abs(this.flowOut.value));
 	var fMax = Math.max(Math.abs(this.flowIn.value), Math.abs(this.flowOut.value));
 	if (fMax < 2 * dataNameSpace.drawFuelValueThreshold / thresh) return 0;

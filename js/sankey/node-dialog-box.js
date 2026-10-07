@@ -202,6 +202,9 @@ var nodeboxNameSpace = {
 			case "N6_1_1_3":
 				isChecked = dataNameSpace.isOtherSectorsDisaggregated;
 				break;
+			case "E6_1_1_3_2":
+				isChecked = dataNameSpace.isHouseholdsDisaggregated;
+				break;
 			case "T2_6": case "N2_6_1": case "N2_6_2":
 				isChecked = dataNameSpace.isRPITransformationDisaggregated;
 				break;
@@ -253,6 +256,7 @@ var nodeboxNameSpace = {
 			"N6_1_1_1",
 			"N6_1_1_2",
 			"N6_1_1_3",
+			"E6_1_1_3_2",
 			"N6_1_2",
 			"T2",
 			"T2_11",

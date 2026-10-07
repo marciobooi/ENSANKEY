@@ -23,12 +23,13 @@ var dataNameSpace = {
 	isIndustryDisaggregated: false,
 	isTransportDisaggregated: false,
 	isOtherSectorsDisaggregated: false,
+	isHouseholdsDisaggregated: false,
 	isRPITransformationDisaggregated: false,
 	isEHGTransformationDisaggregated: false,
-	nodesDisaggregated: { // global disaggregation state: 10 bits
-		"all": "1111111111111",
-		"none": "0000000000000",
-		"default": "0101000000000"
+	nodesDisaggregated: { // global disaggregation state: 14 bits
+		"all": "11111111111111",
+		"none": "00000000000000",
+		"default": "01010000000000"
 	},
 
 	// reference variables for global diagram setup + default settings
@@ -38,7 +39,7 @@ var dataNameSpace = {
 		"unit": "KTOE", // cf. energyUnits object in codes.js
 		"fuels": "TOTAL", // "TOTAL", "SFFP", "O4000", "G3000-CO350-370", "RA000", "W6100_6220", "N900H", "H8000", "E7000"
 		"highlight": "_", // global indices for fuels in fuelMap(REF.fuels) to be highlighted
-		"nodeDisagg": "0101000000000", // 13-bit string to encode current node disaggregation state
+		"nodeDisagg": "01010000000000", // 14-bit string to encode current node disaggregation state
 		"flowDisagg": "0", // master flag to disaggregate all flows: "0" or "1"
 		"language": "EN" // language selected
 	},
@@ -72,6 +73,7 @@ var dataNameSpace = {
 	xN6_1_1_X_dis: 1.4, // x of final energy consumption sectors (disaggregated)
 	xN6_1_2_X: 1.22, // final non-energy consumption sectors
 	xN6_1_1_X_X: 1.6, // final energy consumption sub-sectors
+	xN6_1_1_X_X_X: 1.9, // x of the households end uses
 	yN6_1_1_X_X: 0.2, // starting y of final energy consumption sub-sectors
 	xE6_5_X: 1.1, // consumption for the energy branch
 	xT2_9: 0.55, // aggregated transformation node T2_9 - Refineries and petrochimical industry
@@ -189,6 +191,10 @@ var dataNameSpace = {
 
 		}
 		dataNameSpace.ref["flowDisagg"] = parseBool(dataNameSpace.ref["flowDisagg"]);
+
+		// URLs created before the households end uses were added carry a 13-bit state
+		var nodeDisagg = dataNameSpace.ref["nodeDisagg"].toString();
+		if (nodeDisagg.length === 13) dataNameSpace.ref["nodeDisagg"] = nodeDisagg + "0";
 	},
 
 	//Number of frames used to interpolate diagram animation

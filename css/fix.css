@@ -88,3 +88,7 @@ dl, ol, ul {
     /* align-content: center; */
     justify-content: center;
 }
+
+svg#svg-container {
+    height: 60vh;
+}

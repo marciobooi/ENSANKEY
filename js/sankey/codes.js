@@ -13,6 +13,13 @@ const codesEurobase = {
     // comp : ['PRD', 'IDCO', 'FDCO', 'STK_DRW', 'STK_BLD', 'NTI', 'TI_EHG_EONL_E', 'TI_EHG_CHP_E', 'TI_EHG_HONL_E', 'TI_EHG_OTH', 'TI_RPI_OTH_E', 'TI_OTH', 'NTO', 'TO_EHG_EONL', 'TO_EHG_CHP', 'TO_EHG_HONL', 'TO_EHG_G_OTH', 'TO_RPI_O_OTH', 'TO_OTH', 'TL', 'TL_EHG', 'TL_EHG_EONL', 'TL_EHG_CHP', 'TL_EHG_HONL', 'TL_EHG_L_OTH', 'TL_CO', 'TL_BF', 'TL_GW', 'TL_RPI', 'TL_RPI_RO', 'TL_RPI_PIR', 'TL_RPI_L_OTH', 'TL_BKBPB', 'TL_OTH', 'AAS', 'AAT', 'FC', 'STATDIFF_INFLOW', 'STATDIFF_OUTFLOW', 'TBKFLOW']//prettier-ignore
  
   },
+  // Disaggregated final energy consumption in households - quantities
+  // https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table
+  nrg_d_hhq: {
+    // dimensions: ["nrg_bal", "siec", "unit", "geo", "time"]
+    nrg_bal: ["FC_OTH_HH_E_SH", "FC_OTH_HH_E_SC", "FC_OTH_HH_E_WH", "FC_OTH_HH_E_CK", "FC_OTH_HH_E_LE", "FC_OTH_HH_E_OE"],
+    unit: "TJ", // this dataset has no KTOE (and GWH only covers electricity/heat): values are converted to KTOE when loaded into sankeyDB
+  },
 }
 
 
@@ -337,7 +344,15 @@ var EurobaseToSankey = {
     "FC_OTH_HH_E": "F6_1_1_3_2",
     "FC_OTH_AF_E": "F6_1_1_3_3",
     "FC_OTH_FISH_E": "F6_1_1_3_4",
-    "FC_OTH_NSP_E": "F6_1_1_3_5"
+    "FC_OTH_NSP_E": "F6_1_1_3_5",
+
+    // final energy consumption - households by end use (dataset nrg_d_hhq)
+    "FC_OTH_HH_E_SH": "F6_1_1_3_2_1", // space heating
+    "FC_OTH_HH_E_SC": "F6_1_1_3_2_2", // space cooling
+    "FC_OTH_HH_E_WH": "F6_1_1_3_2_3", // water heating
+    "FC_OTH_HH_E_CK": "F6_1_1_3_2_4", // cooking
+    "FC_OTH_HH_E_LE": "F6_1_1_3_2_5", // lighting and electrical appliances
+    "FC_OTH_HH_E_OE": "F6_1_1_3_2_6"  // other end use
   }
 };
 
@@ -381,7 +396,7 @@ ALL ABOUT NODE CODES
 */
 // Assign a title to each node which is possibly shown in the Sankey diagram !!! LOOKUP TABLE !!!
 // 2017-05-22: Labels are now set in the language JSON files in the data folder
-sankeyNodes = { "N1": "", "N1_1": "", "E1_1_1": "", "E1_1_2": "", "E1_2": "", "E1_3": "", "E1_4": "", "T2": "", "N2_1": "", "N2_2": "", "T2_6": "", "N2_6_1": "", "N2_6_2": "", "T2_6_1": "", "T2_6_2": "", "T2_6_3": "", "T2_7": "", "T2_8": "", "T2_9": "", "T2_10": "", "T2_11": "", "N2_11_1": "", "N2_11_2": "", "T2_11_1": "", "T2_11_2": "", "T2_11_3": "", "T2_11_4": "", "T2_12": "", "N3": "", "E4": "", "N5": "", "N6": "", "E6_2": "", "E6_3":"", "E6_4": "", "E6_5": "", "E6_5_1": "", "E6_5_2": "", "E6_5_3": "", "E6_5_4": "", "E6_5_5": "", "E6_5_6": "", "E6_5_7": "", "E6_5_8": "", "E6_5_9": "", "E6_5_10": "", "E6_5_11": "", "E6_5_12": "", "E6_5_13": "", "E6_5_14": "", "E6_5_15": "", "E6_5_16": "", "E6_6": "", "E6_7": "", "E6_8": "", "N6_1": "", "N6_1_1": "", "N6_1_1_1": "", "E6_1_1_1_1": "", "E6_1_1_1_2": "", "E6_1_1_1_3": "", "E6_1_1_1_4": "", "E6_1_1_1_5": "", "E6_1_1_1_6": "", "E6_1_1_1_7": "", "E6_1_1_1_8": "", "E6_1_1_1_9": "", "E6_1_1_1_10": "", "E6_1_1_1_11": "", "E6_1_1_1_12": "", "E6_1_1_1_13": "", "N6_1_1_2": "", "E6_1_1_2_1": "", "E6_1_1_2_2": "", "E6_1_1_2_3": "", "E6_1_1_2_4": "", "E6_1_1_2_5": "", "E6_1_1_2_6": "", "E6_1_1_2_7": "", "N6_1_1_3": "", "E6_1_1_3_1": "", "E6_1_1_3_2": "", "E6_1_1_3_3": "", "E6_1_1_3_4": "", "E6_1_1_3_5": "", "N6_1_2": "", "E6_1_2_1": "", "E6_1_2_2": "", "E6_1_2_3": "" }; //prettier-ignore
+sankeyNodes = { "N1": "", "N1_1": "", "E1_1_1": "", "E1_1_2": "", "E1_2": "", "E1_3": "", "E1_4": "", "T2": "", "N2_1": "", "N2_2": "", "T2_6": "", "N2_6_1": "", "N2_6_2": "", "T2_6_1": "", "T2_6_2": "", "T2_6_3": "", "T2_7": "", "T2_8": "", "T2_9": "", "T2_10": "", "T2_11": "", "N2_11_1": "", "N2_11_2": "", "T2_11_1": "", "T2_11_2": "", "T2_11_3": "", "T2_11_4": "", "T2_12": "", "N3": "", "E4": "", "N5": "", "N6": "", "E6_2": "", "E6_3":"", "E6_4": "", "E6_5": "", "E6_5_1": "", "E6_5_2": "", "E6_5_3": "", "E6_5_4": "", "E6_5_5": "", "E6_5_6": "", "E6_5_7": "", "E6_5_8": "", "E6_5_9": "", "E6_5_10": "", "E6_5_11": "", "E6_5_12": "", "E6_5_13": "", "E6_5_14": "", "E6_5_15": "", "E6_5_16": "", "E6_6": "", "E6_7": "", "E6_8": "", "N6_1": "", "N6_1_1": "", "N6_1_1_1": "", "E6_1_1_1_1": "", "E6_1_1_1_2": "", "E6_1_1_1_3": "", "E6_1_1_1_4": "", "E6_1_1_1_5": "", "E6_1_1_1_6": "", "E6_1_1_1_7": "", "E6_1_1_1_8": "", "E6_1_1_1_9": "", "E6_1_1_1_10": "", "E6_1_1_1_11": "", "E6_1_1_1_12": "", "E6_1_1_1_13": "", "N6_1_1_2": "", "E6_1_1_2_1": "", "E6_1_1_2_2": "", "E6_1_1_2_3": "", "E6_1_1_2_4": "", "E6_1_1_2_5": "", "E6_1_1_2_6": "", "E6_1_1_2_7": "", "N6_1_1_3": "", "E6_1_1_3_1": "", "E6_1_1_3_2": "", "E6_1_1_3_2_1": "", "E6_1_1_3_2_2": "", "E6_1_1_3_2_3": "", "E6_1_1_3_2_4": "", "E6_1_1_3_2_5": "", "E6_1_1_3_2_6": "", "E6_1_1_3_3": "", "E6_1_1_3_4": "", "E6_1_1_3_5": "", "N6_1_2": "", "E6_1_2_1": "", "E6_1_2_2": "", "E6_1_2_3": "" }; //prettier-ignore
 
 
 
@@ -598,10 +613,23 @@ const flowFormulas = {
   F6_1_1_3_3: { operand1: ["FC_OTH_AF_E"] },
   F6_1_1_3_4: { operand1: ["FC_OTH_FISH_E"] },
   F6_1_1_3_5: { operand1: ["FC_OTH_NSP_E"] },
+
+  // households end uses: operands come from dataset nrg_d_hhq, not nrg_bal_c
+  F6_1_1_3_2_1: { operand1: ["FC_OTH_HH_E_SH"], dataset: "nrg_d_hhq" },
+  F6_1_1_3_2_2: { operand1: ["FC_OTH_HH_E_SC"], dataset: "nrg_d_hhq" },
+  F6_1_1_3_2_3: { operand1: ["FC_OTH_HH_E_WH"], dataset: "nrg_d_hhq" },
+  F6_1_1_3_2_4: { operand1: ["FC_OTH_HH_E_CK"], dataset: "nrg_d_hhq" },
+  F6_1_1_3_2_5: { operand1: ["FC_OTH_HH_E_LE"], dataset: "nrg_d_hhq" },
+  F6_1_1_3_2_6: { operand1: ["FC_OTH_HH_E_OE"], dataset: "nrg_d_hhq" },
 };
+
+// flows (and balance codes) that must NOT be requested from nrg_bal_c
+const hhqFlowCodes = Object.keys(flowFormulas).filter((f) => flowFormulas[f].dataset === "nrg_d_hhq");
+const hhqBalCodes = codesEurobase.nrg_d_hhq.nrg_bal;
 
 const reducedNrgBalListForDataApi = new Set();
 Object.values(flowFormulas).forEach(formula => {
+  if (formula.dataset === "nrg_d_hhq") return;
   if (formula.operand1) {
     formula.operand1.forEach(operand => {
       if (!flowFormulas.hasOwnProperty(operand)) {

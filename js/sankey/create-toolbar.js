@@ -289,10 +289,10 @@ const nsToolbar = {
 		const navitemList = this.navItemList(args);
 		const items = nsToolbarConf.nodeExpandState;
 		let activeOption = "default";
-		if (REF.nodeDisagg === "1111111111111") {
+		if (REF.nodeDisagg === dataNameSpace.nodesDisaggregated.all) {
 			activeOption = "all";
 		}
-		if (REF.nodeDisagg === "0000000000000") {
+		if (REF.nodeDisagg === dataNameSpace.nodesDisaggregated.none) {
 			activeOption = "none";
 		}
 
