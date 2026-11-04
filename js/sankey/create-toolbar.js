@@ -975,7 +975,15 @@ const nsToolbarHandler = {
 
 $(document).ready(function () {
 
-	
+	if (isAccessibilityMode()) {
+		[
+			{ instance: new Footer(), target: "#componentFooter" },
+			{ instance: new Navbar(), target: "#navbar-container" },
+		].forEach(({ instance, target }) => instance.addToDOM(target));
+		if (typeof ECL !== "undefined") ECL.autoInit();
+		return;
+	}
+
 	const components = [
 		{ instance: new ZoomControls(), target: "#zoomControls" },
 		{ instance: new SubNavbar(), target: "#subnavbar-container" },

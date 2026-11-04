@@ -8,6 +8,7 @@ let driverObj = null;
 let isOpen = false;
 
 function tutorial() {
+  if (isAccessibilityMode()) return;
   const confTutorial = excelInfoData[4];
   const lang = REF.language || "EN";
 

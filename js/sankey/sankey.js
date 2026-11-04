@@ -5,6 +5,7 @@ CORE script to draw the current diagram view from global settings stored in REF
 // read global diagram variables from URL
 dataNameSpace.getRefURL();
 languageNameSpace.initLanguage(REF.language);
+if (!isAccessibilityMode()) {
 timeSeries = availableTimeInterval("nrg_bal_c", dataNameSpace.ref.geos).all;
 
 
@@ -20,6 +21,7 @@ sankeyTransform ()
 if (dataNameSpace.ref.year === "latest") dataNameSpace.ref.year = timeSeries.last();
 
 dataNameSpace.isFuelFamilySelected = (REF.fuels !== "TOTAL");
+}
 
 // flag Eurobase download mode: full time series or only REF.year
 //var timeSeriesNeeded = true;
@@ -43,8 +45,8 @@ var sankeyNameSpace = {
 	svgSize: {},
 	zoom: d3.behavior
 		.zoom()
-		.translate([dataNameSpace.reset.translateX, dataNameSpace.reset.translateY])
-		.scale([dataNameSpace.reset.scale])
+		.translate([(dataNameSpace.reset || { translateX: 0 }).translateX, (dataNameSpace.reset || { translateY: 0 }).translateY])
+		.scale([(dataNameSpace.reset || { scale: 1 }).scale])
 		.scaleExtent([0.2, 5])
 		.on("zoom", sankeyToolsNameSpace.zoomed),
 
@@ -55,7 +57,7 @@ var sankeyNameSpace = {
 	scale: REF.scale,
 	viewBox: "",
 	//year used to build animation frames
-	year: Number(timeSeries[0]),
+	year: (typeof timeSeries !== "undefined") ? Number(timeSeries[0]) : NaN,
 
 	// change css and class properties to improve page view on low-resolution screens
 	adaptToScreen: function (isLarge) {
@@ -160,32 +162,43 @@ var sankeyNameSpace = {
 
 	getDiagramViewBox: function (id) {
 		const svgContainer = document.querySelector(`#svg-container${id}`);
+		// Union of the bounding boxes of all drawn children.
+		// Start from +/-Infinity (a falsy check like `!acc.xMin` breaks when a value is 0)
+		// and ignore empty elements, whose getBBox() is 0,0,0,0 and would pull the minimum to 0.
 		const { xMin, xMax, yMin, yMax } = [...svgContainer.children].reduce(
 			(acc, el) => {
+				if (typeof el.getBBox !== "function") return acc;
 				const { x, y, width, height } = el.getBBox();
-				if (!acc.xMin || x < acc.xMin) acc.xMin = x;
-				if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
-				if (!acc.yMin || y < acc.yMin) acc.yMin = y;
-				if (!acc.yMax || y + height > acc.yMax) acc.yMax = y + height;
+				if (width === 0 && height === 0) return acc;
+				acc.xMin = Math.min(acc.xMin, x);
+				acc.xMax = Math.max(acc.xMax, x + width);
+				acc.yMin = Math.min(acc.yMin, y);
+				acc.yMax = Math.max(acc.yMax, y + height);
 				return acc;
 			},
-			{}
+			{ xMin: Infinity, xMax: -Infinity, yMin: Infinity, yMax: -Infinity }
 		);
 
-		sankeyNameSpace.viewBox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
+		// small padding so labels/flows touching the edge of the diagram are not clipped
+		const pad = 12;
+		sankeyNameSpace.viewBox = `${xMin - pad} ${yMin - pad} ${xMax - xMin + 2 * pad} ${yMax - yMin + 2 * pad}`;
 		sankeyNameSpace.svgSize = { width: xMax - xMin, height: yMax - yMin };
 	},
 
 	setDiagramViewBox: function (id) {
 		const svgContainer = document.querySelector(`#svg-container${id}`);
 		svgContainer.setAttribute("viewBox", sankeyNameSpace.viewBox);
-		svgContainer.setAttribute("preserveAspectRatio", "xMinYMin meet");
+		svgContainer.setAttribute("preserveAspectRatio", "xMidYMid meet");
 	},
 
 	setDiagramTranslate: function (id, svgSize) {
 		const svgContainer = document.querySelector(`#svg-container${id}`);
-			sankeyTransform(svgSize.width, svgSize.height);		
-			sankeyNameSpace.zoom.scale(dataNameSpace.reset.scale);
+			sankeyTransform(svgSize.width, svgSize.height);
+			// The viewBox already is the diagram bounding box (centered by xMidYMid meet and scaled to
+			// the svg box), so the initial view is the identity transform: centered and fitted.
+			dataNameSpace.reset = { translateX: 0, translateY: 0, scale: 1 };
+			Object.assign(REF, dataNameSpace.reset);
+			sankeyNameSpace.zoom.translate([0, 0]).scale(1);
 
 		// TODO : device scale
 		// scale = imgHeight / sankeyNameSpace.svgSize.height;

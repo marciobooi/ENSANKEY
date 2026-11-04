@@ -115,6 +115,10 @@ var languageNameSpace = {
 		var langLower = normalized.toLowerCase();
 
 		REF.language = langUpper;
+		if (isAccessibilityMode()) {
+			window.location.search = "?accessibility&language=" + langUpper;
+			return;
+		}
 		dataNameSpace.setRefURL();
 		// function in basiccs file to check the trailor cardinal at the end of the url
 		checkCardinalInUrl();

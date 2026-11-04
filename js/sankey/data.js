@@ -207,6 +207,20 @@ var dataNameSpace = {
 // global shortcut to reference setting
 var REF = dataNameSpace.ref;
 
+// sankey.html?accessibility shows the accessibility statement instead of the tool
+function isAccessibilityMode() {
+	return new URLSearchParams(window.location.search).has("accessibility");
+}
+
+function showAccessibilityView() {
+	$('#page, #allContainer, #timeLineComponent, #zoomControls, #chartContainer, #loader, #diagramContainer').addClass('d-none');
+	document.documentElement.classList.add('a11y-mode');
+	$('#accessibilityView').removeClass('d-none');
+	$('.a11y-back-link').attr('href', '?language=' + REF.language);
+	$('.skip-link').attr('href', '#a11y-statement-title');
+	document.title = 'Accessibility statement - Energy flow diagrams - Eurostat';
+}
+
 // general visualisation settings
 dataNameSpace.isLargeRes =
 	(window.innerHeight ||

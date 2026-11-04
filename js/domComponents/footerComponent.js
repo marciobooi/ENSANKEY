@@ -39,7 +39,7 @@ class Footer {
       </a>
     </li>
     <li class="ecl-site-footer__list-item">
-        <a id="footer-access" href="https://ec.europa.eu/eurostat/web/main/help/accessibility" class="ecl-link ecl-link--standalone ecl-site-footer__link">
+        <a id="footer-access" href="?accessibility&language=${REF.language}" class="ecl-link ecl-link--standalone ecl-site-footer__link">
       ${languageNameSpace.labels["FOOTER_ACCESSIBILITY"]}
       </a>
     </li>`;
